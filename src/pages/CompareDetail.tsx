@@ -144,12 +144,12 @@ export const CompareDetail: React.FC<CompareDetailProps> = ({
 
         {/* COMPARISON MATRIX TABLE */}
         <div className="overflow-x-auto custom-scrollbar rounded-2xl border border-white/5 saas-glass">
-          <table className="w-full text-left border-collapse text-xs md:text-sm">
+          <table className="w-full text-left border-collapse text-xs md:text-sm min-w-[550px]">
             <thead>
               <tr className="border-b border-white/5 bg-slate-950/45">
-                <th className="p-4 md:p-5 text-slate-400 font-bold uppercase tracking-wider w-1/3">Specifications</th>
-                <th className="p-4 md:p-5 text-white font-extrabold w-1/3 text-center md:text-left">{toolA.name}</th>
-                <th className="p-4 md:p-5 text-white font-extrabold w-1/3 text-center md:text-left">{toolB.name}</th>
+                <th className="p-4 md:p-5 text-slate-400 font-bold uppercase tracking-wider w-1/3 min-w-[150px]">Specifications</th>
+                <th className="p-4 md:p-5 text-white font-extrabold w-1/3 min-w-[200px] text-center md:text-left">{toolA.name}</th>
+                <th className="p-4 md:p-5 text-white font-extrabold w-1/3 min-w-[200px] text-center md:text-left">{toolB.name}</th>
               </tr>
             </thead>
             <tbody className="divide-y divide-white/5 text-slate-300 font-medium">

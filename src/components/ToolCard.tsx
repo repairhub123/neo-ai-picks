@@ -1,5 +1,5 @@
 import React from 'react';
-import { ThumbsUp, ArrowUpRight, Star } from 'lucide-react';
+import { ArrowUpRight, Star } from 'lucide-react';
 import { ToolIcon } from './ToolIcon';
 
 export interface AITool {
@@ -22,6 +22,7 @@ export interface AITool {
   upvotes: number;
   iconBg?: string; // Optional backdrop color class
   isFeatured?: boolean;
+  isEditorsPick?: boolean;
   rating?: number;
 }
 
@@ -63,7 +64,7 @@ export const ToolCard: React.FC<ToolCardProps> = ({
         <ToolIcon toolId={tool.id} toolName={tool.name} category={tool.category} size="md" />
 
         {/* INFO */}
-        <div className="space-y-1.5">
+        <div className="space-y-1.5 flex-grow">
           <div className="flex flex-wrap items-center gap-2">
             <h3 className="font-bold text-white text-base md:text-lg group-hover:text-violet-400 transition-colors flex items-center gap-1.5">
               {tool.name}
@@ -72,8 +73,13 @@ export const ToolCard: React.FC<ToolCardProps> = ({
             
             {tool.isFeatured && (
               <span className="flex items-center gap-0.5 text-[9px] font-black text-amber-400 bg-amber-500/10 border border-amber-500/20 px-2 py-0.5 rounded-full uppercase tracking-wider">
-                <Star className="w-2.5 h-2.5 fill-current" />
-                Featured
+                ★ Featured
+              </span>
+            )}
+
+            {tool.isEditorsPick && (
+              <span className="flex items-center gap-0.5 text-[9px] font-black text-violet-400 bg-violet-500/10 border border-violet-500/20 px-2 py-0.5 rounded-full uppercase tracking-wider">
+                ✦ Editor's Pick
               </span>
             )}
 
@@ -100,23 +106,13 @@ export const ToolCard: React.FC<ToolCardProps> = ({
         </div>
       </div>
 
-      {/* UPVOTE */}
-      <div className="flex sm:flex-col items-center justify-between w-full sm:w-auto border-t sm:border-t-0 border-white/5 pt-3 sm:pt-0 gap-2 flex-shrink-0 self-stretch sm:self-center">
-        <span className="sm:hidden text-xs text-slate-500 font-medium">Upvotes</span>
-        <button
-          onClick={(e) => {
-            e.stopPropagation();
-            onUpvote(e);
-          }}
-          className={`flex sm:flex-col items-center justify-center gap-1.5 px-4.5 sm:px-4 py-2 sm:py-2.5 rounded-xl border font-bold text-xs sm:w-18 transition-all cursor-pointer active:scale-95 ${
-            hasUpvoted
-              ? 'bg-violet-600 border-violet-500 text-white shadow-lg shadow-violet-600/30'
-              : 'bg-slate-900 hover:bg-slate-800 border-white/10 hover:border-violet-500/30 text-slate-300 hover:text-white'
-          }`}
-        >
-          <ThumbsUp className={`w-3.5 h-3.5 ${hasUpvoted ? 'fill-white' : ''}`} />
-          <span className="font-extrabold tracking-tight">{upvotes}</span>
-        </button>
+      {/* RATING */}
+      <div className="flex sm:flex-col items-center sm:items-end justify-between w-full sm:w-auto border-t sm:border-t-0 border-white/5 pt-3 sm:pt-0 gap-1 flex-shrink-0 self-stretch sm:self-center">
+        <span className="sm:hidden text-xs text-slate-500 font-medium">Rating</span>
+        <div className="flex items-center gap-1">
+          <Star className="w-3.5 h-3.5 fill-current text-amber-400" />
+          <span className="font-extrabold text-sm text-slate-200">{tool.rating || 4.7}</span>
+        </div>
       </div>
     </div>
   );

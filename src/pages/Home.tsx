@@ -73,11 +73,11 @@ export const Home: React.FC<HomeProps> = ({
 
   // Sorting
   const sortedTools = [...filteredTools].sort((a, b) => {
-    const votesA = upvotesState[a.id] || a.upvotes;
-    const votesB = upvotesState[b.id] || b.upvotes;
+    const ratingA = a.rating || 4.5;
+    const ratingB = b.rating || 4.5;
 
     if (sortBy === 'popular') {
-      return votesB - votesA;
+      return ratingB - ratingA;
     } else if (sortBy === 'newest') {
       return b.id.localeCompare(a.id);
     } else {
@@ -85,15 +85,11 @@ export const Home: React.FC<HomeProps> = ({
     }
   });
 
-  // Featured Tools: top 4 upvoted tools
-  const featuredTools = [...tools]
-    .sort((a, b) => (upvotesState[b.id] || b.upvotes) - (upvotesState[a.id] || a.upvotes))
-    .slice(0, 4);
+  // Featured Tools
+  const featuredTools = tools.filter((t) => t.isFeatured).slice(0, 4);
 
-  // Popular Tools: next 4 upvoted tools (replaces "Latest Launches")
-  const popularTools = [...tools]
-    .sort((a, b) => (upvotesState[b.id] || b.upvotes) - (upvotesState[a.id] || a.upvotes))
-    .slice(4, 8);
+  // Popular Tools (Editor's Picks)
+  const popularTools = tools.filter((t) => t.isEditorsPick).slice(0, 4);
 
   // Popular Comparisons List
   const popularComparisons = [
@@ -144,12 +140,12 @@ export const Home: React.FC<HomeProps> = ({
           </div>
 
           <h1 className="text-4xl md:text-6xl font-extrabold tracking-tight leading-[1.12] text-white">
-            Find, Compare & Explore <br />
-            <span className="gradient-text-purple">the Best AI Tools</span>
+            Discover the Best <br />
+            <span className="gradient-text-purple">AI Tools in Minutes</span>
           </h1>
 
           <p className="text-base md:text-xl text-slate-400 font-medium max-w-2xl mx-auto leading-relaxed">
-            Discover powerful AI tools for writing, coding, design, video creation, productivity, automation, and more.
+            Compare, explore, and find the perfect AI tool for writing, coding, image generation, video creation, productivity, and automation.
           </p>
 
           {/* SEARCH BAR */}
@@ -297,7 +293,9 @@ export const Home: React.FC<HomeProps> = ({
                 </div>
                 <div className="flex items-center justify-between pt-2 border-t border-white/5 text-[10px] text-slate-500">
                   <span>{tool.category}</span>
-                  <span className="font-bold text-violet-400">▲ {upvotesState[tool.id] || tool.upvotes}</span>
+                  <span className="font-bold text-amber-400 flex items-center gap-0.5">
+                    ★ {tool.rating || 4.7}
+                  </span>
                 </div>
               </div>
             );
@@ -405,8 +403,8 @@ export const Home: React.FC<HomeProps> = ({
                     <h4 className="font-bold text-xs text-white group-hover:text-violet-400 transition-colors">{tool.name}</h4>
                     <p className="text-[10px] text-slate-500">{tool.category}</p>
                   </div>
-                  <span className="text-[10px] font-bold text-violet-400 bg-violet-500/10 border border-violet-500/20 px-2 py-0.5 rounded-lg">
-                    ▲ {upvotesState[tool.id] || tool.upvotes}
+                  <span className="text-[10px] font-bold text-amber-400 bg-amber-500/5 border border-amber-500/10 px-2.5 py-0.5 rounded-lg flex items-center gap-0.5">
+                    ★ {tool.rating || 4.7}
                   </span>
                 </div>
               ))}
@@ -435,6 +433,45 @@ export const Home: React.FC<HomeProps> = ({
         </div>
 
       </div>
+
+      {/* NEWSLETTER SIGNUP SECTION */}
+      <div className="max-w-7xl mx-auto w-full px-6 mb-20">
+        <div className="p-8 md:p-12 rounded-3xl bg-gradient-to-br from-violet-950/20 to-purple-950/5 border border-violet-500/15 relative overflow-hidden flex flex-col md:flex-row items-center justify-between gap-8">
+          <div className="absolute top-0 right-0 w-64 h-64 bg-violet-600/5 rounded-full blur-3xl pointer-events-none" />
+          <div className="absolute bottom-0 left-0 w-48 h-48 bg-pink-500/5 rounded-full blur-2xl pointer-events-none" />
+          
+          <div className="space-y-3 max-w-lg text-center md:text-left">
+            <span className="text-[9px] font-extrabold uppercase tracking-widest text-violet-400 bg-violet-500/10 border border-violet-500/20 px-2.5 py-1 rounded-full w-fit">
+              Newsletter
+            </span>
+            <h3 className="text-2xl md:text-3xl font-black text-white leading-tight">
+              Get Vetted AI Tool Reviews Direct to Your Inbox
+            </h3>
+            <p className="text-slate-400 text-xs md:text-sm font-medium leading-relaxed">
+              Join our community of developers, writers, and founders. We send one weekly roundup of the best new AI tools. No spam.
+            </p>
+          </div>
+
+          <form 
+            onSubmit={(e) => { e.preventDefault(); alert('Subscribed successfully!'); }}
+            className="flex flex-col sm:flex-row gap-2 w-full max-w-md"
+          >
+            <input
+              type="email"
+              placeholder="Enter your email address"
+              required
+              className="bg-slate-900 border border-white/10 focus:border-violet-500 rounded-xl py-3.5 px-4 text-white text-sm focus:outline-none focus:ring-1 focus:ring-violet-500 flex-grow"
+            />
+            <button
+              type="submit"
+              className="bg-white hover:bg-slate-100 text-slate-950 font-bold text-sm px-6 py-3.5 rounded-xl transition-all cursor-pointer active:scale-95 shadow-lg whitespace-nowrap"
+            >
+              Subscribe Now
+            </button>
+          </form>
+        </div>
+      </div>
+
     </div>
   );
 };

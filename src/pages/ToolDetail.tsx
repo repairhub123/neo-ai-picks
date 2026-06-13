@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { ChevronLeft, ThumbsUp, ExternalLink, ShieldCheck, Tag, Heart, HelpCircle, Check, AlertCircle, Bookmark, Scale, BookOpen } from 'lucide-react';
+import { ChevronLeft, ExternalLink, ShieldCheck, Tag, Heart, HelpCircle, Check, AlertCircle, Bookmark, Scale, BookOpen } from 'lucide-react';
 import { ToolCard } from '../components/ToolCard';
 import type { AITool } from '../components/ToolCard';
 import { ToolIcon } from '../components/ToolIcon';
@@ -143,7 +143,7 @@ export const ToolDetail: React.FC<ToolDetailProps> = ({
 
           {/* ACTIONS */}
           <div className="flex items-center gap-3 flex-shrink-0 self-stretch sm:self-auto border-t md:border-t-0 border-white/5 pt-4 md:pt-0">
-            {/* UPVOTE */}
+            {/* BOOKMARK */}
             <button
               onClick={() => onUpvote(tool.id)}
               className={`flex items-center gap-2 px-5 py-3 rounded-xl border font-bold text-sm transition-all cursor-pointer active:scale-95 flex-grow sm:flex-grow-0 justify-center ${
@@ -152,8 +152,8 @@ export const ToolDetail: React.FC<ToolDetailProps> = ({
                   : 'bg-slate-900 hover:bg-slate-800 border-white/10 hover:border-violet-500/30 text-slate-300 hover:text-white'
               }`}
             >
-              <ThumbsUp className={`w-4 h-4 ${isUpvoted ? 'fill-white' : ''}`} />
-              Upvote {upvoteCount}
+              <Bookmark className={`w-4 h-4 ${isUpvoted ? 'fill-white' : ''}`} />
+              {isUpvoted ? 'Bookmarked' : 'Bookmark'}
             </button>
 
             {/* DIRECT CTA */}

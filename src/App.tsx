@@ -31,7 +31,9 @@ function App() {
     // Cast toolsData to AITool[]
     const typedTools = (toolsData as any[]).map((t, idx) => ({
       ...t,
-      isFeatured: idx < 4, // Make the first 4 tools featured
+      isFeatured: idx < 4 || t.id === 'cursor' || t.id === 'flux' || t.id === 'gemini',
+      isEditorsPick: t.id === 'chatgpt' || t.id === 'claude' || t.id === 'cursor' || t.id === 'perplexity' || t.id === 'midjourney' || t.id === 'elevenlabs',
+      rating: t.rating || parseFloat((4.5 + (idx % 5) * 0.1).toFixed(1)),
       releaseDate: `2026-05-${Math.max(1, 30 - idx)}`,
       upvotes: t.upvotes || Math.max(10, 280 - idx * 8)
     })) as AITool[];
