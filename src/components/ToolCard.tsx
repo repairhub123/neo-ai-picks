@@ -24,6 +24,7 @@ export interface AITool {
   isFeatured?: boolean;
   isEditorsPick?: boolean;
   rating?: number;
+  tags?: string[];
 }
 
 interface ToolCardProps {

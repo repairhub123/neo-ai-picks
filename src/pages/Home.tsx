@@ -64,9 +64,11 @@ export const Home: React.FC<HomeProps> = ({
     const searchMatch =
       query === '' ||
       tool.name.toLowerCase().includes(query) ||
+      tool.category.toLowerCase().includes(query) ||
       tool.tagline.toLowerCase().includes(query) ||
       tool.description.toLowerCase().includes(query) ||
-      tool.features.some((feat) => feat.toLowerCase().includes(query));
+      tool.features.some((feat) => feat.toLowerCase().includes(query)) ||
+      (tool.tags && tool.tags.some((tag) => tag.toLowerCase().includes(query)));
 
     return categoryMatch && searchMatch;
   });
@@ -372,10 +374,11 @@ export const Home: React.FC<HomeProps> = ({
             </div>
           ) : (
             <div className="p-16 text-center rounded-2xl saas-glass space-y-4">
-              <p className="text-slate-400 font-medium">No tools found matching your search options.</p>
+              <h3 className="text-lg font-bold text-white">No tools found</h3>
+              <p className="text-slate-400 text-sm max-w-xs mx-auto">Try adjusting your search query or choosing a different category filter.</p>
               <button 
                 onClick={() => { setSearchQuery(''); setSelectedCategory('All Tools'); }}
-                className="bg-violet-600 text-white px-4 py-2 rounded-xl text-xs font-bold"
+                className="bg-violet-600 hover:bg-violet-500 text-white px-4.5 py-2.5 rounded-xl text-xs font-bold transition-colors cursor-pointer"
               >
                 Reset Filters
               </button>
