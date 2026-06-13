@@ -36,9 +36,6 @@ interface ToolCardProps {
 
 export const ToolCard: React.FC<ToolCardProps> = ({
   tool,
-  upvotes,
-  hasUpvoted,
-  onUpvote,
   onClick
 }) => {
   const getPricingStyle = (pricing: string) => {

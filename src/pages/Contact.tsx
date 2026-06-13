@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
-import { Mail, Sparkles, Send, CheckCircle } from 'lucide-react';
+import { Mail, Send, CheckCircle } from 'lucide-react';
 import SEO from '../components/SEO';
 
 interface ContactProps {
   navigateTo: (tab: string, arg?: string) => void;
 }
 
-export const Contact: React.FC<ContactProps> = ({ navigateTo }) => {
+export const Contact: React.FC<ContactProps> = () => {
   const [formData, setFormData] = useState({
     name: '',
     email: '',

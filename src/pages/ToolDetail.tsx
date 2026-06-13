@@ -62,7 +62,6 @@ export const ToolDetail: React.FC<ToolDetailProps> = ({
     .slice(0, 5);
 
   const isUpvoted = upvotedTools.has(tool.id);
-  const upvoteCount = upvotesState[tool.id] || tool.upvotes;
 
   const getPricingStyle = (pricing: string) => {
     switch (pricing) {

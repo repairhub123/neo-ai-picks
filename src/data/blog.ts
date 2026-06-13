@@ -74,7 +74,7 @@ export const blogTopics: BlogTopic[] = [
   {
     id: 'claude-artifacts-web-prototyping',
     title: 'How to Use Claude Artifacts to Prototype Web Apps in Seconds',
-    excerpt: 'Step-by-step guide to generating React and HTML previews using Anthropic's interactive visual workspace.',
+    excerpt: 'Step-by-step guide to generating React and HTML previews using Anthropic\'s interactive visual workspace.',
     category: 'Writing',
     date: 'June 09, 2026',
     author: 'Devon Miller',
@@ -103,7 +103,7 @@ export const blogTopics: BlogTopic[] = [
   },
   {
     id: 'gemini-1-5-context-window-tips',
-    title: 'Unlocking Gemini's 2 Million Token Context Window for Document Summaries',
+    title: 'Unlocking Gemini\'s 2 Million Token Context Window for Document Summaries',
     excerpt: 'How to upload entire books, PDFs, and video lectures to Google Gemini for synthesis.',
     category: 'Writing',
     date: 'May 28, 2026',
@@ -164,7 +164,7 @@ export const blogTopics: BlogTopic[] = [
   {
     id: 'ai-blogging-optimization-google-rank',
     title: 'Google EEAT Guidelines and AI-Generated Content: How to Rank in 2026',
-    excerpt: 'How to format generative blog articles to comply with Google's Experience and Trust markers.',
+    excerpt: 'How to format generative blog articles to comply with Google\'s Experience and Trust markers.',
     category: 'Writing',
     date: 'May 06, 2026',
     author: 'Emma Watson',
@@ -226,7 +226,7 @@ export const blogTopics: BlogTopic[] = [
   {
     id: 'windsurf-agentic-ide-debugging-loops',
     title: 'Solving Complex Bugs Autonomously with Windsurf Agent Loops',
-    excerpt: 'How Codeium's Cascade agent reads terminal traces and executes multi-file debugging sequences.',
+    excerpt: 'How Codeium\'s Cascade agent reads terminal traces and executes multi-file debugging sequences.',
     category: 'Coding',
     date: 'June 08, 2026',
     author: 'Nate Cole',
@@ -508,9 +508,9 @@ v0 generates clean, responsive React code utilizing Tailwind CSS and shadcn/ui c
 
 For developers working with sensitive corporate code or in offline environments, setting up a local AI assistant is essential. By combining the open-source [Continue](/tool/continue) plugin with Ollama, you can download models like DeepSeek-Coder, Llama-3-8B-Instruct, or Codestral. 
 
-1. Install Ollama and download your preferred model via `ollama run codestral`.
-2. Connect the model in the Continue configuration file (`config.json`) under the `models` array.
-3. Configure autocomplete to use lightweight models like `nomic-embed-text` for semantic index building.
+1. Install Ollama and download your preferred model via \`ollama run codestral\`.
+2. Connect the model in the Continue configuration file (\`config.json\`) under the \`models\` array.
+3. Configure autocomplete to use lightweight models like \`nomic-embed-text\` for semantic index building.
 
 For a commercial solution, [Tabnine](/tool/tabnine) offers pre-packaged local deployment. It runs custom-trained parameters directly on your local developer machine's Nvidia GPU, ensuring that no code lines ever leak over the internet.
 
@@ -540,8 +540,8 @@ Senior developers benefit most by combining these layers: using autocomplete for
 ### Best Practices for AI-Native Coding
 
 To get the most out of AI code editors, developers should adopt these strategies:
-1. **Optimize Your Codebase Index**: Keep your `.gitignore` updated so the AI doesn't spend tokens indexing temporary logs or `node_modules` folders.
-2. **Utilize Prompt Context**: Prefix your prompts with references like `@filename` or `@symbolname` to give the AI the exact code blocks it needs.
+1. **Optimize Your Codebase Index**: Keep your \`.gitignore\` updated so the AI doesn't spend tokens indexing temporary logs or \`node_modules\` folders.
+2. **Utilize Prompt Context**: Prefix your prompts with references like \`@filename\` or \`@symbolname\` to give the AI the exact code blocks it needs.
 3. **Verify Compiler Checks**: AI-generated code can look syntactically correct but fail compilation. Use agent tools like Windsurf's Cascade or compile locally before committing.
 
 ---
