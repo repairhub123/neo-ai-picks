@@ -69,8 +69,18 @@ export const Footer: React.FC<FooterProps> = ({ navigateTo }) => {
               </button>
             </li>
             <li>
-              <button onClick={() => setActiveModal('contact')} className="hover:text-white transition-colors cursor-pointer text-left">
+              <button onClick={() => navigateTo('contact')} className="hover:text-white transition-colors cursor-pointer text-left">
                 Contact
+              </button>
+            </li>
+            <li>
+              <button onClick={() => navigateTo('privacy')} className="hover:text-white transition-colors cursor-pointer text-left">
+                Privacy Policy
+              </button>
+            </li>
+            <li>
+              <button onClick={() => navigateTo('terms')} className="hover:text-white transition-colors cursor-pointer text-left">
+                Terms of Service
               </button>
             </li>
           </ul>

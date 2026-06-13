@@ -8,6 +8,10 @@ import CompareDetail from './pages/CompareDetail';
 import SubmitTool from './pages/SubmitTool';
 import BlogFeed from './pages/BlogFeed';
 import BlogDetail from './pages/BlogDetail';
+import Contact from './pages/Contact';
+import Privacy from './pages/Privacy';
+import Terms from './pages/Terms';
+import NotFound from './pages/NotFound';
 import toolsData from './data/tools.json';
 import type { AITool } from './components/ToolCard';
 
@@ -63,11 +67,19 @@ function App() {
         setCurrentRoute({ path: 'blog-detail', param: id });
       } else if (pathname === '/submit') {
         setCurrentRoute({ path: 'submit' });
+      } else if (pathname === '/contact') {
+        setCurrentRoute({ path: 'contact' });
+      } else if (pathname === '/privacy') {
+        setCurrentRoute({ path: 'privacy' });
+      } else if (pathname === '/terms') {
+        setCurrentRoute({ path: 'terms' });
       } else if (pathname.startsWith('/tool/')) {
         const id = pathname.substring(6);
         setCurrentRoute({ path: 'tool', param: id });
-      } else {
+      } else if (pathname === '/' || pathname === '') {
         setCurrentRoute({ path: 'home' });
+      } else {
+        setCurrentRoute({ path: '404' });
       }
     };
 
@@ -104,6 +116,18 @@ function App() {
     } else if (path === 'submit') {
       url = '/submit';
       routePath = 'submit';
+    } else if (path === 'contact') {
+      url = '/contact';
+      routePath = 'contact';
+    } else if (path === 'privacy') {
+      url = '/privacy';
+      routePath = 'privacy';
+    } else if (path === 'terms') {
+      url = '/terms';
+      routePath = 'terms';
+    } else if (path === '404') {
+      url = '/404';
+      routePath = '404';
     } else if (path === 'tool' || path.startsWith('tool')) {
       const tId = param || path.split('/')[1];
       url = `/tool/${tId}`;
@@ -213,15 +237,15 @@ function App() {
         return <BlogFeed navigateTo={navigateTo} />;
       case 'blog-detail':
         return <BlogDetail topicId={currentRoute.param || ''} tools={tools} navigateTo={navigateTo} />;
+      case 'contact':
+        return <Contact navigateTo={navigateTo} />;
+      case 'privacy':
+        return <Privacy navigateTo={navigateTo} />;
+      case 'terms':
+        return <Terms navigateTo={navigateTo} />;
+      case '404':
       default:
-        return (
-          <div className="flex-grow flex flex-col items-center justify-center py-20 text-white">
-            <h2 className="text-xl font-bold">404 - Page Not Found</h2>
-            <button onClick={() => navigateTo('home')} className="mt-4 bg-violet-600 px-4 py-2 rounded-xl text-xs font-bold">
-              Go Home
-            </button>
-          </div>
-        );
+        return <NotFound navigateTo={navigateTo} />;
     }
   };
 

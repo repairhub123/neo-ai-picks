@@ -6,6 +6,7 @@ import { ToolIcon } from '../components/ToolIcon';
 import { comparisonPairs } from '../data/comparisons';
 import { blogTopics } from '../data/blog';
 import SEO from '../components/SEO';
+import Breadcrumbs from '../components/Breadcrumbs';
 
 interface ToolDetailProps {
   toolId: string;
@@ -101,15 +102,26 @@ export const ToolDetail: React.FC<ToolDetailProps> = ({
         jsonLd={softwareSchema}
       />
 
-      <div className="max-w-7xl mx-auto space-y-8">
-        {/* BACK TO DIRECTORY */}
-        <button
-          onClick={() => navigateTo('home')}
-          className="flex items-center gap-1.5 text-slate-400 hover:text-white text-sm font-semibold transition-all group w-fit cursor-pointer"
-        >
-          <ChevronLeft className="w-4 h-4 group-hover:-translate-x-0.5 transition-transform" />
-          Back to Directory
-        </button>
+      <div className="max-w-7xl mx-auto space-y-6">
+        <div className="space-y-2">
+          {/* BREADCRUMBS */}
+          <Breadcrumbs
+            navigateTo={navigateTo}
+            items={[
+              { label: 'Explore Tools', onClick: () => navigateTo('home') },
+              { label: tool.name }
+            ]}
+          />
+
+          {/* BACK TO DIRECTORY */}
+          <button
+            onClick={() => navigateTo('home')}
+            className="flex items-center gap-1.5 text-slate-400 hover:text-white text-sm font-semibold transition-all group w-fit cursor-pointer"
+          >
+            <ChevronLeft className="w-4 h-4 group-hover:-translate-x-0.5 transition-transform" />
+            Back to Directory
+          </button>
+        </div>
 
         {/* PROFILE HEADER CARD */}
         <div className="p-6 md:p-8 rounded-2xl saas-glass relative overflow-hidden flex flex-col md:flex-row md:items-center justify-between gap-6">

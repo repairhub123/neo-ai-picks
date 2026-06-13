@@ -4,12 +4,102 @@ import { blogTopics, getDynamicContent } from '../data/blog';
 import { comparisonPairs } from '../data/comparisons';
 import type { AITool } from '../components/ToolCard';
 import SEO from '../components/SEO';
+import Breadcrumbs from '../components/Breadcrumbs';
 
 interface BlogDetailProps {
   topicId: string;
   tools: AITool[];
   navigateTo: (tab: string, arg?: string) => void;
 }
+
+// Inline Markdown Parser to dynamically support links [text](path) in SPA router
+const parseInlineMarkdown = (text: string, navigateTo: (tab: string, arg?: string) => void) => {
+  const linkRegex = /\[([^\]]+)\]\(([^)]+)\)/g;
+  const parts = [];
+  let lastIndex = 0;
+  let match;
+
+  while ((match = linkRegex.exec(text)) !== null) {
+    const matchIndex = match.index;
+    if (matchIndex > lastIndex) {
+      parts.push(text.substring(lastIndex, matchIndex));
+    }
+
+    const linkText = match[1];
+    const linkUrl = match[2];
+
+    if (linkUrl.startsWith('/tool/')) {
+      const toolId = linkUrl.substring(6);
+      parts.push(
+        <button
+          key={matchIndex}
+          onClick={() => navigateTo('tool', toolId)}
+          className="text-violet-400 hover:text-violet-300 hover:underline font-bold bg-transparent border-none p-0 inline cursor-pointer text-left align-baseline"
+        >
+          {linkText}
+        </button>
+      );
+    } else if (linkUrl.startsWith('/compare/')) {
+      const compareId = linkUrl.substring(9);
+      parts.push(
+        <button
+          key={matchIndex}
+          onClick={() => navigateTo(`compare/${compareId}`)}
+          className="text-violet-400 hover:text-violet-300 hover:underline font-bold bg-transparent border-none p-0 inline cursor-pointer text-left align-baseline"
+        >
+          {linkText}
+        </button>
+      );
+    } else if (linkUrl.startsWith('http://') || linkUrl.startsWith('https://')) {
+      parts.push(
+        <a
+          key={matchIndex}
+          href={linkUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="text-violet-400 hover:text-violet-300 hover:underline font-bold align-baseline"
+        >
+          {linkText}
+        </a>
+      );
+    } else {
+      parts.push(linkText);
+    }
+
+    lastIndex = linkRegex.lastIndex;
+  }
+
+  if (lastIndex < text.length) {
+    parts.push(text.substring(lastIndex));
+  }
+
+  return parts.map((part, pIdx) => {
+    if (typeof part !== 'string') return part;
+
+    return (
+      <span key={pIdx}>
+        {part.split('**').map((chunk, cIdx) => {
+          if (cIdx % 2 === 1) {
+            return <strong key={cIdx} className="text-white font-bold">{chunk}</strong>;
+          }
+          if (chunk.includes('`')) {
+            return chunk.split('`').map((codePart, cpIdx) => {
+              if (cpIdx % 2 === 1) {
+                return (
+                  <code key={cpIdx} className="bg-slate-950 text-violet-300 border border-white/5 px-1.5 py-0.5 rounded text-xs font-semibold">
+                    {codePart}
+                  </code>
+                );
+              }
+              return codePart;
+            });
+          }
+          return chunk;
+        })}
+      </span>
+    );
+  });
+};
 
 export const BlogDetail: React.FC<BlogDetailProps> = ({ topicId, tools, navigateTo }) => {
   const post = blogTopics.find((t) => t.id === topicId);
@@ -87,16 +177,26 @@ export const BlogDetail: React.FC<BlogDetailProps> = ({ topicId, tools, navigate
         jsonLd={blogPostingSchema}
       />
 
-      <div className="max-w-7xl mx-auto space-y-8">
-        
-        {/* BACK TO FEED */}
-        <button
-          onClick={() => navigateTo('blog')}
-          className="flex items-center gap-1.5 text-slate-400 hover:text-white text-sm font-semibold transition-all group w-fit cursor-pointer"
-        >
-          <ChevronLeft className="w-4 h-4 group-hover:-translate-x-0.5 transition-transform" />
-          Back to Blog Feed
-        </button>
+      <div className="max-w-7xl mx-auto space-y-6">
+        <div className="space-y-2">
+          {/* BREADCRUMBS */}
+          <Breadcrumbs
+            navigateTo={navigateTo}
+            items={[
+              { label: 'Blog', onClick: () => navigateTo('blog') },
+              { label: post.title }
+            ]}
+          />
+
+          {/* BACK TO FEED */}
+          <button
+            onClick={() => navigateTo('blog')}
+            className="flex items-center gap-1.5 text-slate-400 hover:text-white text-sm font-semibold transition-all group w-fit cursor-pointer"
+          >
+            <ChevronLeft className="w-4 h-4 group-hover:-translate-x-0.5 transition-transform" />
+            Back to Blog Feed
+          </button>
+        </div>
 
         {/* THUMBNAIL BANNER */}
         <div className={`w-full aspect-[21/9] rounded-2xl bg-gradient-to-br ${post.imageBg} flex items-center justify-center p-8 text-center border border-white/5 relative overflow-hidden`}>
@@ -167,13 +267,18 @@ export const BlogDetail: React.FC<BlogDetailProps> = ({ topicId, tools, navigate
                               <span className="text-violet-400 mt-1.5 select-none">•</span>
                               <div>
                                 <strong className="text-white font-bold">{boldPart}: </strong>
-                                {restPart}
+                                {parseInlineMarkdown(restPart.trim(), navigateTo)}
                               </div>
                             </li>
                           );
                         }
                         
-                        return <li key={i}>{clean}</li>;
+                        return (
+                          <li key={i} className="list-none flex items-start gap-2">
+                            <span className="text-violet-400 mt-1.5 select-none">•</span>
+                            <div>{parseInlineMarkdown(clean, navigateTo)}</div>
+                          </li>
+                        );
                       })}
                     </ul>
                   );
@@ -196,14 +301,16 @@ export const BlogDetail: React.FC<BlogDetailProps> = ({ topicId, tools, navigate
                               </span>
                               <div>
                                 <strong className="text-white block mb-1 font-bold text-sm">{title}</strong>
-                                <span className="text-slate-300 text-sm leading-relaxed">{boldSplit[1].trim()}</span>
+                                <span className="text-slate-300 text-sm leading-relaxed">
+                                  {parseInlineMarkdown(boldSplit[1].trim(), navigateTo)}
+                                </span>
                               </div>
                             </li>
                           );
                         }
                         return (
-                          <li key={i} className="list-decimal list-inside">
-                            {clean}
+                          <li key={i} className="list-decimal list-inside text-sm">
+                            {parseInlineMarkdown(clean, navigateTo)}
                           </li>
                         );
                       })}
@@ -214,20 +321,7 @@ export const BlogDetail: React.FC<BlogDetailProps> = ({ topicId, tools, navigate
                 // Paragraph
                 return (
                   <p key={index} className="whitespace-pre-wrap leading-relaxed">
-                    {trimmed.split('**').map((chunk, cIdx) => {
-                      if (cIdx % 2 === 1) {
-                        return <strong key={cIdx} className="text-white font-bold">{chunk}</strong>;
-                      }
-                      if (chunk.includes('`')) {
-                        return chunk.split('`').map((codePart, cpIdx) => {
-                          if (cpIdx % 2 === 1) {
-                            return <code key={cpIdx} className="bg-slate-950 text-violet-300 border border-white/5 px-1.5 py-0.5 rounded text-xs">{codePart}</code>;
-                          }
-                          return codePart;
-                        });
-                      }
-                      return chunk;
-                    })}
+                    {parseInlineMarkdown(trimmed, navigateTo)}
                   </p>
                 );
               })}

@@ -6,6 +6,7 @@ import { getPremiumComparison } from '../data/comparisons/registry';
 import { blogTopics } from '../data/blog';
 import type { AITool } from '../components/ToolCard';
 import SEO from '../components/SEO';
+import Breadcrumbs from '../components/Breadcrumbs';
 
 interface CompareDetailProps {
   comparisonId: string;
@@ -100,15 +101,26 @@ export const CompareDetail: React.FC<CompareDetailProps> = ({
         jsonLd={comparisonSchema}
       />
 
-      <div className="max-w-7xl mx-auto space-y-8">
-        {/* BACK TO DIRECTORY */}
-        <button
-          onClick={() => navigateTo('compare')}
-          className="flex items-center gap-1.5 text-slate-400 hover:text-white text-sm font-semibold transition-all group w-fit cursor-pointer"
-        >
-          <ChevronLeft className="w-4 h-4 group-hover:-translate-x-0.5 transition-transform" />
-          Back to Comparisons
-        </button>
+      <div className="max-w-7xl mx-auto space-y-6">
+        <div className="space-y-2">
+          {/* BREADCRUMBS */}
+          <Breadcrumbs
+            navigateTo={navigateTo}
+            items={[
+              { label: 'Comparisons', onClick: () => navigateTo('compare') },
+              { label: `${toolA.name} vs ${toolB.name}` }
+            ]}
+          />
+
+          {/* BACK TO DIRECTORY */}
+          <button
+            onClick={() => navigateTo('compare')}
+            className="flex items-center gap-1.5 text-slate-400 hover:text-white text-sm font-semibold transition-all group w-fit cursor-pointer"
+          >
+            <ChevronLeft className="w-4 h-4 group-hover:-translate-x-0.5 transition-transform" />
+            Back to Comparisons
+          </button>
+        </div>
 
         {/* PROFILE HEADER CARD */}
         <div className="p-8 rounded-2xl saas-glass relative overflow-hidden flex flex-col md:flex-row items-center justify-between gap-8 text-center md:text-left">
