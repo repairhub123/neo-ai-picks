@@ -1,0 +1,464 @@
+import React, { useState, useRef } from 'react';
+import { Sparkles, Activity, Search, X, Star, ArrowRight, ShieldCheck, Zap, Layers } from 'lucide-react';
+import { ToolCard } from '../components/ToolCard';
+import type { AITool } from '../components/ToolCard';
+import { ToolIcon } from '../components/ToolIcon';
+import SEO from '../components/SEO';
+
+interface HomeProps {
+  tools: AITool[];
+  upvotesState: Record<string, number>;
+  upvotedTools: Set<string>;
+  onUpvote: (toolId: string) => void;
+  navigateTo: (tab: string, arg?: string) => void;
+  searchQuery: string;
+  setSearchQuery: (query: string) => void;
+  selectedCategory: string;
+  setSelectedCategory: (category: string) => void;
+}
+
+type SortOption = 'popular' | 'newest' | 'alphabetical';
+
+export const Home: React.FC<HomeProps> = ({
+  tools,
+  upvotesState,
+  upvotedTools,
+  onUpvote,
+  navigateTo,
+  searchQuery,
+  setSearchQuery,
+  selectedCategory,
+  setSelectedCategory
+}) => {
+  const [sortBy, setSortBy] = useState<SortOption>('popular');
+  const directoryRef = useRef<HTMLDivElement>(null);
+
+  const categories = [
+    'All Tools',
+    'Writing',
+    'Coding',
+    'Image Generation',
+    'Video Generation',
+    'Productivity',
+    'Marketing',
+    'Automation'
+  ];
+
+  // Map requested Category names to database equivalents
+  const topCategories = [
+    { label: 'Writing AI', value: 'Writing' },
+    { label: 'Coding AI', value: 'Coding' },
+    { label: 'Image Generation', value: 'Image Generation' },
+    { label: 'Video Generation', value: 'Video Generation' },
+    { label: 'Productivity', value: 'Productivity' },
+    { label: 'Marketing', value: 'Marketing' },
+    { label: 'Automation', value: 'Automation' }
+  ];
+
+  // Filtering
+  const filteredTools = tools.filter((tool) => {
+    const categoryMatch =
+      selectedCategory === 'All Tools' || tool.category === selectedCategory;
+
+    const query = searchQuery.toLowerCase().trim();
+    const searchMatch =
+      query === '' ||
+      tool.name.toLowerCase().includes(query) ||
+      tool.tagline.toLowerCase().includes(query) ||
+      tool.description.toLowerCase().includes(query) ||
+      tool.features.some((feat) => feat.toLowerCase().includes(query));
+
+    return categoryMatch && searchMatch;
+  });
+
+  // Sorting
+  const sortedTools = [...filteredTools].sort((a, b) => {
+    const votesA = upvotesState[a.id] || a.upvotes;
+    const votesB = upvotesState[b.id] || b.upvotes;
+
+    if (sortBy === 'popular') {
+      return votesB - votesA;
+    } else if (sortBy === 'newest') {
+      return b.id.localeCompare(a.id);
+    } else {
+      return a.name.localeCompare(b.name);
+    }
+  });
+
+  // Featured Tools: top 4 upvoted tools
+  const featuredTools = [...tools]
+    .sort((a, b) => (upvotesState[b.id] || b.upvotes) - (upvotesState[a.id] || a.upvotes))
+    .slice(0, 4);
+
+  // Popular Tools: next 4 upvoted tools (replaces "Latest Launches")
+  const popularTools = [...tools]
+    .sort((a, b) => (upvotesState[b.id] || b.upvotes) - (upvotesState[a.id] || a.upvotes))
+    .slice(4, 8);
+
+  // Popular Comparisons List
+  const popularComparisons = [
+    { id: 'chatgpt-vs-claude', label: 'ChatGPT vs Claude', category: 'Writing' },
+    { id: 'claude-vs-gemini', label: 'Claude vs Gemini', category: 'Writing' },
+    { id: 'cursor-vs-windsurf', label: 'Cursor vs Windsurf', category: 'Coding' },
+    { id: 'midjourney-vs-flux', label: 'Midjourney vs Flux', category: 'Image Generation' },
+    { id: 'perplexity-vs-chatgpt', label: 'Perplexity vs ChatGPT', category: 'Productivity' }
+  ];
+
+  const scrollToDirectory = () => {
+    directoryRef.current?.scrollIntoView({ behavior: 'smooth' });
+  };
+
+  // Structured Data Schema
+  const homeSchema = {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "url": "https://neoaipicks.com/",
+    "name": "Neo AI Picks",
+    "description": "Discover, compare and review the best AI tools for writing, coding, design, video creation, automation and productivity.",
+    "potentialAction": {
+      "@type": "SearchAction",
+      "target": "https://neoaipicks.com/?q={search_term_string}",
+      "query-input": "required name=search_term_string"
+    }
+  };
+
+  return (
+    <div className="w-full flex-grow flex flex-col bg-[#0b0f19]">
+      <SEO
+        title="Neo AI Picks - Find, Compare & Explore AI Tools"
+        description="Discover, compare and review the best AI tools for writing, coding, design, video creation, automation and productivity."
+        path="/"
+        jsonLd={homeSchema}
+      />
+
+      {/* HERO SECTION */}
+      <div className="relative w-full py-16 md:py-24 px-6 text-center overflow-hidden">
+        {/* LIGHT ORBS */}
+        <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[350px] md:w-[600px] h-[350px] md:h-[600px] rounded-full bg-violet-600/10 blur-[100px] md:blur-[180px] -z-10 pointer-events-none" />
+        <div className="absolute top-1/3 left-1/4 w-[250px] h-[250px] rounded-full bg-pink-500/5 blur-[80px] -z-10 pointer-events-none" />
+
+        <div className="max-w-4xl mx-auto space-y-6 md:space-y-8">
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full saas-glass border border-white/5 text-[11px] font-bold text-violet-300 tracking-wide uppercase select-none">
+            <Sparkles className="w-3.5 h-3.5" />
+            Vetted AI Software Directory
+          </div>
+
+          <h1 className="text-4xl md:text-6xl font-extrabold tracking-tight leading-[1.12] text-white">
+            Find, Compare & Explore <br />
+            <span className="gradient-text-purple">the Best AI Tools</span>
+          </h1>
+
+          <p className="text-base md:text-xl text-slate-400 font-medium max-w-2xl mx-auto leading-relaxed">
+            Discover powerful AI tools for writing, coding, design, video creation, productivity, automation, and more.
+          </p>
+
+          {/* SEARCH BAR */}
+          <div className="max-w-2xl mx-auto relative group mt-6">
+            <div className="absolute inset-0 bg-gradient-to-r from-violet-500 to-purple-500 rounded-2xl blur-md opacity-25 group-focus-within:opacity-40 transition-all duration-300 pointer-events-none" />
+            <div className="relative flex items-center">
+              <Search className="absolute left-4.5 w-5 h-5 text-slate-500 group-focus-within:text-violet-400 transition-colors pointer-events-none" />
+              <input
+                type="text"
+                placeholder="Search tools by name, category, features..."
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                className="w-full bg-slate-900/90 hover:bg-slate-900 border border-white/10 group-focus-within:border-violet-500 rounded-2xl py-4.5 pl-13 pr-12 text-white placeholder-slate-500 focus:outline-none focus:ring-1 focus:ring-violet-500 text-base shadow-2xl transition-all"
+              />
+              {searchQuery && (
+                <button
+                  onClick={() => setSearchQuery('')}
+                  className="absolute right-4.5 p-1 rounded-full text-slate-400 hover:text-white hover:bg-white/10 transition-all cursor-pointer"
+                >
+                  <X className="w-4 h-4" />
+                </button>
+              )}
+            </div>
+          </div>
+
+          {/* CALL TO ACTION BUTTONS */}
+          <div className="flex flex-wrap items-center justify-center gap-4 pt-4">
+            <button
+              onClick={scrollToDirectory}
+              className="bg-white hover:bg-slate-100 text-slate-950 font-bold text-sm px-6 py-3.5 rounded-xl transition-all cursor-pointer shadow-lg active:scale-95 flex items-center gap-2"
+            >
+              Explore Tools
+              <ArrowRight className="w-4 h-4" />
+            </button>
+            <button
+              onClick={() => navigateTo('compare')}
+              className="bg-slate-900 hover:bg-slate-800 border border-white/10 hover:border-violet-500/30 text-white font-bold text-sm px-6 py-3.5 rounded-xl transition-all cursor-pointer active:scale-95 flex items-center gap-2"
+            >
+              Compare AI Tools
+              <Activity className="w-4 h-4 text-violet-400" />
+            </button>
+          </div>
+        </div>
+      </div>
+
+      {/* WHY NEO AI PICKS SECTION */}
+      <div className="max-w-7xl mx-auto w-full px-6 mb-20 space-y-8">
+        <div className="text-center space-y-2">
+          <h2 className="text-2xl md:text-3xl font-extrabold text-white">Why Neo AI Picks?</h2>
+          <p className="text-sm text-slate-400 max-w-md mx-auto">Our catalog is vetted by developers and founders to ensure high usability standards.</p>
+        </div>
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          {[
+            { title: 'Compare Tools Side-by-Side', desc: 'Inspect parameters, pricing, and pros/cons dynamically.', icon: Activity },
+            { title: 'Discover New AI Products', desc: 'Find recently published and vetted tools daily.', icon: Sparkles },
+            { title: 'Read Expert Reviews', desc: 'Evaluate verified features and actual use cases.', icon: ShieldCheck },
+            { title: 'Explore AI Alternatives', desc: 'Locate equivalent tools matching your constraints.', icon: Layers }
+          ].map((card, i) => {
+            const Icon = card.icon;
+            return (
+              <div key={i} className="p-6 rounded-2xl saas-glass border border-white/5 space-y-3 saas-card-hover">
+                <div className="w-10 h-10 rounded-xl bg-violet-600/10 border border-violet-500/20 flex items-center justify-center text-violet-400">
+                  <Icon className="w-5 h-5" />
+                </div>
+                <h3 className="font-extrabold text-white text-sm md:text-base">{card.title}</h3>
+                <p className="text-slate-400 text-xs md:text-sm font-medium leading-relaxed">{card.desc}</p>
+              </div>
+            );
+          })}
+        </div>
+      </div>
+
+      {/* POPULAR COMPARISONS SECTION */}
+      <div className="max-w-7xl mx-auto w-full px-6 mb-20 space-y-6">
+        <h2 className="text-xl font-bold text-white flex items-center gap-2">
+          <ScaleIcon className="w-5 h-5 text-violet-400" />
+          Popular Comparisons
+        </h2>
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">
+          {popularComparisons.map((pair) => (
+            <div
+              key={pair.id}
+              onClick={() => navigateTo(`compare/${pair.id}`)}
+              className="p-5 rounded-2xl saas-glass border border-white/5 saas-card-hover cursor-pointer space-y-3 flex flex-col justify-between"
+            >
+              <span className="text-[9px] font-extrabold text-violet-400 bg-violet-500/10 border border-violet-500/25 px-2.5 py-0.5 rounded-lg w-fit">
+                {pair.category}
+              </span>
+              <h3 className="font-extrabold text-white text-sm leading-snug">{pair.label}</h3>
+              <div className="text-[10px] text-slate-500 font-bold uppercase tracking-wider flex items-center gap-1">
+                View Specs
+                <ArrowRight className="w-3 h-3 text-violet-400" />
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* TOP CATEGORIES SECTION */}
+      <div className="max-w-7xl mx-auto w-full px-6 mb-20 space-y-6">
+        <h2 className="text-xl font-bold text-white flex items-center gap-2">
+          <Layers className="w-5 h-5 text-violet-400" />
+          Top Categories
+        </h2>
+        <div className="flex flex-wrap gap-3">
+          {topCategories.map((cat) => (
+            <button
+              key={cat.value}
+              onClick={() => {
+                setSelectedCategory(cat.value);
+                scrollToDirectory();
+              }}
+              className="px-5 py-3 rounded-xl saas-glass border border-white/5 hover:border-violet-500/30 hover:bg-violet-950/15 text-slate-300 hover:text-white font-bold text-sm transition-all cursor-pointer flex items-center gap-2"
+            >
+              <Zap className="w-4 h-4 text-violet-400" />
+              {cat.label}
+            </button>
+          ))}
+        </div>
+      </div>
+
+      {/* FEATURED TOOLS GRID */}
+      <div className="max-w-7xl mx-auto w-full px-6 mb-16 space-y-6">
+        <h2 className="text-xl font-bold text-white flex items-center gap-2">
+          <Star className="w-5 h-5 text-amber-400 fill-amber-400" />
+          Featured Tools
+        </h2>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+          {featuredTools.map((tool) => {
+            return (
+              <div 
+                key={tool.id} 
+                onClick={() => navigateTo(`tool/${tool.id}`)}
+                className="p-5 rounded-2xl saas-glass saas-card-hover cursor-pointer space-y-4 flex flex-col justify-between"
+              >
+                <div className="space-y-3">
+                  <div className="flex items-center justify-between">
+                    <ToolIcon toolId={tool.id} toolName={tool.name} category={tool.category} size="md" />
+                    <span className="text-[9px] font-black text-amber-400 bg-amber-500/10 border border-amber-500/20 px-2 py-0.5 rounded-full uppercase tracking-wider">
+                      ★ Featured
+                    </span>
+                  </div>
+                  <h3 className="font-extrabold text-white text-base">{tool.name}</h3>
+                  <p className="text-slate-400 text-xs line-clamp-2 leading-relaxed font-semibold">{tool.tagline}</p>
+                </div>
+                <div className="flex items-center justify-between pt-2 border-t border-white/5 text-[10px] text-slate-500">
+                  <span>{tool.category}</span>
+                  <span className="font-bold text-violet-400">▲ {upvotesState[tool.id] || tool.upvotes}</span>
+                </div>
+              </div>
+            );
+          })}
+        </div>
+      </div>
+
+      {/* CORE LISTING CONTENT */}
+      <div ref={directoryRef} className="max-w-7xl mx-auto w-full px-6 pb-20 grid grid-cols-1 lg:grid-cols-12 gap-8 scroll-mt-20">
+        
+        {/* MAIN FEED */}
+        <div className="lg:col-span-8 space-y-6">
+          
+          {/* CATEGORIES BAR */}
+          <div className="flex flex-col gap-4 border-b border-white/5 pb-4">
+            <h2 className="text-lg font-bold text-white">Browse Directory</h2>
+            <div className="flex items-center gap-2 overflow-x-auto pb-2 custom-scrollbar">
+              {categories.map((category) => {
+                const isActive = selectedCategory === category;
+                return (
+                  <button
+                    key={category}
+                    onClick={() => setSelectedCategory(category)}
+                    className={`whitespace-nowrap px-4 py-2 rounded-xl text-xs font-semibold border transition-all cursor-pointer ${
+                      isActive
+                        ? 'bg-violet-600 border-violet-500 text-white shadow-lg shadow-violet-600/20'
+                        : 'bg-slate-900/40 hover:bg-slate-900 border-white/10 text-slate-400 hover:text-white'
+                    }`}
+                  >
+                    {category}
+                  </button>
+                );
+              })}
+            </div>
+          </div>
+
+          {/* CONTROLS */}
+          <div className="flex items-center justify-between bg-slate-900/30 p-3 rounded-xl border border-white/5 text-xs">
+            <div className="flex items-center gap-2">
+              <span className="text-slate-500 font-bold uppercase tracking-wider">Sort:</span>
+              <button
+                onClick={() => setSortBy('popular')}
+                className={`px-3 py-1.5 rounded-lg font-semibold transition-all cursor-pointer ${
+                  sortBy === 'popular' ? 'bg-violet-600/10 text-violet-400 border border-violet-500/20' : 'text-slate-400 hover:text-white'
+                }`}
+              >
+                ▲ Popular
+              </button>
+              <button
+                onClick={() => setSortBy('newest')}
+                className={`px-3 py-1.5 rounded-lg font-semibold transition-all cursor-pointer ${
+                  sortBy === 'newest' ? 'bg-violet-600/10 text-violet-400 border border-violet-500/20' : 'text-slate-400 hover:text-white'
+                }`}
+              >
+                📅 Newest
+              </button>
+            </div>
+            <span className="text-slate-500 font-semibold">Showing {sortedTools.length} results</span>
+          </div>
+
+          {/* LIST */}
+          {sortedTools.length > 0 ? (
+            <div className="space-y-4">
+              {sortedTools.map((tool) => (
+                <ToolCard
+                  key={tool.id}
+                  tool={tool}
+                  upvotes={upvotesState[tool.id] || tool.upvotes}
+                  hasUpvoted={upvotedTools.has(tool.id)}
+                  onUpvote={() => onUpvote(tool.id)}
+                  onClick={() => navigateTo(`tool/${tool.id}`)}
+                />
+              ))}
+            </div>
+          ) : (
+            <div className="p-16 text-center rounded-2xl saas-glass space-y-4">
+              <p className="text-slate-400 font-medium">No tools found matching your search options.</p>
+              <button 
+                onClick={() => { setSearchQuery(''); setSelectedCategory('All Tools'); }}
+                className="bg-violet-600 text-white px-4 py-2 rounded-xl text-xs font-bold"
+              >
+                Reset Filters
+              </button>
+            </div>
+          )}
+
+        </div>
+
+        {/* SIDEBAR */}
+        <div className="lg:col-span-4 space-y-8">
+          
+          {/* POPULAR AI TOOLS (REPLACED LATEST LAUNCHES) */}
+          <div className="p-6 rounded-2xl saas-glass space-y-4">
+            <h3 className="font-bold text-white text-sm uppercase tracking-wider border-b border-white/5 pb-2">
+              Popular AI Tools
+            </h3>
+            <div className="space-y-3.5">
+              {popularTools.map((tool) => (
+                <div 
+                  key={tool.id}
+                  onClick={() => navigateTo(`tool/${tool.id}`)}
+                  className="flex items-center justify-between hover:bg-white/5 p-2 rounded-xl cursor-pointer transition-all group"
+                >
+                  <div className="space-y-0.5">
+                    <h4 className="font-bold text-xs text-white group-hover:text-violet-400 transition-colors">{tool.name}</h4>
+                    <p className="text-[10px] text-slate-500">{tool.category}</p>
+                  </div>
+                  <span className="text-[10px] font-bold text-violet-400 bg-violet-500/10 border border-violet-500/20 px-2 py-0.5 rounded-lg">
+                    ▲ {upvotesState[tool.id] || tool.upvotes}
+                  </span>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* COMPASS LINK CTA CARD */}
+          <div className="p-6 rounded-2xl bg-gradient-to-br from-violet-900/30 to-purple-900/10 border border-violet-500/20 relative overflow-hidden flex flex-col justify-between h-[180px]">
+            <div className="absolute top-0 right-0 w-32 h-32 bg-violet-500/20 rounded-full blur-2xl pointer-events-none" />
+            <div>
+              <span className="text-[9px] font-extrabold uppercase tracking-widest text-violet-400 bg-violet-500/10 border border-violet-500/20 px-2.5 py-1 rounded-full w-fit">
+                AI Knowledge
+              </span>
+              <h4 className="font-extrabold text-white text-base mt-3 leading-tight max-w-[200px]">
+                Read benchmarks & tutorials in our blog
+              </h4>
+            </div>
+            <button
+              onClick={() => navigateTo('blog')}
+              className="bg-violet-600 hover:bg-violet-500 text-white font-bold text-xs py-2 px-4 rounded-xl w-fit transition-all cursor-pointer active:scale-95 shadow-lg shadow-violet-600/30"
+            >
+              Go to Blog
+            </button>
+          </div>
+
+        </div>
+
+      </div>
+    </div>
+  );
+};
+
+// Mini inline scale icon to prevent compilation dependencies
+const ScaleIcon = (props: React.SVGProps<SVGSVGElement>) => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    width="24"
+    height="24"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="2"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+    {...props}
+  >
+    <path d="m16 16 3-8 3 8c-.5.5-1.5.5-3 .5s-2.5 0-3-.5z" />
+    <path d="m2 16 3-8 3 8c-.5.5-1.5.5-3 .5s-2.5 0-3-.5z" />
+    <path d="M7 21h10" />
+    <path d="M12 3v18" />
+    <path d="M3 7h18" />
+  </svg>
+);
+
+export default Home;
