@@ -57,18 +57,23 @@ export const Home: React.FC<HomeProps> = ({
 
   // Filtering
   const filteredTools = tools.filter((tool) => {
-    const categoryMatch =
-      selectedCategory === 'All Tools' || tool.category === selectedCategory;
-
     const query = searchQuery.toLowerCase().trim();
+    
+    // Ignore category filter if there is an active search query to ensure global search
+    const categoryMatch =
+      query !== '' || selectedCategory === 'All Tools' || tool.category === selectedCategory;
+
+    // Stricter matching for short queries to avoid matching every tool via descriptions/features
     const searchMatch =
       query === '' ||
       tool.name.toLowerCase().includes(query) ||
-      tool.category.toLowerCase().includes(query) ||
-      tool.tagline.toLowerCase().includes(query) ||
-      tool.description.toLowerCase().includes(query) ||
-      tool.features.some((feat) => feat.toLowerCase().includes(query)) ||
-      (tool.tags && tool.tags.some((tag) => tag.toLowerCase().includes(query)));
+      (tool.tags && tool.tags.some((tag) => tag.toLowerCase().includes(query))) ||
+      (query.length > 2 && (
+        tool.category.toLowerCase().includes(query) ||
+        tool.tagline.toLowerCase().includes(query) ||
+        tool.description.toLowerCase().includes(query) ||
+        tool.features.some((feat) => feat.toLowerCase().includes(query))
+      ));
 
     return categoryMatch && searchMatch;
   });
@@ -159,7 +164,10 @@ export const Home: React.FC<HomeProps> = ({
                 type="text"
                 placeholder="Search tools by name, category, features..."
                 value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
+                onChange={(e) => {
+                  setSearchQuery(e.target.value);
+                  setSelectedCategory('All Tools');
+                }}
                 className="w-full bg-slate-900/90 hover:bg-slate-900 border border-white/10 group-focus-within:border-violet-500 rounded-2xl py-4.5 pl-13 pr-12 text-white placeholder-slate-500 focus:outline-none focus:ring-1 focus:ring-violet-500 text-base shadow-2xl transition-all"
               />
               {searchQuery && (
