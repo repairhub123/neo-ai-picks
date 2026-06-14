@@ -19,7 +19,30 @@ export const CompareDetail: React.FC<CompareDetailProps> = ({
   tools,
   navigateTo
 }) => {
-  const pair = comparisonPairs.find((p) => p.id === comparisonId);
+  let pair = comparisonPairs.find((p) => p.id === comparisonId);
+  let isDynamic = false;
+  let dynamicToolA: AITool | undefined = undefined;
+  let dynamicToolB: AITool | undefined = undefined;
+
+  if (!pair && comparisonId && comparisonId.includes('-vs-')) {
+    const parts = comparisonId.split('-vs-');
+    const toolAId = parts[0];
+    const toolBId = parts[1];
+    dynamicToolA = tools.find((t) => t.id === toolAId);
+    dynamicToolB = tools.find((t) => t.id === toolBId);
+
+    if (dynamicToolA && dynamicToolB) {
+      isDynamic = true;
+      pair = {
+        id: comparisonId,
+        toolAId: dynamicToolA.id,
+        toolBId: dynamicToolB.id,
+        title: `${dynamicToolA.name} vs ${dynamicToolB.name}`,
+        excerpt: `Compare features, pricing, and pros & cons between ${dynamicToolA.name} and ${dynamicToolB.name}.`,
+        category: dynamicToolA.category === dynamicToolB.category ? dynamicToolA.category : 'AI Software'
+      };
+    }
+  }
 
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -36,14 +59,14 @@ export const CompareDetail: React.FC<CompareDetailProps> = ({
     );
   }
 
-  const toolA = tools.find((t) => t.id === pair.toolAId);
-  const toolB = tools.find((t) => t.id === pair.toolBId);
+  const toolA = isDynamic ? dynamicToolA! : tools.find((t) => t.id === pair.toolAId);
+  const toolB = isDynamic ? dynamicToolB! : tools.find((t) => t.id === pair.toolBId);
 
   if (!toolA || !toolB) {
     return (
       <div className="max-w-7xl mx-auto px-6 py-20 text-center space-y-4 text-white">
         <h2 className="text-2xl font-bold">One or both tools are not preloaded</h2>
-        <p className="text-slate-400">Cannot load comparisons. Ensure ChatGPT and Claude are loaded.</p>
+        <p className="text-slate-400">Cannot load comparisons. Ensure both tools exist in the directory.</p>
         <button onClick={() => navigateTo('compare')} className="bg-violet-600 px-5 py-2.5 rounded-xl text-sm font-bold">
           Go Back
         </button>
@@ -95,7 +118,7 @@ export const CompareDetail: React.FC<CompareDetailProps> = ({
   return (
     <div className="w-full flex-grow bg-[#0b0f19] pb-20 pt-8 px-6">
       <SEO
-        title={detailedPair ? detailedPair.seoTitle : `${toolA.name} vs ${toolB.name}: Which AI Tool is Best in 2026?`}
+        title={isDynamic ? `${toolA.name} vs ${toolB.name} - AI Tool Comparison` : (detailedPair ? detailedPair.seoTitle : `${toolA.name} vs ${toolB.name}: Which AI Tool is Best in 2026?`)}
         description={detailedPair ? detailedPair.seoDescription : `Read our side-by-side comparison of ${toolA.name} and ${toolB.name}. Contrast features, pricing structures, pros, cons, ratings, and find out our verdict.`}
         path={`/compare/${pair.id}`}
         jsonLd={comparisonSchema}
@@ -215,6 +238,19 @@ export const CompareDetail: React.FC<CompareDetailProps> = ({
                     <td className="p-4 md:p-5">
                       <ul className="list-disc list-inside space-y-1 text-xs">
                         {toolB.features.slice(0,3).map((f) => <li key={f}>{f}</li>)}
+                      </ul>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td className="p-4 md:p-5 font-bold text-slate-400 bg-slate-950/20">Best Use Case</td>
+                    <td className="p-4 md:p-5">
+                      <ul className="list-disc list-inside space-y-1 text-xs">
+                        {(toolA.bestUseCases || []).map((b) => <li key={b}>{b}</li>)}
+                      </ul>
+                    </td>
+                    <td className="p-4 md:p-5">
+                      <ul className="list-disc list-inside space-y-1 text-xs">
+                        {(toolB.bestUseCases || []).map((b) => <li key={b}>{b}</li>)}
                       </ul>
                     </td>
                   </tr>

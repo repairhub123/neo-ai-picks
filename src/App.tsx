@@ -222,7 +222,7 @@ function App() {
           />
         );
       case 'compare':
-        return <CompareFeed navigateTo={navigateTo} />;
+        return <CompareFeed tools={tools} navigateTo={navigateTo} />;
       case 'compare-detail':
         return (
           <CompareDetail

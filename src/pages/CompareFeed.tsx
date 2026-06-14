@@ -1,13 +1,77 @@
-import React from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { comparisonPairs } from '../data/comparisons';
-import { ArrowRight, Sparkles, Activity } from 'lucide-react';
+import { ArrowRight, Sparkles, Activity, ArrowLeftRight } from 'lucide-react';
 import SEO from '../components/SEO';
+import type { AITool } from '../components/ToolCard';
 
 interface CompareFeedProps {
+  tools: AITool[];
   navigateTo: (tab: string, arg?: string) => void;
 }
 
-export const CompareFeed: React.FC<CompareFeedProps> = ({ navigateTo }) => {
+export const CompareFeed: React.FC<CompareFeedProps> = ({ tools = [], navigateTo }) => {
+  const [selectedToolA, setSelectedToolA] = useState<AITool | null>(null);
+  const [selectedToolB, setSelectedToolB] = useState<AITool | null>(null);
+  const [searchQueryA, setSearchQueryA] = useState('');
+  const [searchQueryB, setSearchQueryB] = useState('');
+  const [showDropdownA, setShowDropdownA] = useState(false);
+  const [showDropdownB, setShowDropdownB] = useState(false);
+
+  const dropdownRefA = useRef<HTMLDivElement>(null);
+  const dropdownRefB = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (dropdownRefA.current && !dropdownRefA.current.contains(event.target as Node)) {
+        setShowDropdownA(false);
+      }
+      if (dropdownRefB.current && !dropdownRefB.current.contains(event.target as Node)) {
+        setShowDropdownB(false);
+      }
+    };
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, []);
+
+  const filteredToolsA = tools.filter((t) => {
+    const query = searchQueryA.toLowerCase().trim();
+    const isSelectedInB = selectedToolB && t.id === selectedToolB.id;
+    return !isSelectedInB && (query === '' || t.name.toLowerCase().includes(query) || t.category.toLowerCase().includes(query));
+  });
+
+  const filteredToolsB = tools.filter((t) => {
+    const query = searchQueryB.toLowerCase().trim();
+    const isSelectedInA = selectedToolA && t.id === selectedToolA.id;
+    return !isSelectedInA && (query === '' || t.name.toLowerCase().includes(query) || t.category.toLowerCase().includes(query));
+  });
+
+  const handleSwap = () => {
+    const tempTool = selectedToolA;
+    setSelectedToolA(selectedToolB);
+    setSearchQueryA(selectedToolB ? selectedToolB.name : '');
+    setSelectedToolB(tempTool);
+    setSearchQueryB(tempTool ? tempTool.name : '');
+  };
+
+  const handleCompare = () => {
+    if (!selectedToolA || !selectedToolB) return;
+    const idA = selectedToolA.id;
+    const idB = selectedToolB.id;
+
+    // Check if predefined comparison exists: either idA-vs-idB or idB-vs-idA
+    const existingPair = comparisonPairs.find(
+      (p) => (p.toolAId === idA && p.toolBId === idB) || (p.toolAId === idB && p.toolBId === idA)
+    );
+
+    if (existingPair) {
+      navigateTo(`compare/${existingPair.id}`);
+    } else {
+      navigateTo(`compare/${idA}-vs-${idB}`);
+    }
+  };
+
   // Structured Data: WebPage / Directory Schema
   const directorySchema = {
     "@context": "https://schema.org",
@@ -42,6 +106,115 @@ export const CompareFeed: React.FC<CompareFeedProps> = ({ navigateTo }) => {
           <p className="text-sm md:text-base text-slate-400 max-w-lg mx-auto leading-relaxed">
             Eliminate the guesswork. Contrast specifications, pricing tiers, pros & cons, and verified features side-by-side.
           </p>
+        </div>
+
+        {/* COMPARE BUILDER */}
+        <div className="bg-slate-900/60 border border-white/10 rounded-2xl p-6 space-y-4 max-w-4xl mx-auto z-40 relative">
+          <h2 className="text-xl font-bold text-white text-center">Compare Tools Dynamically</h2>
+          <div className="flex flex-col md:flex-row items-center gap-4 justify-between">
+            {/* Tool A Searchable Dropdown */}
+            <div ref={dropdownRefA} className="relative w-full md:w-5/12">
+              <label className="block text-xs font-semibold text-slate-400 mb-1.5">Select Tool A</label>
+              <input
+                type="text"
+                placeholder="Search first tool..."
+                value={searchQueryA}
+                onFocus={() => setShowDropdownA(true)}
+                onChange={(e) => {
+                  setSearchQueryA(e.target.value);
+                  setSelectedToolA(null);
+                  setShowDropdownA(true);
+                }}
+                className="w-full bg-slate-950 border border-white/10 rounded-xl px-4 py-2.5 text-white placeholder-slate-500 focus:outline-none focus:border-violet-500 text-sm"
+              />
+              {showDropdownA && (
+                <div className="absolute top-full left-0 right-0 mt-1.5 z-50 bg-slate-950 border border-white/10 rounded-xl shadow-2xl max-h-60 overflow-y-auto divide-y divide-white/5">
+                  {filteredToolsA.length > 0 ? (
+                    filteredToolsA.map((tool) => (
+                      <div
+                        key={tool.id}
+                        onClick={() => {
+                          setSelectedToolA(tool);
+                          setSearchQueryA(tool.name);
+                          setShowDropdownA(false);
+                        }}
+                        className="px-4 py-2 hover:bg-white/5 cursor-pointer text-slate-300 hover:text-white text-sm flex justify-between"
+                      >
+                        <span className="font-semibold">{tool.name}</span>
+                        <span className="text-xs text-slate-500">{tool.category}</span>
+                      </div>
+                    ))
+                  ) : (
+                    <div className="px-4 py-2 text-slate-500 text-xs text-center">No tools found</div>
+                  )}
+                </div>
+              )}
+            </div>
+
+            {/* Swap Button */}
+            <button
+              onClick={handleSwap}
+              type="button"
+              className="p-2.5 rounded-full bg-slate-800 hover:bg-slate-700 text-slate-400 hover:text-white transition-all cursor-pointer flex-shrink-0"
+              title="Swap selection"
+            >
+              <ArrowLeftRight className="w-5 h-5" />
+            </button>
+
+            {/* Tool B Searchable Dropdown */}
+            <div ref={dropdownRefB} className="relative w-full md:w-5/12">
+              <label className="block text-xs font-semibold text-slate-400 mb-1.5">Select Tool B</label>
+              <input
+                type="text"
+                placeholder="Search second tool..."
+                value={searchQueryB}
+                onFocus={() => setShowDropdownB(true)}
+                onChange={(e) => {
+                  setSearchQueryB(e.target.value);
+                  setSelectedToolB(null);
+                  setShowDropdownB(true);
+                }}
+                className="w-full bg-slate-950 border border-white/10 rounded-xl px-4 py-2.5 text-white placeholder-slate-500 focus:outline-none focus:border-violet-500 text-sm"
+              />
+              {showDropdownB && (
+                <div className="absolute top-full left-0 right-0 mt-1.5 z-50 bg-slate-950 border border-white/10 rounded-xl shadow-2xl max-h-60 overflow-y-auto divide-y divide-white/5">
+                  {filteredToolsB.length > 0 ? (
+                    filteredToolsB.map((tool) => (
+                      <div
+                        key={tool.id}
+                        onClick={() => {
+                          setSelectedToolB(tool);
+                          setSearchQueryB(tool.name);
+                          setShowDropdownB(false);
+                        }}
+                        className="px-4 py-2 hover:bg-white/5 cursor-pointer text-slate-300 hover:text-white text-sm flex justify-between"
+                      >
+                        <span className="font-semibold">{tool.name}</span>
+                        <span className="text-xs text-slate-500">{tool.category}</span>
+                      </div>
+                    ))
+                  ) : (
+                    <div className="px-4 py-2 text-slate-500 text-xs text-center">No tools found</div>
+                  )}
+                </div>
+              )}
+            </div>
+          </div>
+
+          {/* Compare Button */}
+          <div className="flex justify-center pt-2">
+            <button
+              onClick={handleCompare}
+              disabled={!selectedToolA || !selectedToolB}
+              className={`px-8 py-3 rounded-xl font-extrabold text-sm transition-all cursor-pointer ${
+                selectedToolA && selectedToolB
+                  ? 'bg-violet-600 hover:bg-violet-500 text-white shadow-lg shadow-violet-600/25 active:scale-95'
+                  : 'bg-slate-800 text-slate-500 cursor-not-allowed'
+              }`}
+            >
+              Compare Now
+            </button>
+          </div>
         </div>
 
         {/* FEED GRID */}
@@ -81,4 +254,5 @@ export const CompareFeed: React.FC<CompareFeedProps> = ({ navigateTo }) => {
     </div>
   );
 };
+
 export default CompareFeed;
