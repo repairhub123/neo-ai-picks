@@ -188,16 +188,18 @@ export const Home: React.FC<HomeProps> = ({
     directoryRef.current?.scrollIntoView({ behavior: 'smooth' });
   };
 
+  const siteUrl = import.meta.env.VITE_SITE_URL || 'https://neo-ai-picks.vercel.app';
+
   // Structured Data Schema
   const homeSchema = {
     "@context": "https://schema.org",
     "@type": "WebSite",
-    "url": "https://neoaipicks.com/",
+    "url": `${siteUrl}/`,
     "name": "Neo AI Picks",
     "description": "Discover, compare and review the best AI tools for writing, coding, design, video creation, automation and productivity.",
     "potentialAction": {
       "@type": "SearchAction",
-      "target": "https://neoaipicks.com/?q={search_term_string}",
+      "target": `${siteUrl}/?q={search_term_string}`,
       "query-input": "required name=search_term_string"
     }
   };

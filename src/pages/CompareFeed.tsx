@@ -113,13 +113,15 @@ export const CompareFeed: React.FC<CompareFeedProps> = ({ tools = [], navigateTo
     }
   };
 
+  const siteUrl = import.meta.env.VITE_SITE_URL || 'https://neo-ai-picks.vercel.app';
+
   // Structured Data: WebPage / Directory Schema
   const directorySchema = {
     "@context": "https://schema.org",
     "@type": "WebPage",
     "name": "Compare AI Tools - Neo AI Picks",
     "description": "Side-by-side comparison matrices of the top generative writing, coding, and image AI tools.",
-    "url": "https://neoaipicks.com/compare"
+    "url": `${siteUrl}/compare`
   };
 
   return (

@@ -16,7 +16,7 @@ export const SEO: React.FC<SEOProps> = ({
   ogType = 'website',
   jsonLd
 }) => {
-  const siteUrl = 'https://neoaipicks.com';
+  const siteUrl = import.meta.env.VITE_SITE_URL || 'https://neo-ai-picks.vercel.app';
   const canonicalUrl = `${siteUrl}${path}`;
 
   useEffect(() => {

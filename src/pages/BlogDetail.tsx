@@ -191,6 +191,8 @@ export const BlogDetail: React.FC<BlogDetailProps> = ({ topicId, tools, navigate
     return '2026-06-12'; // fallback
   };
 
+  const siteUrl = import.meta.env.VITE_SITE_URL || 'https://neo-ai-picks.vercel.app';
+
   // Structured Data: BlogPosting Schema
   const blogPostingSchema = {
     "@context": "https://schema.org",
@@ -207,12 +209,12 @@ export const BlogDetail: React.FC<BlogDetailProps> = ({ topicId, tools, navigate
       "name": "Neo AI Picks",
       "logo": {
         "@type": "ImageObject",
-        "url": "https://neoaipicks.com/favicon.svg"
+        "url": `${siteUrl}/favicon.svg`
       }
     },
     "mainEntityOfPage": {
       "@type": "WebPage",
-      "@id": `https://neoaipicks.com/blog/${post.id}`
+      "@id": `${siteUrl}/blog/${post.id}`
     }
   };
 
