@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { Sparkles, Activity, Search, X, Star, ArrowRight, ShieldCheck, Zap, Layers } from 'lucide-react';
 import { ToolCard } from '../components/ToolCard';
 import type { AITool } from '../components/ToolCard';
@@ -31,7 +31,50 @@ export const Home: React.FC<HomeProps> = ({
   setSelectedCategory
 }) => {
   const [sortBy, setSortBy] = useState<SortOption>('popular');
+  const [showDropdown, setShowDropdown] = useState(false);
+  const [focusedIndex, setFocusedIndex] = useState(-1);
   const directoryRef = useRef<HTMLDivElement>(null);
+  const searchContainerRef = useRef<HTMLDivElement>(null);
+
+  // Click outside search container closes the dropdown
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent | TouchEvent) => {
+      if (searchContainerRef.current && !searchContainerRef.current.contains(event.target as Node)) {
+        setShowDropdown(false);
+      }
+    };
+    document.addEventListener('mousedown', handleClickOutside);
+    document.addEventListener('touchstart', handleClickOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+      document.removeEventListener('touchstart', handleClickOutside);
+    };
+  }, []);
+
+  // Helper to escape regex chars
+  const escapeRegExp = (str: string) => {
+    return str.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+  };
+
+  // Helper function to highlight matching search term
+  const highlightMatch = (text: string, highlight: string) => {
+    if (!highlight.trim()) return <span>{text}</span>;
+    const escapedHighlight = escapeRegExp(highlight.trim());
+    const parts = text.split(new RegExp(`(${escapedHighlight})`, 'gi'));
+    return (
+      <>
+        {parts.map((part, idx) =>
+          part.toLowerCase() === highlight.trim().toLowerCase() ? (
+            <span key={idx} className="text-violet-400 font-extrabold underline decoration-violet-500/30">
+              {part}
+            </span>
+          ) : (
+            part
+          )
+        )}
+      </>
+    );
+  };
 
   const categories = [
     'All Tools',
@@ -80,6 +123,14 @@ export const Home: React.FC<HomeProps> = ({
 
   // Sorting
   const sortedTools = [...filteredTools].sort((a, b) => {
+    const query = searchQuery.toLowerCase().trim();
+    if (query !== '') {
+      const aStarts = a.name.toLowerCase().startsWith(query);
+      const bStarts = b.name.toLowerCase().startsWith(query);
+      if (aStarts && !bStarts) return -1;
+      if (!aStarts && bStarts) return 1;
+    }
+
     const ratingA = a.rating || 4.5;
     const ratingB = b.rating || 4.5;
 
@@ -91,6 +142,32 @@ export const Home: React.FC<HomeProps> = ({
       return a.name.localeCompare(b.name);
     }
   });
+
+  // Autocomplete matches
+  const dropdownMatches = searchQuery.trim() !== '' ? sortedTools.slice(0, 8) : [];
+
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (dropdownMatches.length === 0) return;
+
+    if (e.key === 'ArrowDown') {
+      e.preventDefault();
+      setFocusedIndex((prev) => (prev < dropdownMatches.length - 1 ? prev + 1 : 0));
+    } else if (e.key === 'ArrowUp') {
+      e.preventDefault();
+      setFocusedIndex((prev) => (prev > 0 ? prev - 1 : dropdownMatches.length - 1));
+    } else if (e.key === 'Enter') {
+      e.preventDefault();
+      if (focusedIndex >= 0 && focusedIndex < dropdownMatches.length) {
+        const selectedTool = dropdownMatches[focusedIndex];
+        navigateTo(`tool/${selectedTool.id}`);
+        setShowDropdown(false);
+      }
+    } else if (e.key === 'Escape') {
+      e.preventDefault();
+      setShowDropdown(false);
+      e.currentTarget.blur();
+    }
+  };
 
   // Featured Tools
   const featuredTools = tools.filter((t) => t.isFeatured).slice(0, 4);
@@ -156,7 +233,7 @@ export const Home: React.FC<HomeProps> = ({
           </p>
 
           {/* SEARCH BAR */}
-          <div className="max-w-2xl mx-auto relative group mt-6">
+          <div ref={searchContainerRef} className="max-w-2xl mx-auto relative group mt-6">
             <div className="absolute inset-0 bg-gradient-to-r from-violet-500 to-purple-500 rounded-2xl blur-md opacity-25 group-focus-within:opacity-40 transition-all duration-300 pointer-events-none" />
             <div className="relative flex items-center">
               <Search className="absolute left-4.5 w-5 h-5 text-slate-500 group-focus-within:text-violet-400 transition-colors pointer-events-none" />
@@ -164,21 +241,73 @@ export const Home: React.FC<HomeProps> = ({
                 type="text"
                 placeholder="Search tools by name, category, features..."
                 value={searchQuery}
+                onFocus={() => setShowDropdown(true)}
+                onKeyDown={handleKeyDown}
                 onChange={(e) => {
                   setSearchQuery(e.target.value);
                   setSelectedCategory('All Tools');
+                  setShowDropdown(true);
+                  setFocusedIndex(-1);
                 }}
                 className="w-full bg-slate-900/90 hover:bg-slate-900 border border-white/10 group-focus-within:border-violet-500 rounded-2xl py-4.5 pl-13 pr-12 text-white placeholder-slate-500 focus:outline-none focus:ring-1 focus:ring-violet-500 text-base shadow-2xl transition-all"
               />
               {searchQuery && (
                 <button
-                  onClick={() => setSearchQuery('')}
+                  onClick={() => {
+                    setSearchQuery('');
+                    setFocusedIndex(-1);
+                  }}
                   className="absolute right-4.5 p-1 rounded-full text-slate-400 hover:text-white hover:bg-white/10 transition-all cursor-pointer"
                 >
                   <X className="w-4 h-4" />
                 </button>
               )}
             </div>
+
+            {/* Autocomplete Dropdown */}
+            {showDropdown && searchQuery.trim() !== '' && (
+              <div className="absolute top-full left-0 right-0 mt-2.5 z-50 saas-glass border border-white/10 bg-[#0b0f19]/95 rounded-2xl shadow-2xl overflow-hidden flex flex-col p-2 max-h-[380px] overflow-y-auto custom-scrollbar animate-fade-in animate-slide-down">
+                {dropdownMatches.length > 0 ? (
+                  dropdownMatches.map((tool, idx) => {
+                    const isHighlighted = idx === focusedIndex;
+                    return (
+                      <div
+                        key={tool.id}
+                        onClick={() => {
+                          navigateTo(`tool/${tool.id}`);
+                          setShowDropdown(false);
+                        }}
+                        onMouseEnter={() => setFocusedIndex(idx)}
+                        className={`flex items-center justify-between gap-3.5 p-3 rounded-xl cursor-pointer transition-all duration-200 ${
+                          isHighlighted
+                            ? 'bg-white/10 text-white'
+                            : 'hover:bg-white/5 text-slate-300 hover:text-white'
+                        }`}
+                      >
+                        <div className="flex items-center gap-3">
+                          <ToolIcon toolId={tool.id} toolName={tool.name} category={tool.category} size="sm" />
+                          <div className="flex flex-col text-left">
+                            <span className="font-extrabold text-sm">
+                              {highlightMatch(tool.name, searchQuery)}
+                            </span>
+                            <span className="text-[10px] text-slate-500 font-semibold">
+                              {tool.category}
+                            </span>
+                          </div>
+                        </div>
+                        <span className="text-[10px] font-bold text-violet-400 bg-violet-500/10 px-2 py-0.5 rounded-lg border border-violet-500/20">
+                          View Tool
+                        </span>
+                      </div>
+                    );
+                  })
+                ) : (
+                  <div className="p-4 text-center text-slate-500 text-xs font-semibold">
+                    No matching tools found
+                  </div>
+                )}
+              </div>
+            )}
           </div>
 
           {/* CALL TO ACTION BUTTONS */}
