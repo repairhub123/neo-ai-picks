@@ -6,6 +6,7 @@ import type { AITool } from '../components/ToolCard';
 import SEO from '../components/SEO';
 import Breadcrumbs from '../components/Breadcrumbs';
 import { BlogCover } from '../components/BlogCover';
+import { trackEvent } from '../utils/analytics';
 
 interface BlogDetailProps {
   topicId: string;
@@ -108,7 +109,10 @@ export const BlogDetail: React.FC<BlogDetailProps> = ({ topicId, tools, navigate
 
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
-  }, [topicId]);
+    if (post) {
+      trackEvent('view_blog_article', 'Engagement', post.title);
+    }
+  }, [topicId, post]);
 
   const handleCopyLink = () => {
     navigator.clipboard.writeText(window.location.href);
@@ -174,6 +178,19 @@ export const BlogDetail: React.FC<BlogDetailProps> = ({ topicId, tools, navigate
     .filter((topic) => topic.id !== post.id && topic.category === post.category)
     .slice(0, 3);
 
+  // Convert human-readable date e.g. "June 14, 2026" to ISO date "2026-06-14"
+  const parseToISODate = (dateStr: string) => {
+    try {
+      const dateObj = new Date(dateStr);
+      if (!isNaN(dateObj.getTime())) {
+        return dateObj.toISOString().split('T')[0];
+      }
+    } catch (e) {
+      console.error('Failed to parse date:', dateStr, e);
+    }
+    return '2026-06-12'; // fallback
+  };
+
   // Structured Data: BlogPosting Schema
   const blogPostingSchema = {
     "@context": "https://schema.org",
@@ -184,7 +201,7 @@ export const BlogDetail: React.FC<BlogDetailProps> = ({ topicId, tools, navigate
       "@type": "Person",
       "name": post.author
     },
-    "datePublished": "2026-06-12", // mock date ISO
+    "datePublished": parseToISODate(post.date),
     "publisher": {
       "@type": "Organization",
       "name": "Neo AI Picks",

@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react';
+import { trackPageView } from '../utils/analytics';
 
 interface SEOProps {
   title: string;
@@ -21,6 +22,9 @@ export const SEO: React.FC<SEOProps> = ({
   useEffect(() => {
     // 1. Meta Title
     document.title = title;
+
+    // Track page view in GA4
+    trackPageView(path, title);
 
     // 2. Meta Description
     let metaDesc = document.querySelector('meta[name="description"]');

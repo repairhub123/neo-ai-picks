@@ -3,10 +3,17 @@ import { comparisonPairs } from '../data/comparisons';
 import { ArrowRight, Sparkles, Activity, ArrowLeftRight } from 'lucide-react';
 import SEO from '../components/SEO';
 import type { AITool } from '../components/ToolCard';
+import { trackEvent } from '../utils/analytics';
 
 interface CompareFeedProps {
   tools: AITool[];
   navigateTo: (tab: string, arg?: string) => void;
+}
+
+interface RecentComparison {
+  toolA: string;
+  toolB: string;
+  id: string;
 }
 
 export const CompareFeed: React.FC<CompareFeedProps> = ({ tools = [], navigateTo }) => {
@@ -16,11 +23,25 @@ export const CompareFeed: React.FC<CompareFeedProps> = ({ tools = [], navigateTo
   const [searchQueryB, setSearchQueryB] = useState('');
   const [showDropdownA, setShowDropdownA] = useState(false);
   const [showDropdownB, setShowDropdownB] = useState(false);
+  const [recentComparisons, setRecentComparisons] = useState<RecentComparison[]>([]);
 
   const dropdownRefA = useRef<HTMLDivElement>(null);
   const dropdownRefB = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
+    // Track page visit event
+    trackEvent('view_compare_hub', 'Engagement', 'Compare Feed');
+
+    // Load recent selections from localStorage
+    const stored = localStorage.getItem('neo_recent_comparisons');
+    if (stored) {
+      try {
+        setRecentComparisons(JSON.parse(stored));
+      } catch (e) {
+        console.error('Failed to parse recent comparisons:', e);
+      }
+    }
+
     const handleClickOutside = (event: MouseEvent) => {
       if (dropdownRefA.current && !dropdownRefA.current.contains(event.target as Node)) {
         setShowDropdownA(false);
@@ -64,6 +85,26 @@ export const CompareFeed: React.FC<CompareFeedProps> = ({ tools = [], navigateTo
     const existingPair = comparisonPairs.find(
       (p) => (p.toolAId === idA && p.toolBId === idB) || (p.toolAId === idB && p.toolBId === idA)
     );
+
+    const comparisonId = existingPair ? existingPair.id : `${idA}-vs-${idB}`;
+    const comparisonTitle = `${selectedToolA.name} vs ${selectedToolB.name}`;
+
+    // Add to recent comparisons list
+    const newRecent = {
+      toolA: selectedToolA.name,
+      toolB: selectedToolB.name,
+      id: comparisonId
+    };
+
+    setRecentComparisons((prev) => {
+      const filtered = prev.filter((item) => item.id !== comparisonId);
+      const updated = [newRecent, ...filtered].slice(0, 5);
+      localStorage.setItem('neo_recent_comparisons', JSON.stringify(updated));
+      return updated;
+    });
+
+    // Track Compare Builder Submission event
+    trackEvent('compare_builder_submit', 'Compare Builder', comparisonTitle);
 
     if (existingPair) {
       navigateTo(`compare/${existingPair.id}`);
@@ -229,23 +270,40 @@ export const CompareFeed: React.FC<CompareFeedProps> = ({ tools = [], navigateTo
             </button>
           </div>
 
-          {/* Popular Comparison Chips */}
-          <div className="flex flex-wrap items-center justify-center gap-2 pt-4 border-t border-white/5 text-xs">
-            <span className="text-slate-500 font-bold mr-1 uppercase tracking-wider text-[10px]">Popular:</span>
-            {[
-              { id: 'chatgpt-vs-claude', label: 'ChatGPT vs Claude' },
-              { id: 'perplexity-vs-chatgpt', label: 'Perplexity vs ChatGPT' },
-              { id: 'cursor-vs-windsurf', label: 'Cursor vs Windsurf' },
-              { id: 'midjourney-vs-flux', label: 'Midjourney vs Flux' }
-            ].map((item) => (
-              <button
-                key={item.id}
-                onClick={() => navigateTo(`compare/${item.id}`)}
-                className="px-3.5 py-1.5 rounded-full bg-slate-950/60 border border-white/5 hover:border-violet-500/30 text-slate-400 hover:text-white hover:bg-slate-950 transition-all cursor-pointer text-[11px] font-bold"
-              >
-                {item.label}
-              </button>
-            ))}
+          {/* Popular & Recent Comparison Chips */}
+          <div className="flex flex-col gap-3 pt-4 border-t border-white/5 text-xs">
+            <div className="flex flex-wrap items-center justify-center gap-2">
+              <span className="text-slate-500 font-bold mr-1 uppercase tracking-wider text-[10px]">Popular:</span>
+              {[
+                { id: 'chatgpt-vs-claude', label: 'ChatGPT vs Claude' },
+                { id: 'perplexity-vs-chatgpt', label: 'Perplexity vs ChatGPT' },
+                { id: 'cursor-vs-windsurf', label: 'Cursor vs Windsurf' },
+                { id: 'midjourney-vs-flux', label: 'Midjourney vs Flux' }
+              ].map((item) => (
+                <button
+                  key={item.id}
+                  onClick={() => navigateTo(`compare/${item.id}`)}
+                  className="px-3.5 py-1.5 rounded-full bg-slate-950/60 border border-white/5 hover:border-violet-500/30 text-slate-400 hover:text-white hover:bg-slate-950 transition-all cursor-pointer text-[11px] font-bold"
+                >
+                  {item.label}
+                </button>
+              ))}
+            </div>
+
+            {recentComparisons.length > 0 && (
+              <div className="flex flex-wrap items-center justify-center gap-2 pt-1 border-t border-white/5 pt-2">
+                <span className="text-slate-500 font-bold mr-1 uppercase tracking-wider text-[10px]">Recent:</span>
+                {recentComparisons.map((item) => (
+                  <button
+                    key={item.id}
+                    onClick={() => navigateTo(`compare/${item.id}`)}
+                    className="px-3.5 py-1.5 rounded-full bg-violet-950/20 border border-violet-500/15 hover:border-violet-500/30 text-violet-400 hover:text-violet-300 transition-all cursor-pointer text-[11px] font-bold"
+                  >
+                    {item.toolA} vs {item.toolB}
+                  </button>
+                ))}
+              </div>
+            )}
           </div>
         </div>
 

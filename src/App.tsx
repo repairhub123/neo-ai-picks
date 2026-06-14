@@ -14,6 +14,7 @@ import Terms from './pages/Terms';
 import NotFound from './pages/NotFound';
 import toolsData from './data/tools.json';
 import type { AITool } from './components/ToolCard';
+import { initGA, trackEvent } from './utils/analytics';
 
 interface RouteState {
   path: string;
@@ -30,10 +31,13 @@ function App() {
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedCategory, setSelectedCategory] = useState('All Tools');
 
-  // Initialize tools and upvotes
+  // Initialize tools, upvotes, bookmarks, and analytics
   useEffect(() => {
-    // Cast toolsData to AITool[]
-    const typedTools = (toolsData as any[]).map((t, idx) => ({
+    // 1. Initialize GA4
+    initGA();
+
+    // 2. Cast and load base tools
+    const baseTools = (toolsData as any[]).map((t, idx) => ({
       ...t,
       isFeatured: idx < 4 || t.id === 'cursor' || t.id === 'flux' || t.id === 'gemini',
       isEditorsPick: t.id === 'chatgpt' || t.id === 'claude' || t.id === 'cursor' || t.id === 'perplexity' || t.id === 'midjourney' || t.id === 'elevenlabs',
@@ -42,14 +46,63 @@ function App() {
       upvotes: t.upvotes || Math.max(10, 280 - idx * 8)
     })) as AITool[];
 
-    setTools(typedTools);
+    // 3. Load user-submitted tools from localStorage
+    let submittedTools: AITool[] = [];
+    const storedSubmissions = localStorage.getItem('neo_submitted_tools');
+    if (storedSubmissions) {
+      try {
+        submittedTools = JSON.parse(storedSubmissions);
+      } catch (e) {
+        console.error('Failed to parse submitted tools:', e);
+      }
+    }
 
+    const allTools = [...submittedTools, ...baseTools];
+    setTools(allTools);
+
+    // 4. Load upvotes from localStorage or fallback to defaults
     const initialVotes: Record<string, number> = {};
-    typedTools.forEach((t) => {
+    allTools.forEach((t) => {
       initialVotes[t.id] = t.upvotes;
     });
+
+    const storedUpvotes = localStorage.getItem('neo_upvotes');
+    if (storedUpvotes) {
+      try {
+        const parsedUpvotes = JSON.parse(storedUpvotes);
+        Object.keys(parsedUpvotes).forEach((key) => {
+          initialVotes[key] = parsedUpvotes[key];
+        });
+      } catch (e) {
+        console.error('Failed to parse cached upvotes:', e);
+      }
+    }
     setUpvotesState(initialVotes);
+
+    // 5. Load bookmarks from localStorage
+    const storedBookmarks = localStorage.getItem('neo_bookmarks');
+    if (storedBookmarks) {
+      try {
+        const parsedBookmarks = JSON.parse(storedBookmarks) as string[];
+        setUpvotedTools(new Set(parsedBookmarks));
+      } catch (e) {
+        console.error('Failed to parse cached bookmarks:', e);
+      }
+    }
   }, []);
+
+  // Save upvotes to localStorage on change
+  useEffect(() => {
+    if (Object.keys(upvotesState).length > 0) {
+      localStorage.setItem('neo_upvotes', JSON.stringify(upvotesState));
+    }
+  }, [upvotesState]);
+
+  // Save bookmarks to localStorage on change
+  useEffect(() => {
+    localStorage.setItem('neo_bookmarks', JSON.stringify(Array.from(upvotedTools)));
+  }, [upvotedTools]);
+
 
   // Browser History API Listener
   useEffect(() => {
@@ -187,11 +240,21 @@ function App() {
       slug: newId
     };
 
-    setTools((prev) => [fullTool, ...prev]);
+    setTools((prev) => {
+      const updated = [fullTool, ...prev];
+      // Filter out base tools to only save user submitted ones
+      const userSubmitted = updated.filter(t => !toolsData.some((orig: any) => orig.id === t.id));
+      localStorage.setItem('neo_submitted_tools', JSON.stringify(userSubmitted));
+      return updated;
+    });
+
     setUpvotesState((prev) => ({
       ...prev,
       [newId]: 1
     }));
+
+    // Track submission in Google Analytics
+    trackEvent('submit_tool', 'Engagement', fullTool.name);
   };
 
   const renderPage = () => {

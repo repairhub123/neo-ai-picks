@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { ChevronLeft, ExternalLink, ShieldCheck, Tag, Heart, HelpCircle, Check, AlertCircle, Bookmark, Scale, BookOpen } from 'lucide-react';
+import { ChevronLeft, ExternalLink, ShieldCheck, Tag, Heart, HelpCircle, Check, AlertCircle, Bookmark, Scale, BookOpen, Sparkles } from 'lucide-react';
 import { ToolCard } from '../components/ToolCard';
 import type { AITool } from '../components/ToolCard';
 import { ToolIcon } from '../components/ToolIcon';
@@ -7,6 +7,7 @@ import { comparisonPairs } from '../data/comparisons';
 import { blogTopics } from '../data/blog';
 import SEO from '../components/SEO';
 import Breadcrumbs from '../components/Breadcrumbs';
+import { trackEvent } from '../utils/analytics';
 
 interface ToolDetailProps {
   toolId: string;
@@ -29,7 +30,11 @@ export const ToolDetail: React.FC<ToolDetailProps> = ({
 
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
-  }, [toolId]);
+    if (tool) {
+      // Track tool details page visit
+      trackEvent('view_tool_detail', 'Engagement', tool.name);
+    }
+  }, [toolId, tool]);
 
   if (!tool) {
     return (
@@ -47,10 +52,7 @@ export const ToolDetail: React.FC<ToolDetailProps> = ({
     .filter((t) => t.id !== tool.id && t.category === tool.category)
     .slice(0, 3);
 
-  // Get all comparisons involving this tool
-  const relatedComparisons = comparisonPairs
-    .filter((pair) => pair.toolAId === tool.id || pair.toolBId === tool.id)
-    .slice(0, 5);
+
 
   // Get related blogs (by category or mentioning this tool name)
   const relatedBlogs = blogTopics
@@ -74,6 +76,41 @@ export const ToolDetail: React.FC<ToolDetailProps> = ({
       default:
         return 'bg-slate-500/10 text-slate-400 border border-slate-500/20';
     }
+  };
+
+  // Generate internal comparative counterpart links dynamically
+  const getCompareLinks = (currentTool: AITool, allTools: AITool[]) => {
+    let comparators: string[] = [];
+    if (currentTool.category === 'Writing') {
+      comparators = ['chatgpt', 'claude', 'perplexity'];
+    } else if (currentTool.category === 'Coding') {
+      comparators = ['cursor', 'claude', 'chatgpt'];
+    } else if (currentTool.category === 'Image Generation') {
+      comparators = ['midjourney', 'flux'];
+    } else {
+      comparators = allTools
+        .filter((t) => t.id !== currentTool.id && t.category === currentTool.category)
+        .slice(0, 2)
+        .map((t) => t.id);
+    }
+
+    return comparators
+      .filter((id) => id !== currentTool.id)
+      .map((targetId) => {
+        const targetTool = allTools.find((t) => t.id === targetId);
+        if (!targetTool) return null;
+        
+        const existingPair = comparisonPairs.find(
+          (p) => (p.toolAId === currentTool.id && p.toolBId === targetId) || (p.toolAId === targetId && p.toolBId === currentTool.id)
+        );
+        const comparisonId = existingPair ? existingPair.id : `${currentTool.id}-vs-${targetId}`;
+
+        return {
+          label: `Compare ${currentTool.name} vs ${targetTool.name}`,
+          id: comparisonId
+        };
+      })
+      .filter((item) => item !== null) as { label: string; id: string }[];
   };
 
   // Structured Data: SoftwareApplication Schema
@@ -172,6 +209,7 @@ export const ToolDetail: React.FC<ToolDetailProps> = ({
               href={tool.websiteUrl}
               target="_blank"
               rel="noopener noreferrer"
+              onClick={() => trackEvent('outbound_click', 'Outbound', tool.name)}
               className="flex items-center justify-center gap-2 bg-white hover:bg-slate-100 text-slate-950 font-bold text-sm px-5 py-3 rounded-xl transition-all cursor-pointer active:scale-95 shadow-md flex-grow sm:flex-grow-0"
             >
               Visit Website
@@ -185,6 +223,30 @@ export const ToolDetail: React.FC<ToolDetailProps> = ({
           
           {/* MAIN COLUMN */}
           <div className="lg:col-span-8 space-y-8">
+            
+            {/* QUICK SUMMARIES (BEST FOR & PRICING SUMMARY) */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+              <div className="p-6 rounded-2xl saas-glass border border-violet-500/10 space-y-2 relative overflow-hidden">
+                <div className="absolute top-0 right-0 w-16 h-16 bg-violet-600/5 rounded-full blur-xl pointer-events-none" />
+                <div className="text-[10px] text-violet-400 font-extrabold uppercase tracking-widest flex items-center gap-1">
+                  <Sparkles className="w-3.5 h-3.5" />
+                  Best For
+                </div>
+                <p className="text-white text-sm font-semibold leading-relaxed">
+                  {tool.bestUseCases[0] || 'General generative AI applications.'}
+                </p>
+              </div>
+              <div className="p-6 rounded-2xl saas-glass border border-violet-500/10 space-y-2 relative overflow-hidden">
+                <div className="absolute top-0 right-0 w-16 h-16 bg-violet-600/5 rounded-full blur-xl pointer-events-none" />
+                <div className="text-[10px] text-violet-400 font-extrabold uppercase tracking-widest flex items-center gap-1">
+                  <HelpCircle className="w-3.5 h-3.5" />
+                  Pricing Summary
+                </div>
+                <p className="text-white text-sm font-semibold leading-relaxed">
+                  {tool.pricingDetails || `${tool.pricing} plan option.`}
+                </p>
+              </div>
+            </div>
             
             {/* DESCRIPTION */}
             <div className="p-6 md:p-8 rounded-2xl saas-glass space-y-4">
@@ -351,21 +413,21 @@ export const ToolDetail: React.FC<ToolDetailProps> = ({
               </div>
             </div>
 
-            {/* RELATED COMPARISONS */}
-            {relatedComparisons.length > 0 && (
+            {/* DYNAMIC COMPARE LINKS */}
+            {getCompareLinks(tool, tools).length > 0 && (
               <div className="p-6 rounded-2xl saas-glass space-y-4">
                 <h3 className="font-bold text-white text-sm uppercase tracking-wider border-b border-white/5 pb-2 flex items-center gap-1.5">
                   <Scale className="w-4 h-4 text-violet-400" />
-                  Popular Comparisons
+                  Direct Comparisons
                 </h3>
                 <div className="space-y-2.5">
-                  {relatedComparisons.map((pair) => (
+                  {getCompareLinks(tool, tools).map((item) => (
                     <button
-                      key={pair.id}
-                      onClick={() => navigateTo(`compare/${pair.id}`)}
-                      className="w-full text-left text-xs font-semibold text-slate-350 hover:text-white bg-slate-900/40 hover:bg-slate-900 border border-white/5 hover:border-violet-500/20 p-3 rounded-xl transition-all cursor-pointer block"
+                      key={item.id}
+                      onClick={() => navigateTo(`compare/${item.id}`)}
+                      className="w-full text-left text-xs font-semibold text-slate-350 hover:text-white bg-slate-900/40 hover:bg-slate-900 border border-white/5 hover:border-violet-500/20 p-3 rounded-xl transition-all cursor-pointer block font-bold"
                     >
-                      {pair.title}
+                      {item.label}
                     </button>
                   ))}
                 </div>
