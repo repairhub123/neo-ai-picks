@@ -432,6 +432,87 @@ export const comparisonPairs: ComparisonPair[] = [
     title: 'ElevenLabs vs Murf: Custom Voice Cloning vs Studio Presentation Audio',
     excerpt: 'Comparing advanced text-to-speech voice design against timeline-based voiceover templates.',
     category: 'Automation'
+  },
+  // Phase 1 Comparison Expansion
+  {
+    id: 'notebooklm-vs-chatgpt',
+    toolAId: 'notebooklm',
+    toolBId: 'chatgpt',
+    title: 'NotebookLM vs ChatGPT: Document Analysis vs General Chat',
+    excerpt: 'Compare Google\'s NotebookLM and OpenAI\'s ChatGPT. We analyze source-grounded file search against general conversational reasoning.',
+    category: 'Productivity'
+  },
+  {
+    id: 'cursor-vs-supermaven',
+    toolAId: 'cursor',
+    toolBId: 'supermaven',
+    title: 'Cursor vs Supermaven: Leading AI IDE vs Fastest Autocomplete',
+    excerpt: 'Compare Cursor AI editor and Supermaven autocomplete extension. Analyze composer editing features against inline completion speeds.',
+    category: 'Coding'
+  },
+  {
+    id: 'bolt-new-vs-lovable',
+    toolAId: 'bolt-new',
+    toolBId: 'lovable',
+    title: 'Bolt.new vs Lovable: Web Containers vs App Builder',
+    excerpt: 'Compare StackBlitz\'s Bolt.new browser coding sandbox and Lovable.dev full-stack application builder.',
+    category: 'Coding'
+  },
+  {
+    id: 'replit-agent-vs-bolt-new',
+    toolAId: 'replit-agent',
+    toolBId: 'bolt-new',
+    title: 'Replit Agent vs Bolt.new: Cloud IDE Coder vs Browser Containers',
+    excerpt: 'An in-depth look at Replit Agent and StackBlitz\'s Bolt.new. Compare cloud server hosting against client-side browser execution.',
+    category: 'Coding'
+  },
+  {
+    id: 'perplexity-vs-notebooklm',
+    toolAId: 'perplexity',
+    toolBId: 'notebooklm',
+    title: 'Perplexity vs NotebookLM: Real-time Web Search vs Document Notebook',
+    excerpt: 'Compare Perplexity AI search engine and Google\'s NotebookLM. Contrast dynamic web citation retrieval with private document workspace notes.',
+    category: 'Productivity'
+  },
+  {
+    id: 'n8n-vs-make',
+    toolAId: 'n8n',
+    toolBId: 'make',
+    title: 'n8n vs Make: Self-Hosted Workflows vs Visual Integration',
+    excerpt: 'Compare n8n workflow engine and Make.com. Contrast open-source node execution control with visual cloud pipelines.',
+    category: 'Automation'
+  },
+  {
+    id: 'claude-code-vs-cursor',
+    toolAId: 'claude',
+    toolBId: 'cursor',
+    title: 'Claude Code vs Cursor: Terminal Coding Agent vs Editor GUI',
+    excerpt: 'Compare Anthropic\'s Claude Code command-line developer assistant and Cursor AI IDE. Analyze terminal agent speed vs visual file composition.',
+    category: 'Coding'
+  },
+  {
+    id: 'kling-ai-vs-runway',
+    toolAId: 'kling-ai',
+    toolBId: 'runway',
+    title: 'Kling AI vs Runway: Best AI Video Models Compared',
+    excerpt: 'Compare Kling AI video rendering and Runway Gen-3 Alpha. We analyze camera movement adherence and physical simulations.',
+    category: 'Video Generation'
+  },
+  {
+    id: 'magnific-ai-vs-topaz-photo-ai',
+    toolAId: 'magnific-ai',
+    toolBId: 'stable-diffusion',
+    title: 'Magnific AI vs Topaz Photo AI: Generative Upscaling vs Photo Recovery',
+    excerpt: 'Compare Magnific AI generative enhancement details and Topaz Photo AI professional raw pixel recovery adjustments.',
+    category: 'Image Generation'
+  },
+  {
+    id: 'photoroom-vs-canva',
+    toolAId: 'photoroom',
+    toolBId: 'adobe-firefly',
+    title: 'Photoroom vs Canva: Product Backgrounds vs Complete Graphic Suite',
+    excerpt: 'Compare Photoroom\'s background removal automation and Canva\'s all-in-one graphic design templates and brand asset manager.',
+    category: 'Image Generation'
   }
 ];
 

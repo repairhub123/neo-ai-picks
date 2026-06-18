@@ -154,7 +154,7 @@ export const blogTopics: BlogTopic[] = [
   {
     id: 'seo-content-outline-generators-compared',
     title: 'Comparing Surfer SEO and Jasper AI Outline Editors',
-    excerpt: 'An comparison of NLP keyword outlines vs standard generative content outlines.',
+    excerpt: 'An in-depth comparison of NLP keyword outline builders against standard generative AI outline editors for SEO content teams.',
     category: 'Writing',
     date: 'May 10, 2026',
     author: 'Lucas Garcia',
@@ -194,7 +194,7 @@ export const blogTopics: BlogTopic[] = [
   {
     id: 'storyboarding-prompts-creative-directors',
     title: 'AI Storyboarding: Turning Script Text into Novel Outlines',
-    excerpt: 'How creative directors leverage ChatGPT and Midjourney to pitch movie concepts.',
+    excerpt: 'How creative directors leverage ChatGPT and Midjourney prompt frameworks to pitch, storyboard, and visualize cinematic movie concepts.',
     category: 'Writing',
     date: 'April 25, 2026',
     author: 'Elena Petrova',

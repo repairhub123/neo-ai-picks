@@ -1,5 +1,9 @@
 {
+  "cleanUrls": true,
   "rewrites": [
-    { "source": "/(.*)", "destination": "/index.html" }
+    {
+      "source": "/((?!robots.txt|sitemap.xml|favicon.svg|icons.svg|google78980073366421cd.html|assets/|.*\\..*$).*)",
+      "destination": "/index.html"
+    }
   ]
 }

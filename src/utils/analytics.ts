@@ -8,6 +8,14 @@ declare global {
   }
 }
 
+// Initialize dataLayer and gtag placeholder immediately on import (module scope)
+if (typeof window !== 'undefined') {
+  window.dataLayer = window.dataLayer || [];
+  window.gtag = window.gtag || function () {
+    window.dataLayer.push(arguments);
+  };
+}
+
 export const initGA = () => {
   if (!GA_MEASUREMENT_ID) {
     console.warn('GA4 Measurement ID (VITE_GA_MEASUREMENT_ID) is missing. Analytics is disabled.');
@@ -23,15 +31,12 @@ export const initGA = () => {
   script.src = `https://www.googletagmanager.com/gtag/js?id=${GA_MEASUREMENT_ID}`;
   document.head.appendChild(script);
 
-  window.dataLayer = window.dataLayer || [];
-  window.gtag = function () {
-    window.dataLayer.push(arguments);
-  };
-  
-  window.gtag('js', new Date());
-  window.gtag('config', GA_MEASUREMENT_ID, {
-    send_page_view: false // Manual page views in SPA
-  });
+  if (window.gtag) {
+    window.gtag('js', new Date());
+    window.gtag('config', GA_MEASUREMENT_ID, {
+      send_page_view: false // Manual page views in SPA
+    });
+  }
 };
 
 export const trackPageView = (path: string, title: string) => {

@@ -39,13 +39,15 @@ export const BlogFeed: React.FC<BlogFeedProps> = ({ navigateTo }) => {
   const featuredPost = filteredTopics[0];
   const gridPosts = filteredTopics.slice(1);
 
+  const siteUrl = import.meta.env.VITE_SITE_URL || 'https://neo-ai-picks.vercel.app';
+
   // Structured Data: Blog Schema
   const blogListSchema = {
     "@context": "https://schema.org",
     "@type": "Blog",
     "name": "Neo AI Picks Blog",
     "description": "Daily reviews, prompts, guides, and tutorials exploring generative AI applications.",
-    "url": "https://neoaipicks.com/blog"
+    "url": `${siteUrl}/blog`
   };
 
   return (

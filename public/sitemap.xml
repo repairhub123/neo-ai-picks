@@ -61,6 +61,18 @@
   <url><loc>https://neo-ai-picks.vercel.app/tool/writesonic</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
   <url><loc>https://neo-ai-picks.vercel.app/tool/zapier-ai</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
 
+  <!-- Phase 1 Content Expansion Tools -->
+  <url><loc>https://neo-ai-picks.vercel.app/tool/notebooklm</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://neo-ai-picks.vercel.app/tool/bolt-new</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://neo-ai-picks.vercel.app/tool/lovable</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://neo-ai-picks.vercel.app/tool/replit-agent</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://neo-ai-picks.vercel.app/tool/supermaven</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://neo-ai-picks.vercel.app/tool/kling-ai</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://neo-ai-picks.vercel.app/tool/consensus</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://neo-ai-picks.vercel.app/tool/fathom</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://neo-ai-picks.vercel.app/tool/photoroom</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://neo-ai-picks.vercel.app/tool/magnific-ai</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+
   <!-- Comparison Matrices -->
   <url><loc>https://neo-ai-picks.vercel.app/compare/adobe-firefly-vs-dall-e-3</loc><changefreq>weekly</changefreq><priority>0.7</priority></url>
   <url><loc>https://neo-ai-picks.vercel.app/compare/adobe-firefly-vs-midjourney</loc><changefreq>weekly</changefreq><priority>0.7</priority></url>
@@ -114,6 +126,18 @@
   <url><loc>https://neo-ai-picks.vercel.app/compare/writesonic-vs-copy-ai</loc><changefreq>weekly</changefreq><priority>0.7</priority></url>
   <url><loc>https://neo-ai-picks.vercel.app/compare/writesonic-vs-jasper</loc><changefreq>weekly</changefreq><priority>0.7</priority></url>
   <url><loc>https://neo-ai-picks.vercel.app/compare/zapier-ai-vs-hubspot-ai</loc><changefreq>weekly</changefreq><priority>0.7</priority></url>
+
+  <!-- Phase 1 Comparison Expansion -->
+  <url><loc>https://neo-ai-picks.vercel.app/compare/notebooklm-vs-chatgpt</loc><changefreq>weekly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://neo-ai-picks.vercel.app/compare/cursor-vs-supermaven</loc><changefreq>weekly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://neo-ai-picks.vercel.app/compare/bolt-new-vs-lovable</loc><changefreq>weekly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://neo-ai-picks.vercel.app/compare/replit-agent-vs-bolt-new</loc><changefreq>weekly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://neo-ai-picks.vercel.app/compare/perplexity-vs-notebooklm</loc><changefreq>weekly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://neo-ai-picks.vercel.app/compare/n8n-vs-make</loc><changefreq>weekly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://neo-ai-picks.vercel.app/compare/claude-code-vs-cursor</loc><changefreq>weekly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://neo-ai-picks.vercel.app/compare/kling-ai-vs-runway</loc><changefreq>weekly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://neo-ai-picks.vercel.app/compare/magnific-ai-vs-topaz-photo-ai</loc><changefreq>weekly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://neo-ai-picks.vercel.app/compare/photoroom-vs-canva</loc><changefreq>weekly</changefreq><priority>0.7</priority></url>
 
   <!-- Blog Articles -->
   <url><loc>https://neo-ai-picks.vercel.app/blog/best-ai-tools-for-students</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>

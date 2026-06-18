@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Send, Sparkles, CheckCircle2, ShieldCheck, X } from 'lucide-react';
+import SEO from '../components/SEO';
 
 interface SubmitToolProps {
   onAddTool: (tool: any) => void;
@@ -119,6 +120,11 @@ export const SubmitTool: React.FC<SubmitToolProps> = ({ onAddTool, navigateTo })
 
   return (
     <div className="w-full flex-grow bg-[#0b0f19] pb-20 pt-8 px-6 relative">
+      <SEO
+        title="Submit a New AI Tool | Neo AI Picks"
+        description="Submit your artificial intelligence product, directory entry, or SaaS project to Neo AI Picks."
+        path="/submit"
+      />
       
       {/* ORBS */}
       <div className="absolute top-1/4 right-1/4 w-[300px] h-[300px] rounded-full bg-violet-500/5 blur-[120px] pointer-events-none" />
