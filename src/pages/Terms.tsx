@@ -28,7 +28,7 @@ export const Terms: React.FC<TermsProps> = () => {
         <div className="space-y-4 border-b border-white/5 pb-6">
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-violet-500/10 border border-violet-500/20 text-xs font-bold text-violet-400 select-none uppercase tracking-wider">
             <Scale className="w-3.5 h-3.5" />
-            Terms & Conditions
+            Terms &amp; Conditions
           </div>
           <h1 className="text-3xl md:text-5xl font-extrabold text-white tracking-tight">
             Terms of Service
@@ -47,9 +47,19 @@ export const Terms: React.FC<TermsProps> = () => {
         </div>
 
         {/* TERMS CONTENT */}
-        <div className="prose prose-invert prose-indigo max-w-none text-slate-300 space-y-6 leading-relaxed text-sm md:text-base font-medium">
+        <div className="max-w-none text-slate-300 space-y-6 leading-relaxed text-sm md:text-base font-medium">
           <p>
-            Welcome to **Neo AI Picks**. These terms and conditions outline the rules and regulations for the use of Neo AI Picks' Website, located at [neoaipicks.com](https://neoaipicks.com).
+            Welcome to <strong>Neo AI Picks</strong>. These terms and conditions outline the rules and regulations for
+            the use of Neo AI Picks' website, located at{' '}
+            <a
+              href="https://neo-ai-picks.vercel.app"
+              className="text-violet-400 hover:text-white underline underline-offset-2 transition-colors"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              neo-ai-picks.vercel.app
+            </a>
+            .
           </p>
           <p>
             By accessing this website, we assume you accept these terms and conditions. Do not continue to use Neo AI Picks if you do not agree to take all of the terms and conditions stated on this page.
@@ -57,9 +67,9 @@ export const Terms: React.FC<TermsProps> = () => {
 
           <hr className="border-white/5 my-8" />
 
-          <h3 className="text-lg md:text-xl font-bold text-white pt-2 flex items-center gap-2">
+          <h2 className="text-lg md:text-xl font-bold text-white pt-2">
             1. Intellectual Property
-          </h3>
+          </h2>
           <p>
             Other than the content you own, under these Terms, Neo AI Picks and/or its licensors own all the intellectual property rights and materials contained in this Website. All rights are reserved. You are granted a limited license only for purposes of viewing the material contained on this Website.
           </p>
@@ -67,9 +77,9 @@ export const Terms: React.FC<TermsProps> = () => {
             The listed AI tool logos, names, and websites are the intellectual property of their respective owners. We display them for discovery and indexing purposes only.
           </p>
 
-          <h3 className="text-lg md:text-xl font-bold text-white pt-2 flex items-center gap-2">
+          <h2 className="text-lg md:text-xl font-bold text-white pt-2">
             2. Directory Usage Restrictions
-          </h3>
+          </h2>
           <p>
             You are specifically restricted from all of the following:
           </p>
@@ -82,38 +92,48 @@ export const Terms: React.FC<TermsProps> = () => {
             <li>Using this Website contrary to applicable laws and regulations.</li>
           </ul>
 
-          <h3 className="text-lg md:text-xl font-bold text-white pt-2 flex items-center gap-2">
+          <h2 className="text-lg md:text-xl font-bold text-white pt-2">
             3. Tool Submissions Policy
-          </h3>
+          </h2>
           <p>
             If you submit a tool using our Submit Tool form:
           </p>
           <ul className="list-disc list-inside space-y-2 text-slate-350 ml-4">
             <li>You warrant that you are the owner or authorized representative of the tool being listed.</li>
             <li>You grant Neo AI Picks a non-exclusive, worldwide license to display your tool details, logo, description, and pricing models.</li>
-            <li>We reserve the right to edit descriptions, select category alignments, write pros & cons, or reject any submissions to maintain our quality standards.</li>
+            <li>We reserve the right to edit descriptions, select category alignments, write pros &amp; cons, or reject any submissions to maintain our quality standards.</li>
             <li>Fake statistics, spam descriptions, or link-farming submissions will be deleted immediately.</li>
           </ul>
 
-          <h3 className="text-lg md:text-xl font-bold text-white pt-2 flex items-center gap-2">
+          <h2 className="text-lg md:text-xl font-bold text-white pt-2">
             4. No Warranties
-          </h3>
+          </h2>
           <p>
-            This Website is provided "as is," with all faults, and Neo AI Picks expresses no representations or warranties, of any kind related to this Website or the materials contained on this Website. We do not guarantee the uptime, performance, or correctness of the tools profiled in our directory. Users choose to purchase third-party plans at their own discretion.
+            This Website is provided <strong>"as is,"</strong> with all faults, and Neo AI Picks expresses no representations or warranties, of any kind related to this Website or the materials contained on this Website. We do not guarantee the uptime, performance, or correctness of the tools profiled in our directory. Users choose to purchase third-party plans at their own discretion.
           </p>
 
-          <h3 className="text-lg md:text-xl font-bold text-white pt-2 flex items-center gap-2">
+          <h2 className="text-lg md:text-xl font-bold text-white pt-2">
             5. Limitation of Liability
-          </h3>
+          </h2>
           <p>
             In no event shall Neo AI Picks, nor any of its officers, directors and employees, be held liable for anything arising out of or in any way connected with your use of this Website. Neo AI Picks, including its officers, directors and employees shall not be held liable for any indirect, consequential or special liability arising out of or in any way related to your use of this Website or the listed third-party AI tools.
           </p>
 
-          <h3 className="text-lg md:text-xl font-bold text-white pt-2 flex items-center gap-2">
-            6. Governing Law & Jurisdiction
-          </h3>
+          <h2 className="text-lg md:text-xl font-bold text-white pt-2">
+            6. Governing Law &amp; Jurisdiction
+          </h2>
           <p>
             These Terms will be governed by and interpreted in accordance with the laws of the jurisdiction of our headquarters, and you submit to the non-exclusive jurisdiction of the state and federal courts located in that region for the resolution of any disputes.
+          </p>
+
+          <hr className="border-white/5 my-8" />
+
+          <p className="text-slate-500 text-xs">
+            Questions about these terms? Contact us at{' '}
+            <a href="mailto:contact@neoaipicks.com" className="text-violet-400 hover:text-white underline underline-offset-2 transition-colors">
+              contact@neoaipicks.com
+            </a>
+            .
           </p>
         </div>
       </div>

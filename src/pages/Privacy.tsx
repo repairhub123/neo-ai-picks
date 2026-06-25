@@ -28,7 +28,7 @@ export const Privacy: React.FC<PrivacyProps> = () => {
         <div className="space-y-4 border-b border-white/5 pb-6">
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-violet-500/10 border border-violet-500/20 text-xs font-bold text-violet-400 select-none uppercase tracking-wider">
             <Lock className="w-3.5 h-3.5" />
-            Compliance & Security
+            Compliance &amp; Security
           </div>
           <h1 className="text-3xl md:text-5xl font-extrabold text-white tracking-tight">
             Privacy Policy
@@ -41,32 +41,40 @@ export const Privacy: React.FC<PrivacyProps> = () => {
             <span>•</span>
             <span className="flex items-center gap-1">
               <ShieldCheck className="w-3.5 h-3.5 text-emerald-400" />
-              GDPR & CCPA Compliant
+              GDPR &amp; CCPA Compliant
             </span>
           </div>
         </div>
 
         {/* POLICY CONTENT */}
-        <div className="prose prose-invert prose-indigo max-w-none text-slate-300 space-y-6 leading-relaxed text-sm md:text-base font-medium">
+        <div className="max-w-none text-slate-300 space-y-6 leading-relaxed text-sm md:text-base font-medium">
           <p>
-            At **Neo AI Picks**, accessible from [neoaipicks.com](https://neoaipicks.com), one of our main priorities is the privacy of our visitors. This Privacy Policy document contains types of information that is collected and recorded by Neo AI Picks and how we use it.
+            At <strong>Neo AI Picks</strong>, accessible from{' '}
+            <a href="https://neo-ai-picks.vercel.app" className="text-violet-400 hover:text-white underline underline-offset-2 transition-colors" target="_blank" rel="noopener noreferrer">
+              neo-ai-picks.vercel.app
+            </a>
+            , one of our main priorities is the privacy of our visitors. This Privacy Policy document contains types of information that is collected and recorded by Neo AI Picks and how we use it.
           </p>
           <p>
-            If you have additional questions or require more information about our Privacy Policy, do not hesitate to contact us at [contact@neoaipicks.com](mailto:contact@neoaipicks.com).
+            If you have additional questions or require more information about our Privacy Policy, do not hesitate to contact us at{' '}
+            <a href="mailto:contact@neoaipicks.com" className="text-violet-400 hover:text-white underline underline-offset-2 transition-colors">
+              contact@neoaipicks.com
+            </a>
+            .
           </p>
 
           <hr className="border-white/5 my-8" />
 
-          <h3 className="text-lg md:text-xl font-bold text-white pt-2 flex items-center gap-2">
+          <h2 className="text-lg md:text-xl font-bold text-white pt-2 flex items-center gap-2">
             1. Consent
-          </h3>
+          </h2>
           <p>
             By using our website, you hereby consent to our Privacy Policy and agree to its terms.
           </p>
 
-          <h3 className="text-lg md:text-xl font-bold text-white pt-2 flex items-center gap-2">
+          <h2 className="text-lg md:text-xl font-bold text-white pt-2">
             2. Information We Collect
-          </h3>
+          </h2>
           <p>
             The personal information that you are asked to provide, and the reasons why you are asked to provide it, will be made clear to you at the point we ask you to provide your personal information.
           </p>
@@ -76,9 +84,9 @@ export const Privacy: React.FC<PrivacyProps> = () => {
             <li><strong>Communications:</strong> If you contact us directly via our Contact form, we receive details such as your name, email address, subject line, and the content of the message.</li>
           </ul>
 
-          <h3 className="text-lg md:text-xl font-bold text-white pt-2 flex items-center gap-2">
+          <h2 className="text-lg md:text-xl font-bold text-white pt-2">
             3. How We Use Your Information
-          </h3>
+          </h2>
           <p>
             We use the information we collect in various ways, including to:
           </p>
@@ -91,26 +99,26 @@ export const Privacy: React.FC<PrivacyProps> = () => {
             <li>Detect and prevent spam, malicious upvotes, or fake submissions.</li>
           </ul>
 
-          <h3 className="text-lg md:text-xl font-bold text-white pt-2 flex items-center gap-2">
+          <h2 className="text-lg md:text-xl font-bold text-white pt-2">
             4. Log Files and Analytical Cookies
-          </h3>
+          </h2>
           <p>
             Neo AI Picks follows a standard procedure of using log files and cookies. These files log visitors when they visit websites. The information collected by log files includes internet protocol (IP) addresses, browser type, Internet Service Provider (ISP), date and time stamp, referring/exit pages, and number of clicks. These are not linked to any information that is personally identifiable. The purpose of the information is for analyzing trends, administering the site, tracking users' movement on the website, and gathering demographic information.
           </p>
           <p>
-            Our analytics provider is Google Analytics. We use this to track anonymized user sessions to measure directory engagement. No personally identifiable search data is recorded.
+            Our analytics provider is <strong>Google Analytics</strong>. We use this to track anonymized user sessions to measure directory engagement. No personally identifiable search data is recorded.
           </p>
 
-          <h3 className="text-lg md:text-xl font-bold text-white pt-2 flex items-center gap-2">
-            5. Third-Party Links & Partner Sites
-          </h3>
+          <h2 className="text-lg md:text-xl font-bold text-white pt-2">
+            5. Third-Party Links &amp; Partner Sites
+          </h2>
           <p>
             Neo AI Picks contains links to external AI tool websites. Our privacy policy does not apply to other advertisers or websites. Thus, we are advising you to consult the respective Privacy Policies of these third-party servers for more detailed information. It may include their practices and instructions about how to opt-out of certain options.
           </p>
 
-          <h3 className="text-lg md:text-xl font-bold text-white pt-2 flex items-center gap-2">
+          <h2 className="text-lg md:text-xl font-bold text-white pt-2">
             6. GDPR Data Protection Rights
-          </h3>
+          </h2>
           <p>
             We want to make sure you are fully aware of all of your data protection rights. Every user is entitled to the following:
           </p>
@@ -122,11 +130,15 @@ export const Privacy: React.FC<PrivacyProps> = () => {
             <li><strong>The right to object to processing</strong> – You have the right to object to our processing of your data.</li>
           </ul>
 
-          <h3 className="text-lg md:text-xl font-bold text-white pt-2 flex items-center gap-2">
+          <h2 className="text-lg md:text-xl font-bold text-white pt-2">
             7. Contact Support
-          </h3>
+          </h2>
           <p>
-            If you would like to exercise any of these compliance rights or request edits/removal of your listed AI tool from our directory, please write to: **contact@neoaipicks.com**.
+            If you would like to exercise any of these compliance rights or request edits/removal of your listed AI tool from our directory, please write to:{' '}
+            <a href="mailto:contact@neoaipicks.com" className="text-violet-400 hover:text-white font-bold underline underline-offset-2 transition-colors">
+              contact@neoaipicks.com
+            </a>
+            .
           </p>
         </div>
       </div>

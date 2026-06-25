@@ -1,23 +1,27 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, lazy, Suspense } from 'react';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
-import Home from './pages/Home';
-import ToolDetail from './pages/ToolDetail';
-import CompareFeed from './pages/CompareFeed';
-import CompareDetail from './pages/CompareDetail';
-import SubmitTool from './pages/SubmitTool';
-import BlogFeed from './pages/BlogFeed';
-import BlogDetail from './pages/BlogDetail';
-import Contact from './pages/Contact';
-import Privacy from './pages/Privacy';
-import Terms from './pages/Terms';
-import About from './pages/About';
-import NotFound from './pages/NotFound';
+import { FeatureRequestModal } from './components/FeatureRequestModal';
 import toolsData from './data/tools.json';
 import type { AITool } from './components/ToolCard';
 import { initGA, trackEvent } from './utils/analytics';
-import { AdminDashboard } from './pages/AdminDashboard';
-import { FeatureRequestModal } from './components/FeatureRequestModal';
+
+// ─── Eagerly loaded: lightweight shell pages ──────────────────────────────────
+import Home from './pages/Home';
+import NotFound from './pages/NotFound';
+
+// ─── Lazily loaded: heavy feature pages ──────────────────────────────────────
+const ToolDetail     = lazy(() => import('./pages/ToolDetail'));
+const CompareFeed    = lazy(() => import('./pages/CompareFeed'));
+const CompareDetail  = lazy(() => import('./pages/CompareDetail'));
+const SubmitTool     = lazy(() => import('./pages/SubmitTool'));
+const BlogFeed       = lazy(() => import('./pages/BlogFeed'));
+const BlogDetail     = lazy(() => import('./pages/BlogDetail'));
+const Contact        = lazy(() => import('./pages/Contact'));
+const Privacy        = lazy(() => import('./pages/Privacy'));
+const Terms          = lazy(() => import('./pages/Terms'));
+const About          = lazy(() => import('./pages/About'));
+const AdminDashboard = lazy(() => import('./pages/AdminDashboard').then(m => ({ default: m.AdminDashboard })));
 
 interface RouteState {
   path: string;
@@ -419,7 +423,18 @@ function App() {
       />
 
       <main className="flex-grow flex flex-col">
-        {renderPage()}
+        <Suspense
+          fallback={
+            <div className="w-full flex-grow flex items-center justify-center bg-[#0b0f19] py-32">
+              <div className="flex flex-col items-center gap-4">
+                <div className="w-8 h-8 rounded-full border-2 border-violet-500 border-t-transparent animate-spin" />
+                <p className="text-slate-600 text-xs font-semibold tracking-wider">Loading…</p>
+              </div>
+            </div>
+          }
+        >
+          {renderPage()}
+        </Suspense>
       </main>
 
       <Footer navigateTo={navigateTo} />

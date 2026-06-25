@@ -84,7 +84,10 @@ export const SEO: React.FC<SEOProps> = ({
       { property: 'og:url', content: canonicalUrl },
       { property: 'og:type', content: ogType },
       { property: 'og:site_name', content: 'Neo AI Picks' },
-      { property: 'og:image', content: `${siteUrl}/favicon.svg` }
+      { property: 'og:image', content: `${siteUrl}/og-image.png` },
+      { property: 'og:image:width', content: '1200' },
+      { property: 'og:image:height', content: '630' },
+      { property: 'og:image:alt', content: 'Neo AI Picks - AI Tools Directory' },
     ];
 
     ogTags.forEach(({ property, content }) => {
@@ -102,7 +105,8 @@ export const SEO: React.FC<SEOProps> = ({
       { name: 'twitter:card', content: 'summary_large_image' },
       { name: 'twitter:title', content: displayTitle },
       { name: 'twitter:description', content: displayDescription },
-      { name: 'twitter:image', content: `${siteUrl}/favicon.svg` }
+      { name: 'twitter:image', content: `${siteUrl}/og-image.png` },
+      { name: 'twitter:image:alt', content: 'Neo AI Picks - AI Tools Directory' },
     ];
 
     twitterTags.forEach(({ name, content }) => {
