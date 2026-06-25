@@ -339,7 +339,7 @@ export const SubmitTool: React.FC<SubmitToolProps> = ({ onAddTool, navigateTo, o
 
       {/* SUCCESS POPUP */}
       {showSuccess && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/80 backdrop-blur-md">
+        <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-slate-950/80 backdrop-blur-md">
           <div className="max-w-md w-full saas-glass border-white/5 rounded-3xl p-6 md:p-8 space-y-6 shadow-2xl relative text-center">
             
             <button 

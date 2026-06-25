@@ -17,7 +17,7 @@ export const Navbar: React.FC<NavbarProps> = ({ currentTab, navigateTo }) => {
   ];
 
   return (
-    <nav className="sticky top-0 z-50 saas-glass border-b border-white/5 w-full px-6 py-4">
+    <nav className="fixed top-0 left-0 right-0 z-[60] saas-glass border-b border-white/5 w-full px-6 py-4">
       <div className="max-w-7xl mx-auto flex items-center justify-between">
         {/* LOGO */}
         <div 

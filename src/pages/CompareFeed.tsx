@@ -178,7 +178,7 @@ export const CompareFeed: React.FC<CompareFeedProps> = ({ tools = [], navigateTo
                 className="w-full bg-slate-900/90 hover:bg-slate-900 border border-white/10 focus:border-violet-500 rounded-xl px-4 py-3 text-white placeholder-slate-500 focus:outline-none focus:ring-1 focus:ring-violet-500 text-sm shadow-xl transition-all"
               />
               {showDropdownA && (
-                <div className="absolute top-full left-0 right-0 mt-1.5 z-50 saas-glass bg-[#0b0f19]/90 backdrop-blur-md border border-white/10 rounded-xl shadow-2xl max-h-60 overflow-y-auto scroll-smooth custom-scrollbar divide-y divide-white/5">
+                <div className="absolute top-full left-0 right-0 mt-1.5 z-30 saas-glass bg-[#0b0f19]/90 backdrop-blur-md border border-white/10 rounded-xl shadow-2xl max-h-60 overflow-y-auto scroll-smooth custom-scrollbar divide-y divide-white/5">
                   {filteredToolsA.length > 0 ? (
                     filteredToolsA.map((tool) => (
                       <div
@@ -233,7 +233,7 @@ export const CompareFeed: React.FC<CompareFeedProps> = ({ tools = [], navigateTo
                 className="w-full bg-slate-900/90 hover:bg-slate-900 border border-white/10 focus:border-violet-500 rounded-xl px-4 py-3 text-white placeholder-slate-500 focus:outline-none focus:ring-1 focus:ring-violet-500 text-sm shadow-xl transition-all"
               />
               {showDropdownB && (
-                <div className="absolute top-full left-0 right-0 mt-1.5 z-50 saas-glass bg-[#0b0f19]/90 backdrop-blur-md border border-white/10 rounded-xl shadow-2xl max-h-60 overflow-y-auto scroll-smooth custom-scrollbar divide-y divide-white/5">
+                <div className="absolute top-full left-0 right-0 mt-1.5 z-30 saas-glass bg-[#0b0f19]/90 backdrop-blur-md border border-white/10 rounded-xl shadow-2xl max-h-60 overflow-y-auto scroll-smooth custom-scrollbar divide-y divide-white/5">
                   {filteredToolsB.length > 0 ? (
                     filteredToolsB.map((tool) => (
                       <div

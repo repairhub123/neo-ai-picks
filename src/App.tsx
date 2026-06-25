@@ -424,7 +424,7 @@ function App() {
         navigateTo={navigateTo} 
       />
 
-      <main className="flex-grow flex flex-col">
+      <main className="flex-grow flex flex-col pt-[var(--navbar-height)]">
         <Suspense
           fallback={
             <div className="w-full flex-grow flex items-center justify-center bg-[#0b0f19] py-32">

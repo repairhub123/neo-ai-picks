@@ -272,7 +272,7 @@ export const Home: React.FC<HomeProps> = ({
           </p>
 
           {/* SEARCH BAR */}
-          <div ref={searchContainerRef} className="max-w-2xl mx-auto relative z-50 group mt-6">
+          <div ref={searchContainerRef} className="max-w-2xl mx-auto relative z-30 group mt-6">
             <div className="absolute inset-0 bg-gradient-to-r from-violet-500 to-purple-500 rounded-2xl blur-md opacity-25 group-focus-within:opacity-40 transition-all duration-300 pointer-events-none" />
             <div className="relative flex items-center">
               <Search className="absolute left-4.5 w-5 h-5 text-slate-500 group-focus-within:text-violet-400 transition-colors pointer-events-none" />
@@ -305,7 +305,7 @@ export const Home: React.FC<HomeProps> = ({
 
             {/* Autocomplete Dropdown */}
             {showDropdown && searchQuery.trim() !== '' && (
-              <div className="absolute top-full left-0 right-0 mt-2.5 z-50 saas-glass border border-white/10 bg-[#0b0f19]/80 backdrop-blur-md rounded-2xl shadow-2xl overflow-hidden flex flex-col p-2 max-h-[380px] overflow-y-auto scroll-smooth custom-scrollbar animate-fade-in animate-slide-down">
+              <div className="absolute top-full left-0 right-0 mt-2.5 z-30 saas-glass border border-white/10 bg-[#0b0f19]/80 backdrop-blur-md rounded-2xl shadow-2xl overflow-hidden flex flex-col p-2 max-h-[380px] overflow-y-auto scroll-smooth custom-scrollbar animate-fade-in animate-slide-down">
                 {dropdownMatches.length > 0 ? (
                   dropdownMatches.map((tool, idx) => {
                     const isHighlighted = idx === focusedIndex;
