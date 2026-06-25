@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://neo-ai-picks.vercel.app/sitemap.xml
+Sitemap: https://neo-ai-picks.vercel.app/sitemap_index.xml
