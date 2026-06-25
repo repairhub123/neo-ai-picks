@@ -81,8 +81,8 @@ export const CompareDetail: React.FC<CompareDetailProps> = ({
 
   // Find other comparisons in the same category or involving toolA/toolB
   const relatedComparisons = comparisonPairs
-    .filter((cp) => cp.id !== pair.id && (cp.toolAId === toolA.id || cp.toolBId === toolA.id || cp.toolAId === toolB.id || cp.toolBId === toolB.id))
-    .slice(0, 3);
+    .filter((cp) => cp.id !== pair.id && (cp.toolAId === toolA.id || cp.toolBId === toolA.id || cp.toolAId === toolB.id || cp.toolBId === toolB.id || cp.category === pair.category))
+    .slice(0, 5);
 
   // Find blog posts that mention toolA or toolB or match category
   const relatedBlogs = blogTopics
@@ -93,7 +93,7 @@ export const CompareDetail: React.FC<CompareDetailProps> = ({
       blog.excerpt.toLowerCase().includes(toolB.name.toLowerCase()) ||
       blog.category === pair.category
     )
-    .slice(0, 3);
+    .slice(0, 5);
 
   // Dynamic Verdict calculation
   const ratingA = toolA.rating || 4.7;

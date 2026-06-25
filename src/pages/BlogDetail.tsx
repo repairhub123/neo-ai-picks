@@ -163,7 +163,7 @@ export const BlogDetail: React.FC<BlogDetailProps> = ({ topicId, tools, navigate
     const excerptMatch = post.excerpt.toLowerCase().includes(tool.name.toLowerCase());
     const contentMatch = content.toLowerCase().includes(tool.name.toLowerCase());
     return titleMatch || excerptMatch || contentMatch;
-  }).slice(0, 3);
+  }).slice(0, 5);
 
   // Find related comparisons
   const featuredToolIds = featuredTools.map((t) => t.id);
@@ -171,12 +171,12 @@ export const BlogDetail: React.FC<BlogDetailProps> = ({ topicId, tools, navigate
     const hasFeaturedTool = featuredToolIds.includes(cp.toolAId) || featuredToolIds.includes(cp.toolBId);
     const categoryMatch = cp.category === post.category;
     return hasFeaturedTool || categoryMatch;
-  }).slice(0, 3);
+  }).slice(0, 5);
 
   // Find related blogs for bottom grid
   const relatedBlogs = blogTopics
     .filter((topic) => topic.id !== post.id && topic.category === post.category)
-    .slice(0, 3);
+    .slice(0, 4);
 
   // Convert human-readable date e.g. "June 14, 2026" to ISO date "2026-06-14"
   const parseToISODate = (dateStr: string) => {

@@ -513,7 +513,321 @@ export const comparisonPairs: ComparisonPair[] = [
     title: 'Photoroom vs Canva: Product Backgrounds vs Complete Graphic Suite',
     excerpt: 'Compare Photoroom\'s background removal automation and Canva\'s all-in-one graphic design templates and brand asset manager.',
     category: 'Image Generation'
-  }
+  },
+  // NEW COMPARISONS (Growth Phase Sprint)
+  {
+    id: 'chatgpt-vs-perplexity',
+    toolAId: 'chatgpt',
+    toolBId: 'perplexity',
+    title: 'ChatGPT vs Perplexity AI: Conversational Chat vs Search-First AI',
+    excerpt: "Compare ChatGPT's versatile conversational engine built for general writing, coding, and creative brainstorming against Perplexity AI's specialized search-first interface that delivers real-time web sources, verified citations, and organized research summaries.",
+    category: 'Writing'
+  },
+  {
+    id: 'gemini-vs-claude',
+    toolAId: 'gemini',
+    toolBId: 'claude',
+    title: 'Gemini vs Claude: Google Workspace vs Anthropic Reasoning',
+    excerpt: "Evaluate Google Gemini's deep integration with Google Workspace tools and live web search against Anthropic Claude's advanced reasoning capabilities, natural writing style, and large context window for analyzing long documents.",
+    category: 'Writing'
+  },
+  {
+    id: 'grammarly-vs-quillbot',
+    toolAId: 'grammarly',
+    toolBId: 'quillbot',
+    title: 'Grammarly vs QuillBot: Grammar Correction vs AI Paraphrasing',
+    excerpt: "Compare Grammarly's comprehensive grammar checking, real-time tone adjustments, and professional editing features with QuillBot's flexible AI paraphrasing modes, summarization tools, and vocabulary expansion designed to help users rewrite existing text quickly.",
+    category: 'Writing'
+  },
+  {
+    id: 'writesonic-vs-rytr',
+    toolAId: 'writesonic',
+    toolBId: 'rytr',
+    title: 'Writesonic vs Rytr: Long-Form SEO Content vs Quick Copy',
+    excerpt: "Analyze Writesonic's robust, feature-rich platform built for long-form SEO articles, landing page copy, and automated bulk content generation against Rytr's lightweight, highly budget-friendly AI writing assistant designed for generating short marketing copy quickly.",
+    category: 'Writing'
+  },
+  {
+    id: 'cursor-vs-replit',
+    toolAId: 'cursor',
+    toolBId: 'replit',
+    title: 'Cursor vs Replit: Local AI IDE vs Cloud-Native Coding',
+    excerpt: "Compare Cursor's local, VS Code-based development environment that utilizes advanced AI agents for refactoring large local codebases against Replit's complete cloud-native workspace built for real-time collaborative coding, instant hosting, and rapid web prototype deployment.",
+    category: 'Coding'
+  },
+  {
+    id: 'github-copilot-vs-codeium',
+    toolAId: 'github-copilot',
+    toolBId: 'codeium',
+    title: 'GitHub Copilot vs Codeium: Paid Autocomplete vs Free Alternative',
+    excerpt: "Compare GitHub Copilot's industry-standard paid code completions, workspace chat integrations, and deep repository context against Codeium's highly capable, enterprise-grade free alternative that offers incredibly fast multi-language autocomplete and built-in AI search tools.",
+    category: 'Coding'
+  },
+  {
+    id: 'replit-vs-bolt-new',
+    toolAId: 'replit',
+    toolBId: 'bolt-new',
+    title: 'Replit vs Bolt.new: Full Cloud IDE vs Instant App Builder',
+    excerpt: "Evaluate Replit's full-featured cloud IDE and collaborative hosting environment designed for managing complete software development projects against Bolt.new's lightweight browser playground that instantly spins up full-stack web previews directly from simple text prompts.",
+    category: 'Coding'
+  },
+  {
+    id: 'cursor-vs-continue-dev',
+    toolAId: 'cursor',
+    toolBId: 'continue-dev',
+    title: 'Cursor vs Continue.dev: Commercial IDE vs Open-Source AI Coding',
+    excerpt: "Compare Cursor's proprietary, fully integrated AI fork of VS Code that features advanced multi-file code editing against Continue.dev's open-source extension that allows developers to bring their own LLM models directly into existing VS Code or JetBrains setups.",
+    category: 'Coding'
+  },
+  {
+    id: 'midjourney-vs-ideogram',
+    toolAId: 'midjourney',
+    toolBId: 'ideogram',
+    title: 'Midjourney vs Ideogram: Artistic Output vs Text-Accurate Generation',
+    excerpt: "Compare Midjourney's industry-leading aesthetic styles, rich photorealistic renderings, and complex lighting textures with Ideogram's unmatched ability to generate clean, highly legible text and custom typography layouts embedded directly within high-quality AI-generated images.",
+    category: 'Image Generation'
+  },
+  {
+    id: 'flux-vs-stable-diffusion',
+    toolAId: 'flux',
+    toolBId: 'stable-diffusion',
+    title: 'Flux vs Stable Diffusion: Next-Gen vs Open-Source Image Models',
+    excerpt: "Analyze the state-of-the-art Flux image models known for realistic hand details and accurate prompt compliance against the long-standing, highly customizable Stable Diffusion ecosystem that supports extensive local fine-tuning and custom ControlNet setups.",
+    category: 'Image Generation'
+  },
+  {
+    id: 'dalle3-vs-ideogram',
+    toolAId: 'dalle3',
+    toolBId: 'ideogram',
+    title: 'DALL-E 3 vs Ideogram: OpenAI Image Generation vs Typography AI',
+    excerpt: "Compare DALL-E 3's seamless integration within ChatGPT and its excellent comprehension of conversational prompt nuances against Ideogram's superior rendering of typography, graphic design elements, and precise text layouts in generated visual art.",
+    category: 'Image Generation'
+  },
+  {
+    id: 'heygen-vs-synthesia',
+    toolAId: 'heygen',
+    toolBId: 'synthesia',
+    title: 'HeyGen vs Synthesia: AI Video Avatar Platforms Compared',
+    excerpt: "Compare HeyGen's photorealistic custom video avatars, advanced voice-cloning capabilities, and dynamic camera movements against Synthesia's enterprise-grade multi-language localized presenters, massive stock avatar library, and interactive video branching tools for corporate training.",
+    category: 'Video Generation'
+  },
+  {
+    id: 'descript-vs-runway',
+    toolAId: 'descript',
+    toolBId: 'runway',
+    title: 'Descript vs Runway: Podcast Editor vs AI Video Generator',
+    excerpt: "Compare Descript's text-based audio and video editing platform designed for podcasters and content editors against Runway's generative AI tools that focus on creating high-quality cinematic video clips and advanced visual effects from scratch.",
+    category: 'Video Generation'
+  },
+  {
+    id: 'suno-ai-vs-udio',
+    toolAId: 'suno-ai',
+    toolBId: 'udio',
+    title: 'Suno AI vs Udio: AI Music Generation Battle 2026',
+    excerpt: "Compare Suno AI's ability to generate fully structured songs with diverse vocal styles and lyrics from single prompts against Udio's high-fidelity audio output, superior musical separation, and advanced editing features for professional producers.",
+    category: 'Voice & Audio'
+  },
+  {
+    id: 'elevenlabs-vs-play-ht',
+    toolAId: 'elevenlabs',
+    toolBId: 'play-ht',
+    title: 'ElevenLabs vs Play.ht: Voice Cloning vs Text-to-Speech APIs',
+    excerpt: "Analyze ElevenLabs' industry-leading emotional range, natural inflection, and multilingual voice cloning capabilities against Play.ht's vast library of ultra-realistic voices, customizable pronunciation settings, and optimized API services for bulk audio generation.",
+    category: 'Voice & Audio'
+  },
+  {
+    id: 'elevenlabs-vs-resemble-ai',
+    toolAId: 'elevenlabs',
+    toolBId: 'resemble-ai',
+    title: 'ElevenLabs vs Resemble AI: Emotional Voices vs Custom Voice Cloning',
+    excerpt: "Compare ElevenLabs' highly realistic voice synthesis and expressive speech styling with Resemble AI's focus on enterprise custom voice cloning, granular emotion controls, and real-time audio watermarking for advanced security protection.",
+    category: 'Voice & Audio'
+  },
+  // NEW COMPARISONS (Gap Analysis Sprint)
+  {
+      id: 'deepl-vs-chatgpt',
+      toolAId: 'deepl',
+      toolBId: 'chatgpt',
+      title: 'DeepL vs ChatGPT: Dedicated Translation vs Generative AI',
+      excerpt: "Compare DeepL's highly accurate, context-aware machine translation with ChatGPT's general-purpose text generation, multi-lingual brainstorming tools, and conversational chat capabilities to find the best platform for scaling professional document translation workflows.",
+      category: 'Writing'
+    },
+    {
+      id: 'jenni-ai-vs-sudowrite',
+      toolAId: 'jenni-ai',
+      toolBId: 'sudowrite',
+      title: 'Jenni AI vs Sudowrite: Academic Essays vs Creative Fiction Writing',
+      excerpt: "Evaluate Jenni AI's specialized citation assistant, autocomplete helper, and academic essay editor against Sudowrite's creative novel planning tools, outline brainstorming cards, and descriptive sensory prose generators designed specifically for fiction writers and novelists.",
+      category: 'Writing'
+    },
+    {
+      id: 'hemingway-ai-vs-grammarly',
+      toolAId: 'hemingway-ai',
+      toolBId: 'grammarly',
+      title: 'Hemingway Editor AI vs Grammarly: Readability Style vs Grammar Checks',
+      excerpt: "Compare Hemingway Editor AI's readability analysis, style suggestions, and bold sentence shortening options with Grammarly's comprehensive spelling corrections, real-time tone adjustments, vocabulary improvements, and built-in academic plagiarism detector.",
+      category: 'Writing'
+    },
+    {
+      id: 'lex-page-vs-notion-ai',
+      toolAId: 'lex-page',
+      toolBId: 'notion-ai',
+      title: 'Lex Page vs Notion AI: Minimalist AI Editor vs Document Workspace',
+      excerpt: "Compare Lex Page's minimalist, distraction-free document editor and inline AI writing prompts with Notion AI's integrated wiki database trackers, automated note summaries, and workspace Q&A engine that queries across team documents.",
+      category: 'Writing'
+    },
+    {
+      id: 'cody-ai-vs-github-copilot',
+      toolAId: 'cody-ai',
+      toolBId: 'github-copilot',
+      title: 'Sourcegraph Cody vs GitHub Copilot: Semantic Repository Indexing vs Autocomplete',
+      excerpt: "Evaluate Sourcegraph Cody's codebase-wide semantic search, private repository indexing, and repository explanation tools against GitHub Copilot's fast inline coding autocomplete, editor chat assistant, and basic unit test generation features.",
+      category: 'Coding'
+    },
+    {
+      id: 'amazon-q-vs-github-copilot',
+      toolAId: 'amazon-q',
+      toolBId: 'github-copilot',
+      title: 'Amazon Q vs GitHub Copilot: AWS Code Optimizations vs General Auto-complete',
+      excerpt: "Evaluate Amazon Q's specialized AWS architecture guidance, security scanning, and legacy code migration tools against GitHub Copilot's fast, general-purpose inline coding autocomplete suggestions and editor chat panels.",
+      category: 'Coding'
+    },
+    {
+      id: 'blackbox-ai-vs-codeium',
+      toolAId: 'blackbox-ai',
+      toolBId: 'codeium',
+      title: 'Blackbox AI vs Codeium: Rapid Code Search vs Low-Latency Auto-complete',
+      excerpt: "Compare Blackbox AI's unique video-to-code extraction tool and web-grounded documentation search capabilities with Codeium's free, low-latency coding autocomplete recommendations and multi-language IDE conversational assistant.",
+      category: 'Coding'
+    },
+    {
+      id: 'phind-vs-perplexity',
+      toolAId: 'phind',
+      toolBId: 'perplexity',
+      title: 'Phind vs Perplexity AI: Developer search Engine vs General Knowledge Search',
+      excerpt: "Compare Phind's developer-centric technical search engine and verified code output examples with Perplexity AI's citation-first research assistant, conversational search modes, and general-knowledge summaries compiled from live web footnotes.",
+      category: 'Coding'
+    },
+    {
+      id: 'you-com-vs-perplexity',
+      toolAId: 'you-com',
+      toolBId: 'perplexity',
+      title: 'You.com vs Perplexity AI: Customizable AI Search Agents vs Research-First Search',
+      excerpt: "Compare You.com's customizable search agent builder, multi-model comparison workspace, and built-in terminal compiler with Perplexity AI's research-focused search dashboard, citation collections, and guided conversational queries.",
+      category: 'Productivity'
+    },
+    {
+      id: 'exa-ai-vs-perplexity',
+      toolAId: 'exa-ai',
+      toolBId: 'perplexity',
+      title: 'Exa AI vs Perplexity AI: Search Engine for AI vs Natural Language Search',
+      excerpt: "Compare Exa AI's programmatic neural link prediction and clean HTML extraction API built for AI agents with Perplexity AI's user-facing conversational search engine, citation footnotes, and research thread summaries.",
+      category: 'Productivity'
+    },
+    {
+      id: 'readwise-reader-vs-notebooklm',
+      toolAId: 'readwise-reader',
+      toolBId: 'notebooklm',
+      title: 'Readwise Reader vs NotebookLM: Personal Article Highlights vs Document Summaries',
+      excerpt: "Compares Readwise Reader's digital read-it-later article inbox, text-to-speech player, and two-way database sync with Google NotebookLM's private, source-grounded document analysis workspace and realistic dual-speaker conversational audio summaries.",
+      category: 'Productivity'
+    },
+    {
+      id: 'heptabase-vs-notion-ai',
+      toolAId: 'heptabase',
+      toolBId: 'notion-ai',
+      title: 'Heptabase vs Notion AI: Visual Mind Maps vs Structured Document Databases',
+      excerpt: "Evaluate Heptabase's visual mind mapping whiteboard canvas, PDF text highlighter, and local-first card notes against Notion AI's structured workspace wiki databases, automated page Q&A, and inline prose generation.",
+      category: 'Productivity'
+    },
+    {
+      id: 'beautiful-ai-vs-gamma-app',
+      toolAId: 'beautiful-ai',
+      toolBId: 'gamma-ai',
+      title: 'Beautiful.ai vs Gamma: Structured Slide Layouts vs AI Presentation Outlining',
+      excerpt: "Compare Beautiful.ai's smart slide templates, real-time designer guidelines, and brand control locks with Gamma's modular card layout system, webpage creation templates, and flexible text-to-presentation prompting assistant.",
+      category: 'Productivity'
+    },
+    {
+      id: 'tome-app-vs-gamma-app',
+      toolAId: 'tome-app',
+      toolBId: 'gamma-ai',
+      title: 'Tome vs Gamma: Visual Interactive Slides vs Rapid AI Presentations',
+      excerpt: "Compare Tome's mobile-responsive presentation canvases, integrated DALL-E image generation, and third-party web embeds with Gamma's visual slide design themes, webpage building layout editor, and conversational content editor.",
+      category: 'Productivity'
+    },
+    {
+      id: 'activepieces-vs-zapier-ai',
+      toolAId: 'activepieces',
+      toolBId: 'zapier-ai',
+      title: 'Activepieces vs Zapier AI: Self-Hostable Open Source vs Enterprise Automation',
+      excerpt: "Compare Activepieces' open-source, self-hosted automation workspace and custom TypeScript builder nodes with Zapier AI's natural language Zap builder, massive library of 6,000 SaaS integrations, and central agent helpers.",
+      category: 'Automation'
+    },
+    {
+      id: 'flowise-vs-langflow',
+      toolAId: 'flowise',
+      toolBId: 'langflow',
+      title: 'Flowise vs Langflow: Visual LLM Chains vs LangChain Agent Orchestration',
+      excerpt: "Compare Flowise's drag-and-drop visual node builder and LangChain pipeline templates with Langflow's Python-centric developer workspace, custom scripting nodes, and advanced multi-agent orchestration tools for building LLM applications.",
+      category: 'Automation'
+    },
+    {
+      id: 'relevance-ai-vs-zapier-ai',
+      toolAId: 'relevance-ai',
+      toolBId: 'zapier-ai',
+      title: 'Relevance AI vs Zapier AI: Autonomous Agent Workforces vs Linear Web Automations',
+      excerpt: "Compares Relevance AI's low-code visual agent builder, task execution tracking logs, and autonomous virtual workforces with Zapier AI's linear web workflow triggers, data formatting blocks, and SaaS app integrations.",
+      category: 'Automation'
+    },
+    {
+      id: 'soundraw-vs-suno-ai',
+      toolAId: 'soundraw',
+      toolBId: 'suno-ai',
+      title: 'Soundraw vs Suno AI: Custom Instrumental Beats vs Full Vocal Song Generators',
+      excerpt: "Evaluate Soundraw's customizable instrumental beats, arrangement editors, and timeline audio controllers for video background music against Suno AI's full text-to-song model that generates realistic vocals, melodies, and custom lyrics.",
+      category: 'Voice & Audio'
+    },
+    {
+      id: 'podcastle-vs-descript',
+      toolAId: 'podcastle',
+      toolBId: 'descript',
+      title: 'Podcastle vs Descript: Audio Podcast Studio vs Transcript-First Video Editor',
+      excerpt: "Compare Podcastle's browser-based multi-guest recording studio, vocal noise filters, and text-to-speech voice skins with Descript's visual timeline editors, automatic filler-word removal, and text-based video script editing.",
+      category: 'Voice & Audio'
+    },
+    {
+      id: 'adobe-podcast-vs-descript',
+      toolAId: 'adobe-podcast',
+      toolBId: 'descript',
+      title: 'Adobe Podcast vs Descript: Vocal Enhancement vs Timeline Editing',
+      excerpt: "Compare Adobe Podcast's web-based speech enhancement filters, microphone check wizard, and visual transcription reader with Descript's advanced multi-track audio timeline, transcription-based video script editing, and Studio Sound cleaning.",
+      category: 'Voice & Audio'
+    },
+    {
+      id: 'pictory-vs-lumen5',
+      toolAId: 'pictory',
+      toolBId: 'lumen5',
+      title: 'Pictory vs Lumen5: Blog-to-Video Outlines vs Storyboard Slideshows',
+      excerpt: "Compare Pictory's text-based script-to-video auto generator, subtitle transcription tool, and filler-word trimmer with Lumen5's visual storyboard slide templates, blog URL web scraper, and drag-and-drop brand asset managers.",
+      category: 'Video Generation'
+    },
+    {
+      id: 'kaiber-vs-runway',
+      toolAId: 'kaiber',
+      toolBId: 'runway',
+      title: 'Kaiber vs Runway: Music Visualizer Animations vs Cinematic Gen-3 Videos',
+      excerpt: "Compare Kaiber's audio-reactive music animations, stylized illustrative filters, and frame-by-frame loop converters with Runway's Gen-3 Alpha cinematic video generation model, Motion Brush controllers, and advanced camera pan settings.",
+      category: 'Video Generation'
+    },
+    {
+      id: 'vectorizer-ai-vs-photoroom',
+      toolAId: 'vectorizer-ai',
+      toolBId: 'photoroom',
+      title: 'Vectorizer.ai vs Photoroom: PNG to SVG Vectorizer vs Background Remover',
+      excerpt: "Compare Vectorizer.ai's high-precision AI tracing algorithm and automatic raster-to-SVG vector converter tool with Photoroom's automated product background scene generator, batch photo editor, and studio reflection shadow adjustments.",
+      category: 'Image Generation'
+    }
 ];
 
 export const getComparisonBySlug = (slug: string): ComparisonPair | undefined => {

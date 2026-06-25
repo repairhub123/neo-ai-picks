@@ -31,6 +31,7 @@ export const FeatureRequestModal: React.FC<FeatureRequestModalProps> = ({
   // Sync prefilled data when modal opens
   useEffect(() => {
     if (isOpen) {
+      // eslint-disable-next-line react-hooks/set-state-in-effect
       setFormData({
         fullName: '',
         email: '',
@@ -63,7 +64,7 @@ export const FeatureRequestModal: React.FC<FeatureRequestModalProps> = ({
     } else {
       try {
         new URL(formData.toolUrl);
-      } catch (e) {
+      } catch {
         tempErrors.toolUrl = 'Please enter a valid URL (including https://).';
       }
     }

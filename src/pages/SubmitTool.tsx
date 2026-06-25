@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
 import { Send, Sparkles, CheckCircle2, ShieldCheck, X } from 'lucide-react';
 import SEO from '../components/SEO';
+import type { AITool } from '../components/ToolCard';
 
 interface SubmitToolProps {
-  onAddTool: (tool: any) => void;
+  onAddTool: (tool: Omit<AITool, 'id' | 'iconBg'>) => void;
   navigateTo: (tab: string, arg?: string) => void;
   onOpenFeatureModal: () => void;
 }
@@ -48,7 +49,7 @@ export const SubmitTool: React.FC<SubmitToolProps> = ({ onAddTool, navigateTo, o
     } else {
       try {
         new URL(formData.websiteUrl);
-      } catch (e) {
+      } catch {
         newErrors.websiteUrl = 'Please enter a valid URL (including https://).';
       }
     }
@@ -83,17 +84,24 @@ export const SubmitTool: React.FC<SubmitToolProps> = ({ onAddTool, navigateTo, o
         .map((tag) => tag.trim())
         .filter((tag) => tag !== '');
 
-      const newTool = {
+      const newTool: Omit<AITool, 'id' | 'iconBg'> = {
         name: formData.name,
         tagline: formData.tagline,
         description: formData.description,
         category: formData.category,
-        pricing: formData.pricing,
+        pricing: formData.pricing as 'Free' | 'Freemium' | 'Paid',
         pricingDetails: formData.pricingDetails || `${formData.pricing} tier plan.`,
         websiteUrl: formData.websiteUrl,
         features,
         tags: tags.length > 0 ? tags : ['AI', 'Tool'],
-        upvotes: 1
+        upvotes: 1,
+        pros: [],
+        cons: [],
+        bestUseCases: [],
+        alternatives: [],
+        seoTitle: '',
+        seoMetaDescription: '',
+        slug: ''
       };
 
       onAddTool(newTool);

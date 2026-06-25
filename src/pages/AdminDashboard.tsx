@@ -35,9 +35,11 @@ interface AdminDashboardProps {
 
 export const AdminDashboard: React.FC<AdminDashboardProps> = ({ 
   tools, 
-  onRefreshTools,
-  navigateTo: _navigateTo 
+  onRefreshTools
 }) => {
+  // Pure current timestamp for rendering
+  const [now] = useState(() => Date.now());
+
   // Authentication State
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [passcode, setPasscode] = useState('');
@@ -52,35 +54,6 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
 
   // Manage Tool Expiry dates
   const [expiryDates, setExpiryDates] = useState<Record<string, string>>({});
-
-  // 1. Check existing Auth
-  useEffect(() => {
-    const isAuthed = sessionStorage.getItem('neo_admin_authed') === 'true';
-    if (isAuthed) {
-      setIsAuthenticated(true);
-      loadAdminData();
-    }
-  }, []);
-
-  const handleLogin = (e: React.FormEvent) => {
-    e.preventDefault();
-    const correctPasscode = import.meta.env.VITE_ADMIN_PASSCODE || 'admin123';
-    
-    if (passcode === correctPasscode) {
-      sessionStorage.setItem('neo_admin_authed', 'true');
-      setIsAuthenticated(true);
-      setAuthError('');
-      loadAdminData();
-    } else {
-      setAuthError('Incorrect passcode. Please try again.');
-    }
-  };
-
-  const handleLogout = () => {
-    sessionStorage.removeItem('neo_admin_authed');
-    setIsAuthenticated(false);
-    setPasscode('');
-  };
 
   // 2. Load DB Data
   const loadAdminData = async () => {
@@ -110,6 +83,37 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
     } finally {
       setIsLoading(false);
     }
+  };
+
+  // 1. Check existing Auth
+  useEffect(() => {
+    const isAuthed = sessionStorage.getItem('neo_admin_authed') === 'true';
+    if (isAuthed) {
+      // eslint-disable-next-line react-hooks/set-state-in-effect
+      setIsAuthenticated(true);
+      loadAdminData();
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  const handleLogin = (e: React.FormEvent) => {
+    e.preventDefault();
+    const correctPasscode = import.meta.env.VITE_ADMIN_PASSCODE || 'admin123';
+    
+    if (passcode === correctPasscode) {
+      sessionStorage.setItem('neo_admin_authed', 'true');
+      setIsAuthenticated(true);
+      setAuthError('');
+      loadAdminData();
+    } else {
+      setAuthError('Incorrect passcode. Please try again.');
+    }
+  };
+
+  const handleLogout = () => {
+    sessionStorage.removeItem('neo_admin_authed');
+    setIsAuthenticated(false);
+    setPasscode('');
   };
 
   // 3. Action Handlers
@@ -185,8 +189,17 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
     }
   };
 
+  interface MockCheckout {
+    sessionId: string;
+    toolId: string;
+    email: string;
+    planType: 'featured_monthly' | 'featured_lifetime';
+    verified: boolean;
+    timestamp: string;
+  }
+
   // Mock checkout session list loader
-  const getMockCheckouts = () => {
+  const getMockCheckouts = (): MockCheckout[] => {
     return JSON.parse(localStorage.getItem('neo_mock_pending_payments') || '[]');
   };
 
@@ -298,7 +311,7 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
           ].map(tab => (
             <button
               key={tab.id}
-              onClick={() => setActiveTab(tab.id as any)}
+              onClick={() => setActiveTab(tab.id as 'requests' | 'tools' | 'analytics' | 'payments')}
               className={`whitespace-nowrap px-4 py-2 rounded-lg text-xs font-bold transition-all ${
                 activeTab === tab.id 
                   ? 'bg-violet-600 text-white shadow-md' 
@@ -449,7 +462,7 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
                             expiry ? (
                               <div className="flex flex-col">
                                 <span className="text-white font-medium">{new Date(expiry).toLocaleDateString()}</span>
-                                <span className="text-[9px] text-slate-500">({Math.ceil((new Date(expiry).getTime() - Date.now()) / (1000 * 60 * 60 * 24))} days left)</span>
+                                <span className="text-[9px] text-slate-500">({Math.ceil((new Date(expiry).getTime() - now) / (1000 * 60 * 60 * 24))} days left)</span>
                               </div>
                             ) : (
                               <span className="text-slate-400 italic">No expiry (Lifetime)</span>
@@ -652,7 +665,7 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
                     </tr>
                   </thead>
                   <tbody className="divide-y divide-white/5 text-slate-300">
-                    {getMockCheckouts().map((chk: any) => (
+                    {getMockCheckouts().map((chk) => (
                       <tr key={chk.sessionId} className="hover:bg-white/5">
                         <td className="p-3 font-mono text-[10px] text-slate-400">{chk.sessionId}</td>
                         <td className="p-3 font-bold text-white">{chk.toolId}</td>

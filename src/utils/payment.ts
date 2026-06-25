@@ -10,6 +10,15 @@ export interface PaymentProvider {
   refundPayment(paymentId: string): Promise<boolean>;
 }
 
+export interface MockPendingPayment {
+  sessionId: string;
+  toolId: string;
+  email: string;
+  planType: 'featured_monthly' | 'featured_lifetime';
+  verified: boolean;
+  timestamp: string;
+}
+
 export class MockPaymentProvider implements PaymentProvider {
   name = 'MockPayment';
 
@@ -50,8 +59,8 @@ export class MockPaymentProvider implements PaymentProvider {
     console.log(`[MockPayment] Verifying payment for session: ${sessionId}`);
     await new Promise(resolve => setTimeout(resolve, 300));
 
-    const pendingPayments = JSON.parse(localStorage.getItem('neo_mock_pending_payments') || '[]');
-    const index = pendingPayments.findIndex((p: any) => p.sessionId === sessionId);
+    const pendingPayments = JSON.parse(localStorage.getItem('neo_mock_pending_payments') || '[]') as MockPendingPayment[];
+    const index = pendingPayments.findIndex((p) => p.sessionId === sessionId);
     
     if (index !== -1) {
       pendingPayments[index].verified = true;

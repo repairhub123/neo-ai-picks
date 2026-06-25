@@ -23,7 +23,17 @@ export const CompareFeed: React.FC<CompareFeedProps> = ({ tools = [], navigateTo
   const [searchQueryB, setSearchQueryB] = useState('');
   const [showDropdownA, setShowDropdownA] = useState(false);
   const [showDropdownB, setShowDropdownB] = useState(false);
-  const [recentComparisons, setRecentComparisons] = useState<RecentComparison[]>([]);
+  const [recentComparisons, setRecentComparisons] = useState<RecentComparison[]>(() => {
+    const stored = localStorage.getItem('neo_recent_comparisons');
+    if (stored) {
+      try {
+        return JSON.parse(stored);
+      } catch (e) {
+        console.error('Failed to parse recent comparisons:', e);
+      }
+    }
+    return [];
+  });
 
   const dropdownRefA = useRef<HTMLDivElement>(null);
   const dropdownRefB = useRef<HTMLDivElement>(null);
@@ -31,16 +41,6 @@ export const CompareFeed: React.FC<CompareFeedProps> = ({ tools = [], navigateTo
   useEffect(() => {
     // Track page visit event
     trackEvent('view_compare_hub', 'Engagement', 'Compare Feed');
-
-    // Load recent selections from localStorage
-    const stored = localStorage.getItem('neo_recent_comparisons');
-    if (stored) {
-      try {
-        setRecentComparisons(JSON.parse(stored));
-      } catch (e) {
-        console.error('Failed to parse recent comparisons:', e);
-      }
-    }
 
     const handleClickOutside = (event: MouseEvent) => {
       if (dropdownRefA.current && !dropdownRefA.current.contains(event.target as Node)) {

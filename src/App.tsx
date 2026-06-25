@@ -32,7 +32,18 @@ function App() {
   const [currentRoute, setCurrentRoute] = useState<RouteState>({ path: 'home' });
   const [tools, setTools] = useState<AITool[]>([]);
   const [upvotesState, setUpvotesState] = useState<Record<string, number>>({});
-  const [upvotedTools, setUpvotedTools] = useState<Set<string>>(new Set());
+  const [upvotedTools, setUpvotedTools] = useState<Set<string>>(() => {
+    const storedBookmarks = localStorage.getItem('neo_bookmarks');
+    if (storedBookmarks) {
+      try {
+        const parsedBookmarks = JSON.parse(storedBookmarks) as string[];
+        return new Set(parsedBookmarks);
+      } catch (e) {
+        console.error('Failed to parse cached bookmarks:', e);
+      }
+    }
+    return new Set();
+  });
   
   // Featured Request Modal states
   const [isFeatureModalOpen, setIsFeatureModalOpen] = useState(false);
@@ -45,7 +56,7 @@ function App() {
 
   const refreshToolsList = async () => {
     // 2. Cast and load base tools
-    const baseTools = (toolsData as any[]).map((t, idx) => ({
+    const baseTools = (toolsData as unknown as Partial<AITool>[]).map((t, idx) => ({
       ...t,
       isFeatured: idx < 4 || t.id === 'cursor' || t.id === 'flux' || t.id === 'gemini',
       isEditorsPick: t.id === 'chatgpt' || t.id === 'claude' || t.id === 'cursor' || t.id === 'perplexity' || t.id === 'midjourney' || t.id === 'elevenlabs',
@@ -111,16 +122,7 @@ function App() {
     // 1. Initialize GA4
     initGA();
 
-    // 2. Load bookmarks from localStorage
-    const storedBookmarks = localStorage.getItem('neo_bookmarks');
-    if (storedBookmarks) {
-      try {
-        const parsedBookmarks = JSON.parse(storedBookmarks) as string[];
-        setUpvotedTools(new Set(parsedBookmarks));
-      } catch (e) {
-        console.error('Failed to parse cached bookmarks:', e);
-      }
-    }
+    // 2. Load bookmarks from localStorage (moved to useState initializer)
 
     // 3. Load all tools and initialize upvotes
     const initializeData = async () => {
@@ -323,7 +325,7 @@ function App() {
     setTools((prev) => {
       const updated = [fullTool, ...prev];
       // Filter out base tools to only save user submitted ones
-      const userSubmitted = updated.filter(t => !toolsData.some((orig: any) => orig.id === t.id));
+      const userSubmitted = updated.filter(t => !toolsData.some((orig: { id: string }) => orig.id === t.id));
       localStorage.setItem('neo_submitted_tools', JSON.stringify(userSubmitted));
       return updated;
     });

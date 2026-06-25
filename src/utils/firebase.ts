@@ -7,7 +7,8 @@ import {
   doc, 
   updateDoc, 
   query, 
-  orderBy
+  orderBy,
+  Firestore
 } from 'firebase/firestore';
 
 // Types
@@ -64,7 +65,7 @@ const isFirebaseConfigured = !!(
   firebaseConfig.appId
 );
 
-let db: any = null;
+let db: Firestore | null = null;
 
 if (isFirebaseConfigured) {
   try {
@@ -184,7 +185,7 @@ export const updateToolFeaturedStatus = async (
 
   if (isFirebaseConfigured && db) {
     const docRef = doc(db, 'tool_featured_status', toolId);
-    await updateDoc(docRef, newStatus as any).catch(async () => {
+    await updateDoc(docRef, newStatus as unknown as Record<string, unknown>).catch(async () => {
       // If doc doesn't exist, create it (not checking exists to minimize read hits)
       const { setDoc } = await import('firebase/firestore');
       await setDoc(doc(db, 'tool_featured_status', toolId), newStatus);
@@ -228,8 +229,8 @@ export const logAnalyticsEvent = async (
   }
 };
 
-export const getAnalyticsSummary = async (toolsList: any[] = []): Promise<AnalyticsSummary> => {
-  let events: AnalyticsEvent[] = [];
+export const getAnalyticsSummary = async (toolsList: { id: string; category: string }[] = []): Promise<AnalyticsSummary> => {
+  let events: AnalyticsEvent[];
 
   if (isFirebaseConfigured && db) {
     const snapshot = await getDocs(collection(db, 'analytics'));

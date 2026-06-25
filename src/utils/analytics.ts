@@ -3,8 +3,8 @@ const GA_MEASUREMENT_ID = import.meta.env.VITE_GA_MEASUREMENT_ID || '';
 // Declare global window properties for TypeScript compilation
 declare global {
   interface Window {
-    dataLayer: any[];
-    gtag?: (...args: any[]) => void;
+    dataLayer: unknown[];
+    gtag?: (...args: unknown[]) => void;
   }
 }
 
@@ -12,6 +12,7 @@ declare global {
 if (typeof window !== 'undefined') {
   window.dataLayer = window.dataLayer || [];
   window.gtag = window.gtag || function () {
+    // eslint-disable-next-line prefer-rest-params
     window.dataLayer.push(arguments);
   };
 }

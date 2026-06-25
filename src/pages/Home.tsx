@@ -214,8 +214,7 @@ export const Home: React.FC<HomeProps> = ({
     "logo": `${siteUrl}/favicon.svg`,
     "sameAs": []
   };
-
-  const graphSchemas: any[] = [websiteSchema, organizationSchema];
+  const graphSchemas: Record<string, unknown>[] = [websiteSchema, organizationSchema];
 
   if (selectedCategory !== 'All Tools') {
     const categoryName = selectedCategory;

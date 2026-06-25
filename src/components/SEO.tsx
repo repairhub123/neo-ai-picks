@@ -7,7 +7,7 @@ interface SEOProps {
   path: string;
   ogType?: 'website' | 'article' | 'profile';
   keywords?: string | string[];
-  jsonLd?: Record<string, any>;
+  jsonLd?: Record<string, unknown>;
 }
 
 export const SEO: React.FC<SEOProps> = ({
@@ -139,7 +139,7 @@ export const SEO: React.FC<SEOProps> = ({
       const existingScript = document.getElementById(scriptId);
       if (existingScript) existingScript.remove();
     };
-  }, [displayTitle, displayDescription, resolvedKeywords, canonicalUrl, ogType, jsonLd]);
+  }, [displayTitle, displayDescription, resolvedKeywords, canonicalUrl, ogType, jsonLd, path, siteUrl]);
 
   return null; // This component operates solely in document head
 };

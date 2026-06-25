@@ -49,10 +49,10 @@ export const ToolDetail: React.FC<ToolDetailProps> = ({
     );
   }
 
-  // Get similar tools (alternatives in the same category)
+  // Get similar tools (alternatives in the same category) — up to 5
   const alternatives = tools
     .filter((t) => t.id !== tool.id && t.category === tool.category)
-    .slice(0, 3);
+    .slice(0, 5);
 
 
 
@@ -82,37 +82,53 @@ export const ToolDetail: React.FC<ToolDetailProps> = ({
 
   // Generate internal comparative counterpart links dynamically
   const getCompareLinks = (currentTool: AITool, allTools: AITool[]) => {
-    let comparators: string[] = [];
+    // 1. Find all existing comparison pairs involving this tool
+    const directPairs = comparisonPairs.filter(
+      (p) => p.toolAId === currentTool.id || p.toolBId === currentTool.id
+    );
+
+    if (directPairs.length >= 3) {
+      // Use actual comparison pairs if we have enough
+      return directPairs.slice(0, 4).map((pair) => {
+        const targetId = pair.toolAId === currentTool.id ? pair.toolBId : pair.toolAId;
+        const targetTool = allTools.find((t) => t.id === targetId);
+        if (!targetTool) return null;
+        return { label: `${currentTool.name} vs ${targetTool.name}`, id: pair.id };
+      }).filter(Boolean) as { label: string; id: string }[];
+    }
+
+    // 2. Fallback: generate by category + check for existing pair
+    let comparators: string[];
     if (currentTool.category === 'Writing') {
-      comparators = ['chatgpt', 'claude', 'perplexity'];
+      comparators = ['chatgpt', 'claude', 'gemini', 'perplexity', 'grammarly'];
     } else if (currentTool.category === 'Coding') {
-      comparators = ['cursor', 'claude', 'chatgpt'];
+      comparators = ['cursor', 'github-copilot', 'windsurf', 'codeium', 'replit'];
     } else if (currentTool.category === 'Image Generation') {
-      comparators = ['midjourney', 'flux'];
+      comparators = ['midjourney', 'dalle3', 'flux', 'stable-diffusion', 'ideogram'];
+    } else if (currentTool.category === 'Video Generation') {
+      comparators = ['runway', 'sora-openai', 'heygen', 'pika-labs'];
+    } else if (currentTool.category === 'Voice & Audio') {
+      comparators = ['elevenlabs', 'murf-ai', 'suno-ai', 'play-ht'];
     } else {
       comparators = allTools
         .filter((t) => t.id !== currentTool.id && t.category === currentTool.category)
-        .slice(0, 2)
+        .slice(0, 4)
         .map((t) => t.id);
     }
 
     return comparators
       .filter((id) => id !== currentTool.id)
+      .slice(0, 4)
       .map((targetId) => {
         const targetTool = allTools.find((t) => t.id === targetId);
         if (!targetTool) return null;
-        
         const existingPair = comparisonPairs.find(
           (p) => (p.toolAId === currentTool.id && p.toolBId === targetId) || (p.toolAId === targetId && p.toolBId === currentTool.id)
         );
         const comparisonId = existingPair ? existingPair.id : `${currentTool.id}-vs-${targetId}`;
-
-        return {
-          label: `Compare ${currentTool.name} vs ${targetTool.name}`,
-          id: comparisonId
-        };
+        return { label: `${currentTool.name} vs ${targetTool.name}`, id: comparisonId };
       })
-      .filter((item) => item !== null) as { label: string; id: string }[];
+      .filter(Boolean) as { label: string; id: string }[];
   };
 
   // Structured Data: Combined Schemas (Software, Breadcrumbs, FAQs)
