@@ -102,7 +102,6 @@ export const CompareDetail: React.FC<CompareDetailProps> = ({
 
   // JSON-LD Product Schema for Comparison
   const comparisonSchema = {
-    "@context": "https://schema.org",
     "@type": "Product",
     "name": `${toolA.name} vs ${toolB.name} Comparison`,
     "description": detailedPair ? detailedPair.seoDescription : pair.excerpt,
@@ -110,9 +109,64 @@ export const CompareDetail: React.FC<CompareDetailProps> = ({
       "@type": "AggregateOffer",
       "priceCurrency": "USD",
       "lowPrice": toolA.pricing === 'Free' ? '0.00' : '10.00',
-      "highPrice": toolB.pricing === 'Paid' ? '30.00' : '20.00',
+      "highPrice": toolB.pricing === 'Paid' ? '39.00' : '29.00',
       "offerCount": "2"
     }
+  };
+
+  const breadcrumbSchema = {
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Home",
+        "item": `${window.location.origin}/`
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Comparisons",
+        "item": `${window.location.origin}/compare`
+      },
+      {
+        "@type": "ListItem",
+        "position": 3,
+        "name": `${toolA.name} vs ${toolB.name}`,
+        "item": `${window.location.origin}/compare/${pair.id}`
+      }
+    ]
+  };
+
+  const faqSchema = {
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": `Which is better, ${toolA.name} or ${toolB.name}?`,
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": `${winner ? `${winner.name} generally rates higher on our directory (${ratingA > ratingB ? ratingA : ratingB}/5 stars) compared to ${ratingA > ratingB ? toolB.name : toolA.name} (${ratingA > ratingB ? ratingB : ratingA}/5 stars).` : `Both tools are closely matched at ${ratingA}/5 stars.`} ${detailedPair?.finalVerdict || `Choose ${toolA.name} for its ${toolA.tagline.toLowerCase()} or ${toolB.name} if you require its ${toolB.tagline.toLowerCase()}`}`
+        }
+      },
+      {
+        "@type": "Question",
+        "name": `What is the difference in pricing between ${toolA.name} and ${toolB.name}?`,
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": `${toolA.name} is offered as a ${toolA.pricing} tool (${toolA.pricingDetails}), while ${toolB.name} is offered as a ${toolB.pricing} tool (${toolB.pricingDetails}).`
+        }
+      }
+    ]
+  };
+
+  const combinedSchema = {
+    "@context": "https://schema.org",
+    "@graph": [
+      comparisonSchema,
+      breadcrumbSchema,
+      faqSchema
+    ]
   };
 
   return (
@@ -121,7 +175,7 @@ export const CompareDetail: React.FC<CompareDetailProps> = ({
         title={isDynamic ? `${toolA.name} vs ${toolB.name} - AI Tool Comparison` : (detailedPair ? detailedPair.seoTitle : `${toolA.name} vs ${toolB.name}: Which AI Tool is Best in 2026?`)}
         description={detailedPair ? detailedPair.seoDescription : `Read our side-by-side comparison of ${toolA.name} and ${toolB.name}. Contrast features, pricing structures, pros, cons, ratings, and find out our verdict.`}
         path={`/compare/${pair.id}`}
-        jsonLd={comparisonSchema}
+        jsonLd={combinedSchema}
       />
 
       <div className="max-w-7xl mx-auto space-y-6">

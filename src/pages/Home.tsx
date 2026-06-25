@@ -15,6 +15,7 @@ interface HomeProps {
   setSearchQuery: (query: string) => void;
   selectedCategory: string;
   setSelectedCategory: (category: string) => void;
+  onOpenFeatureModal: () => void;
 }
 
 type SortOption = 'popular' | 'newest' | 'alphabetical';
@@ -28,7 +29,8 @@ export const Home: React.FC<HomeProps> = ({
   searchQuery,
   setSearchQuery,
   selectedCategory,
-  setSelectedCategory
+  setSelectedCategory,
+  onOpenFeatureModal
 }) => {
   const [sortBy, setSortBy] = useState<SortOption>('popular');
   const [showDropdown, setShowDropdown] = useState(false);
@@ -191,9 +193,9 @@ export const Home: React.FC<HomeProps> = ({
   const siteUrl = import.meta.env.VITE_SITE_URL || 'https://neo-ai-picks.vercel.app';
 
   // Structured Data Schema
-  const homeSchema = {
-    "@context": "https://schema.org",
+  const websiteSchema = {
     "@type": "WebSite",
+    "@id": `${siteUrl}/#website`,
     "url": `${siteUrl}/`,
     "name": "Neo AI Picks",
     "description": "Discover, compare and review the best AI tools for writing, coding, design, video creation, automation and productivity.",
@@ -204,13 +206,49 @@ export const Home: React.FC<HomeProps> = ({
     }
   };
 
+  const organizationSchema = {
+    "@type": "Organization",
+    "@id": `${siteUrl}/#organization`,
+    "name": "Neo AI Picks",
+    "url": `${siteUrl}/`,
+    "logo": `${siteUrl}/favicon.svg`,
+    "sameAs": []
+  };
+
+  const graphSchemas: any[] = [websiteSchema, organizationSchema];
+
+  if (selectedCategory !== 'All Tools') {
+    const categoryName = selectedCategory;
+    const categorySlug = categoryName.toLowerCase().replace(/\s+/g, '-');
+    graphSchemas.push({
+      "@type": "CollectionPage",
+      "@id": `${siteUrl}/#collection-${categorySlug}`,
+      "name": `${categoryName} AI Tools | Neo AI Picks`,
+      "description": `Compare and discover the best vetted AI software and tools for ${categoryName}.`,
+      "url": `${siteUrl}/?category=${categorySlug}`,
+      "mainEntity": {
+        "@type": "ItemList",
+        "itemListElement": sortedTools.slice(0, 10).map((t, idx) => ({
+          "@type": "ListItem",
+          "position": idx + 1,
+          "url": `${siteUrl}/tool/${t.id}`
+        }))
+      }
+    });
+  }
+
+  const combinedSchema = {
+    "@context": "https://schema.org",
+    "@graph": graphSchemas
+  };
+
   return (
     <div className="w-full flex-grow flex flex-col bg-[#0b0f19]">
       <SEO
-        title="Neo AI Picks - Find, Compare & Explore AI Tools"
-        description="Discover, compare and review the best AI tools for writing, coding, design, video creation, automation and productivity."
-        path="/"
-        jsonLd={homeSchema}
+        title={selectedCategory === 'All Tools' ? "Neo AI Picks - Find, Compare & Explore AI Tools" : `${selectedCategory} AI Tools: Best Reviewed in 2026 | Neo AI Picks`}
+        description={selectedCategory === 'All Tools' ? "Discover, compare and review the best AI tools for writing, coding, design, video creation, automation and productivity." : `Explore the top rated and reviewed AI tools for ${selectedCategory}. Check out features, pricing tiers, pros, and cons.`}
+        path={selectedCategory === 'All Tools' ? "/" : `/?category=${selectedCategory.toLowerCase().replace(/\s+/g, '-')}`}
+        jsonLd={combinedSchema}
       />
 
       {/* HERO SECTION */}
@@ -327,6 +365,13 @@ export const Home: React.FC<HomeProps> = ({
             >
               Compare AI Tools
               <Activity className="w-4 h-4 text-violet-400" />
+            </button>
+            <button
+              onClick={onOpenFeatureModal}
+              className="bg-gradient-to-r from-violet-600 to-pink-600 hover:from-violet-500 hover:to-pink-500 text-white font-bold text-sm px-6 py-3.5 rounded-xl transition-all cursor-pointer shadow-lg active:scale-95 flex items-center gap-2"
+            >
+              Feature Your Tool
+              <Sparkles className="w-4 h-4 text-white" />
             </button>
           </div>
         </div>

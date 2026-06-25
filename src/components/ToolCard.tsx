@@ -52,10 +52,23 @@ export const ToolCard: React.FC<ToolCardProps> = ({
     }
   };
 
+  const handleCardClick = () => {
+    if (tool.isFeatured) {
+      import('../utils/firebase').then(({ logAnalyticsEvent }) => {
+        logAnalyticsEvent('featured_click', window.location.pathname, tool.id);
+      });
+    }
+    onClick();
+  };
+
   return (
     <div 
-      onClick={onClick}
-      className="group flex flex-col sm:flex-row items-start sm:items-center justify-between p-5 rounded-2xl saas-glass saas-card-hover cursor-pointer gap-4 transition-all"
+      onClick={handleCardClick}
+      className={`group flex flex-col sm:flex-row items-start sm:items-center justify-between p-5 rounded-2xl border cursor-pointer gap-4 transition-all ${
+        tool.isFeatured 
+          ? 'bg-gradient-to-r from-violet-950/20 via-[#0d1222]/80 to-pink-950/10 border-violet-500/30 hover:border-violet-500/50 hover:shadow-[0_0_15px_rgba(139,92,246,0.15)] shadow-md' 
+          : 'saas-glass border-white/5 saas-card-hover'
+      }`}
     >
       <div className="flex items-start gap-4 flex-grow">
         {/* LOGO */}
@@ -70,7 +83,7 @@ export const ToolCard: React.FC<ToolCardProps> = ({
             </h3>
             
             {tool.isFeatured && (
-              <span className="flex items-center gap-0.5 text-[9px] font-black text-amber-400 bg-amber-500/10 border border-amber-500/20 px-2 py-0.5 rounded-full uppercase tracking-wider">
+              <span className="flex items-center gap-0.5 text-[9px] font-black text-white bg-gradient-to-r from-violet-600 to-pink-600 border border-violet-500/20 px-2.5 py-0.5 rounded-full uppercase tracking-wider shadow-sm">
                 ★ Featured
               </span>
             )}

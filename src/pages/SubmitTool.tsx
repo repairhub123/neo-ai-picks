@@ -5,9 +5,10 @@ import SEO from '../components/SEO';
 interface SubmitToolProps {
   onAddTool: (tool: any) => void;
   navigateTo: (tab: string, arg?: string) => void;
+  onOpenFeatureModal: () => void;
 }
 
-export const SubmitTool: React.FC<SubmitToolProps> = ({ onAddTool, navigateTo }) => {
+export const SubmitTool: React.FC<SubmitToolProps> = ({ onAddTool, navigateTo, onOpenFeatureModal }) => {
   const [formData, setFormData] = useState({
     name: '',
     websiteUrl: '',
@@ -143,6 +144,23 @@ export const SubmitTool: React.FC<SubmitToolProps> = ({ onAddTool, navigateTo })
           <p className="text-sm md:text-base text-slate-400 max-w-lg mx-auto leading-relaxed">
             Register your artificial intelligence project. Submissions populate our explorer feed instantly in local state.
           </p>
+        </div>
+
+        {/* SPONSORSHIP PROMO BANNER */}
+        <div className="p-5 rounded-2xl border border-violet-500/25 bg-gradient-to-r from-violet-950/20 via-[#0d1222]/80 to-pink-950/10 flex flex-col sm:flex-row items-center justify-between gap-4 shadow-lg">
+          <div className="space-y-1 text-center sm:text-left">
+            <h3 className="text-sm font-bold text-white flex items-center gap-1.5 justify-center sm:justify-start">
+              <Sparkles className="h-4 w-4 text-violet-400" /> Want to stand out?
+            </h3>
+            <p className="text-xs text-slate-400 leading-relaxed font-semibold">Get featured at the top of category lists, search results, and comparison pages.</p>
+          </div>
+          <button 
+            type="button"
+            onClick={onOpenFeatureModal}
+            className="whitespace-nowrap rounded-xl bg-gradient-to-r from-violet-600 to-pink-600 px-5 py-2.5 text-xs font-bold text-white hover:from-violet-500 hover:to-pink-500 shadow-md transition-all active:scale-95"
+          >
+            Sponsor / Feature Tool
+          </button>
         </div>
 
         {/* FORM */}

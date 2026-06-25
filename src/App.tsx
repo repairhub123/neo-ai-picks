@@ -15,6 +15,8 @@ import NotFound from './pages/NotFound';
 import toolsData from './data/tools.json';
 import type { AITool } from './components/ToolCard';
 import { initGA, trackEvent } from './utils/analytics';
+import { AdminDashboard } from './pages/AdminDashboard';
+import { FeatureRequestModal } from './components/FeatureRequestModal';
 
 interface RouteState {
   path: string;
@@ -26,16 +28,17 @@ function App() {
   const [tools, setTools] = useState<AITool[]>([]);
   const [upvotesState, setUpvotesState] = useState<Record<string, number>>({});
   const [upvotedTools, setUpvotedTools] = useState<Set<string>>(new Set());
+  
+  // Featured Request Modal states
+  const [isFeatureModalOpen, setIsFeatureModalOpen] = useState(false);
+  const [prefillToolName, setPrefillToolName] = useState('');
+  const [prefillToolUrl, setPrefillToolUrl] = useState('');
 
   // Search & category states shared across pages
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedCategory, setSelectedCategory] = useState('All Tools');
 
-  // Initialize tools, upvotes, bookmarks, and analytics
-  useEffect(() => {
-    // 1. Initialize GA4
-    initGA();
-
+  const refreshToolsList = async () => {
     // 2. Cast and load base tools
     const baseTools = (toolsData as any[]).map((t, idx) => ({
       ...t,
@@ -58,28 +61,52 @@ function App() {
     }
 
     const allTools = [...submittedTools, ...baseTools];
-    setTools(allTools);
 
-    // 4. Load upvotes from localStorage or fallback to defaults
-    const initialVotes: Record<string, number> = {};
-    allTools.forEach((t) => {
-      initialVotes[t.id] = t.upvotes;
-    });
+    // 4. Fetch database status overrides
+    try {
+      const { getFeaturedToolsStatus } = await import('./utils/firebase');
+      const dbStatus = await getFeaturedToolsStatus();
+      
+      const mergedTools = allTools.map(t => {
+        const override = dbStatus[t.id];
+        if (override) {
+          // Check expiry date
+          if (override.expiryDate && new Date(override.expiryDate).getTime() < Date.now()) {
+            return { ...t, isFeatured: false }; // Expired!
+          }
+          return { ...t, isFeatured: override.isFeatured };
+        }
+        return t;
+      });
 
-    const storedUpvotes = localStorage.getItem('neo_upvotes');
-    if (storedUpvotes) {
-      try {
-        const parsedUpvotes = JSON.parse(storedUpvotes);
-        Object.keys(parsedUpvotes).forEach((key) => {
-          initialVotes[key] = parsedUpvotes[key];
-        });
-      } catch (e) {
-        console.error('Failed to parse cached upvotes:', e);
-      }
+      // Sort: featured tools first
+      const sorted = [...mergedTools].sort((a, b) => {
+        const featA = a.isFeatured ? 1 : 0;
+        const featB = b.isFeatured ? 1 : 0;
+        return featB - featA; // featured first
+      });
+      setTools(sorted);
+
+      return sorted;
+    } catch (err) {
+      console.error('Failed to load db overrides:', err);
+      // Fallback sorting
+      const sorted = [...allTools].sort((a, b) => {
+        const featA = a.isFeatured ? 1 : 0;
+        const featB = b.isFeatured ? 1 : 0;
+        return featB - featA;
+      });
+      setTools(sorted);
+      return sorted;
     }
-    setUpvotesState(initialVotes);
+  };
 
-    // 5. Load bookmarks from localStorage
+  // Initialize tools, upvotes, bookmarks, and analytics
+  useEffect(() => {
+    // 1. Initialize GA4
+    initGA();
+
+    // 2. Load bookmarks from localStorage
     const storedBookmarks = localStorage.getItem('neo_bookmarks');
     if (storedBookmarks) {
       try {
@@ -89,6 +116,31 @@ function App() {
         console.error('Failed to parse cached bookmarks:', e);
       }
     }
+
+    // 3. Load all tools and initialize upvotes
+    const initializeData = async () => {
+      const loadedTools = await refreshToolsList();
+      
+      const initialVotes: Record<string, number> = {};
+      loadedTools.forEach((t) => {
+        initialVotes[t.id] = t.upvotes;
+      });
+
+      const storedUpvotes = localStorage.getItem('neo_upvotes');
+      if (storedUpvotes) {
+        try {
+          const parsedUpvotes = JSON.parse(storedUpvotes);
+          Object.keys(parsedUpvotes).forEach((key) => {
+            initialVotes[key] = parsedUpvotes[key];
+          });
+        } catch (e) {
+          console.error('Failed to parse cached upvotes:', e);
+        }
+      }
+      setUpvotesState(initialVotes);
+    };
+
+    initializeData();
   }, []);
 
   // Save upvotes to localStorage on change
@@ -103,6 +155,13 @@ function App() {
     localStorage.setItem('neo_bookmarks', JSON.stringify(Array.from(upvotedTools)));
   }, [upvotedTools]);
 
+
+  // Analytics Page View Tracker
+  useEffect(() => {
+    import('./utils/firebase').then(({ logAnalyticsEvent }) => {
+      logAnalyticsEvent('page_view', window.location.pathname, currentRoute.param || '');
+    });
+  }, [currentRoute]);
 
   // Browser History API Listener
   useEffect(() => {
@@ -126,6 +185,8 @@ function App() {
         setCurrentRoute({ path: 'privacy' });
       } else if (pathname === '/terms') {
         setCurrentRoute({ path: 'terms' });
+      } else if (pathname === '/admin') {
+        setCurrentRoute({ path: 'admin' });
       } else if (pathname.startsWith('/tool/')) {
         const id = pathname.substring(6);
         setCurrentRoute({ path: 'tool', param: id });
@@ -178,6 +239,9 @@ function App() {
     } else if (path === 'terms') {
       url = '/terms';
       routePath = 'terms';
+    } else if (path === 'admin') {
+      url = '/admin';
+      routePath = 'admin';
     } else if (path === '404') {
       url = '/404';
       routePath = '404';
@@ -191,6 +255,12 @@ function App() {
     window.history.pushState({}, '', url);
     setCurrentRoute({ path: routePath, param: routeParam });
     window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
+  const handleOpenFeatureModal = (toolName = '', toolUrl = '') => {
+    setPrefillToolName(toolName);
+    setPrefillToolUrl(toolUrl);
+    setIsFeatureModalOpen(true);
   };
 
   // Upvote logic
@@ -271,6 +341,7 @@ function App() {
             setSearchQuery={setSearchQuery}
             selectedCategory={selectedCategory}
             setSelectedCategory={setSelectedCategory}
+            onOpenFeatureModal={() => handleOpenFeatureModal()}
           />
         );
       case 'tool':
@@ -282,6 +353,7 @@ function App() {
             upvotedTools={upvotedTools}
             onUpvote={handleUpvote}
             navigateTo={navigateTo}
+            onOpenFeatureModal={(name?: string, url?: string) => handleOpenFeatureModal(name, url)}
           />
         );
       case 'compare':
@@ -295,7 +367,21 @@ function App() {
           />
         );
       case 'submit':
-        return <SubmitTool onAddTool={handleAddTool} navigateTo={navigateTo} />;
+        return (
+          <SubmitTool 
+            onAddTool={handleAddTool} 
+            navigateTo={navigateTo} 
+            onOpenFeatureModal={() => handleOpenFeatureModal()}
+          />
+        );
+      case 'admin':
+        return (
+          <AdminDashboard 
+            tools={tools} 
+            onRefreshTools={refreshToolsList} 
+            navigateTo={navigateTo} 
+          />
+        );
       case 'blog':
         return <BlogFeed navigateTo={navigateTo} />;
       case 'blog-detail':
@@ -329,6 +415,13 @@ function App() {
       </main>
 
       <Footer navigateTo={navigateTo} />
+
+      <FeatureRequestModal
+        isOpen={isFeatureModalOpen}
+        onClose={() => setIsFeatureModalOpen(false)}
+        prefilledToolName={prefillToolName}
+        prefilledToolUrl={prefillToolUrl}
+      />
     </div>
   );
 }

@@ -10,58 +10,56 @@
   <url><loc>https://neo-ai-picks.vercel.app/terms</loc><changefreq>monthly</changefreq><priority>0.5</priority></url>
 
   <!-- AI Tool Profiles -->
-  <url><loc>https://neo-ai-picks.vercel.app/tool/adcreative-ai</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://neo-ai-picks.vercel.app/tool/adobe-firefly</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
   <url><loc>https://neo-ai-picks.vercel.app/tool/chatgpt</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
   <url><loc>https://neo-ai-picks.vercel.app/tool/claude</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://neo-ai-picks.vercel.app/tool/codeium</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://neo-ai-picks.vercel.app/tool/continue</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://neo-ai-picks.vercel.app/tool/gemini</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://neo-ai-picks.vercel.app/tool/jasper</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
   <url><loc>https://neo-ai-picks.vercel.app/tool/copy-ai</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
   <url><loc>https://neo-ai-picks.vercel.app/tool/cursor</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://neo-ai-picks.vercel.app/tool/dall-e-3</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://neo-ai-picks.vercel.app/tool/descript</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://neo-ai-picks.vercel.app/tool/elevenlabs</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://neo-ai-picks.vercel.app/tool/fireflies-ai</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://neo-ai-picks.vercel.app/tool/flux</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://neo-ai-picks.vercel.app/tool/gamma</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://neo-ai-picks.vercel.app/tool/gemini</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://neo-ai-picks.vercel.app/tool/windsurf</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
   <url><loc>https://neo-ai-picks.vercel.app/tool/github-copilot</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://neo-ai-picks.vercel.app/tool/grammarly</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://neo-ai-picks.vercel.app/tool/heygen</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://neo-ai-picks.vercel.app/tool/hubspot-ai</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://neo-ai-picks.vercel.app/tool/ideogram</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://neo-ai-picks.vercel.app/tool/jasper</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://neo-ai-picks.vercel.app/tool/leonardo-ai</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://neo-ai-picks.vercel.app/tool/luma-dream-machine</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://neo-ai-picks.vercel.app/tool/make</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://neo-ai-picks.vercel.app/tool/mem-ai</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://neo-ai-picks.vercel.app/tool/v0-vercel</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://neo-ai-picks.vercel.app/tool/tabnine</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
   <url><loc>https://neo-ai-picks.vercel.app/tool/midjourney</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://neo-ai-picks.vercel.app/tool/motion</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://neo-ai-picks.vercel.app/tool/murf</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://neo-ai-picks.vercel.app/tool/n8n</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://neo-ai-picks.vercel.app/tool/dall-e-3</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://neo-ai-picks.vercel.app/tool/stable-diffusion</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://neo-ai-picks.vercel.app/tool/leonardo-ai</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://neo-ai-picks.vercel.app/tool/adobe-firefly</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://neo-ai-picks.vercel.app/tool/runway</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://neo-ai-picks.vercel.app/tool/sora</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://neo-ai-picks.vercel.app/tool/synthesia</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://neo-ai-picks.vercel.app/tool/pika</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://neo-ai-picks.vercel.app/tool/heygen</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://neo-ai-picks.vercel.app/tool/perplexity</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
   <url><loc>https://neo-ai-picks.vercel.app/tool/notion-ai</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
   <url><loc>https://neo-ai-picks.vercel.app/tool/otter-ai</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://neo-ai-picks.vercel.app/tool/perplexity</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://neo-ai-picks.vercel.app/tool/pika</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://neo-ai-picks.vercel.app/tool/playground-ai</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://neo-ai-picks.vercel.app/tool/recraft</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://neo-ai-picks.vercel.app/tool/runway</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://neo-ai-picks.vercel.app/tool/rytr</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://neo-ai-picks.vercel.app/tool/sora</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://neo-ai-picks.vercel.app/tool/speechify</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://neo-ai-picks.vercel.app/tool/stable-diffusion</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://neo-ai-picks.vercel.app/tool/sudowrite</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://neo-ai-picks.vercel.app/tool/gamma</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://neo-ai-picks.vercel.app/tool/fireflies-ai</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://neo-ai-picks.vercel.app/tool/adcreative-ai</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
   <url><loc>https://neo-ai-picks.vercel.app/tool/surfer-seo</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://neo-ai-picks.vercel.app/tool/synthesia</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://neo-ai-picks.vercel.app/tool/tabnine</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://neo-ai-picks.vercel.app/tool/taskade</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://neo-ai-picks.vercel.app/tool/v0-vercel</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://neo-ai-picks.vercel.app/tool/veo</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://neo-ai-picks.vercel.app/tool/windsurf</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://neo-ai-picks.vercel.app/tool/writesonic</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://neo-ai-picks.vercel.app/tool/hubspot-ai</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://neo-ai-picks.vercel.app/tool/elevenlabs</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
   <url><loc>https://neo-ai-picks.vercel.app/tool/zapier-ai</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
-
-  <!-- Phase 1 Content Expansion Tools -->
+  <url><loc>https://neo-ai-picks.vercel.app/tool/flux</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://neo-ai-picks.vercel.app/tool/murf</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://neo-ai-picks.vercel.app/tool/grammarly</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://neo-ai-picks.vercel.app/tool/rytr</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://neo-ai-picks.vercel.app/tool/writesonic</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://neo-ai-picks.vercel.app/tool/sudowrite</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://neo-ai-picks.vercel.app/tool/codeium</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://neo-ai-picks.vercel.app/tool/continue</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://neo-ai-picks.vercel.app/tool/ideogram</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://neo-ai-picks.vercel.app/tool/recraft</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://neo-ai-picks.vercel.app/tool/playground-ai</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://neo-ai-picks.vercel.app/tool/veo</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://neo-ai-picks.vercel.app/tool/luma-dream-machine</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://neo-ai-picks.vercel.app/tool/speechify</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://neo-ai-picks.vercel.app/tool/n8n</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://neo-ai-picks.vercel.app/tool/make</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://neo-ai-picks.vercel.app/tool/motion</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://neo-ai-picks.vercel.app/tool/mem-ai</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://neo-ai-picks.vercel.app/tool/taskade</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://neo-ai-picks.vercel.app/tool/descript</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
   <url><loc>https://neo-ai-picks.vercel.app/tool/notebooklm</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
   <url><loc>https://neo-ai-picks.vercel.app/tool/bolt-new</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
   <url><loc>https://neo-ai-picks.vercel.app/tool/lovable</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
@@ -74,60 +72,58 @@
   <url><loc>https://neo-ai-picks.vercel.app/tool/magnific-ai</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
 
   <!-- Comparison Matrices -->
-  <url><loc>https://neo-ai-picks.vercel.app/compare/adobe-firefly-vs-dall-e-3</loc><changefreq>weekly</changefreq><priority>0.7</priority></url>
-  <url><loc>https://neo-ai-picks.vercel.app/compare/adobe-firefly-vs-midjourney</loc><changefreq>weekly</changefreq><priority>0.7</priority></url>
-  <url><loc>https://neo-ai-picks.vercel.app/compare/adobe-firefly-vs-stable-diffusion</loc><changefreq>weekly</changefreq><priority>0.7</priority></url>
-  <url><loc>https://neo-ai-picks.vercel.app/compare/canva-ai-vs-adobe-firefly</loc><changefreq>weekly</changefreq><priority>0.7</priority></url>
   <url><loc>https://neo-ai-picks.vercel.app/compare/chatgpt-vs-claude</loc><changefreq>weekly</changefreq><priority>0.7</priority></url>
   <url><loc>https://neo-ai-picks.vercel.app/compare/chatgpt-vs-gemini</loc><changefreq>weekly</changefreq><priority>0.7</priority></url>
-  <url><loc>https://neo-ai-picks.vercel.app/compare/claude-vs-cursor</loc><changefreq>weekly</changefreq><priority>0.7</priority></url>
   <url><loc>https://neo-ai-picks.vercel.app/compare/claude-vs-gemini</loc><changefreq>weekly</changefreq><priority>0.7</priority></url>
-  <url><loc>https://neo-ai-picks.vercel.app/compare/copilot-vs-v0</loc><changefreq>weekly</changefreq><priority>0.7</priority></url>
-  <url><loc>https://neo-ai-picks.vercel.app/compare/copy-ai-vs-chatgpt</loc><changefreq>weekly</changefreq><priority>0.7</priority></url>
-  <url><loc>https://neo-ai-picks.vercel.app/compare/copy-ai-vs-claude</loc><changefreq>weekly</changefreq><priority>0.7</priority></url>
-  <url><loc>https://neo-ai-picks.vercel.app/compare/cursor-vs-github-copilot</loc><changefreq>weekly</changefreq><priority>0.7</priority></url>
-  <url><loc>https://neo-ai-picks.vercel.app/compare/cursor-vs-windsurf</loc><changefreq>weekly</changefreq><priority>0.7</priority></url>
-  <url><loc>https://neo-ai-picks.vercel.app/compare/dall-e-3-vs-stable-diffusion</loc><changefreq>weekly</changefreq><priority>0.7</priority></url>
-  <url><loc>https://neo-ai-picks.vercel.app/compare/elevenlabs-vs-heygen</loc><changefreq>weekly</changefreq><priority>0.7</priority></url>
-  <url><loc>https://neo-ai-picks.vercel.app/compare/elevenlabs-vs-murf</loc><changefreq>weekly</changefreq><priority>0.7</priority></url>
-  <url><loc>https://neo-ai-picks.vercel.app/compare/fireflies-ai-vs-otter-ai</loc><changefreq>weekly</changefreq><priority>0.7</priority></url>
-  <url><loc>https://neo-ai-picks.vercel.app/compare/gamma-app-vs-canva-ai</loc><changefreq>weekly</changefreq><priority>0.7</priority></url>
-  <url><loc>https://neo-ai-picks.vercel.app/compare/heygen-vs-pika</loc><changefreq>weekly</changefreq><priority>0.7</priority></url>
-  <url><loc>https://neo-ai-picks.vercel.app/compare/heygen-vs-runway</loc><changefreq>weekly</changefreq><priority>0.7</priority></url>
-  <url><loc>https://neo-ai-picks.vercel.app/compare/jasper-vs-chatgpt</loc><changefreq>weekly</changefreq><priority>0.7</priority></url>
-  <url><loc>https://neo-ai-picks.vercel.app/compare/jasper-vs-claude</loc><changefreq>weekly</changefreq><priority>0.7</priority></url>
   <url><loc>https://neo-ai-picks.vercel.app/compare/jasper-vs-copy-ai</loc><changefreq>weekly</changefreq><priority>0.7</priority></url>
-  <url><loc>https://neo-ai-picks.vercel.app/compare/leonardo-ai-vs-dall-e-3</loc><changefreq>weekly</changefreq><priority>0.7</priority></url>
-  <url><loc>https://neo-ai-picks.vercel.app/compare/leonardo-ai-vs-midjourney</loc><changefreq>weekly</changefreq><priority>0.7</priority></url>
-  <url><loc>https://neo-ai-picks.vercel.app/compare/leonardo-ai-vs-stable-diffusion</loc><changefreq>weekly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://neo-ai-picks.vercel.app/compare/jasper-vs-chatgpt</loc><changefreq>weekly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://neo-ai-picks.vercel.app/compare/copy-ai-vs-chatgpt</loc><changefreq>weekly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://neo-ai-picks.vercel.app/compare/jasper-vs-claude</loc><changefreq>weekly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://neo-ai-picks.vercel.app/compare/copy-ai-vs-claude</loc><changefreq>weekly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://neo-ai-picks.vercel.app/compare/writesonic-vs-jasper</loc><changefreq>weekly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://neo-ai-picks.vercel.app/compare/writesonic-vs-copy-ai</loc><changefreq>weekly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://neo-ai-picks.vercel.app/compare/cursor-vs-windsurf</loc><changefreq>weekly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://neo-ai-picks.vercel.app/compare/cursor-vs-github-copilot</loc><changefreq>weekly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://neo-ai-picks.vercel.app/compare/windsurf-vs-github-copilot</loc><changefreq>weekly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://neo-ai-picks.vercel.app/compare/tabnine-vs-github-copilot</loc><changefreq>weekly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://neo-ai-picks.vercel.app/compare/v0-vs-cursor</loc><changefreq>weekly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://neo-ai-picks.vercel.app/compare/tabnine-vs-cursor</loc><changefreq>weekly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://neo-ai-picks.vercel.app/compare/tabnine-vs-windsurf</loc><changefreq>weekly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://neo-ai-picks.vercel.app/compare/v0-vs-windsurf</loc><changefreq>weekly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://neo-ai-picks.vercel.app/compare/claude-vs-cursor</loc><changefreq>weekly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://neo-ai-picks.vercel.app/compare/copilot-vs-v0</loc><changefreq>weekly</changefreq><priority>0.7</priority></url>
   <url><loc>https://neo-ai-picks.vercel.app/compare/midjourney-vs-dall-e-3</loc><changefreq>weekly</changefreq><priority>0.7</priority></url>
-  <url><loc>https://neo-ai-picks.vercel.app/compare/midjourney-vs-flux</loc><changefreq>weekly</changefreq><priority>0.7</priority></url>
   <url><loc>https://neo-ai-picks.vercel.app/compare/midjourney-vs-stable-diffusion</loc><changefreq>weekly</changefreq><priority>0.7</priority></url>
-  <url><loc>https://neo-ai-picks.vercel.app/compare/notion-ai-vs-chatgpt</loc><changefreq>weekly</changefreq><priority>0.7</priority></url>
-  <url><loc>https://neo-ai-picks.vercel.app/compare/notion-ai-vs-perplexity</loc><changefreq>weekly</changefreq><priority>0.7</priority></url>
-  <url><loc>https://neo-ai-picks.vercel.app/compare/otter-ai-vs-fireflies-ai</loc><changefreq>weekly</changefreq><priority>0.7</priority></url>
-  <url><loc>https://neo-ai-picks.vercel.app/compare/otter-ai-vs-notion-ai</loc><changefreq>weekly</changefreq><priority>0.7</priority></url>
-  <url><loc>https://neo-ai-picks.vercel.app/compare/perplexity-vs-chatgpt</loc><changefreq>weekly</changefreq><priority>0.7</priority></url>
-  <url><loc>https://neo-ai-picks.vercel.app/compare/perplexity-vs-gemini</loc><changefreq>weekly</changefreq><priority>0.7</priority></url>
-  <url><loc>https://neo-ai-picks.vercel.app/compare/pika-vs-synthesia</loc><changefreq>weekly</changefreq><priority>0.7</priority></url>
-  <url><loc>https://neo-ai-picks.vercel.app/compare/runway-vs-pika</loc><changefreq>weekly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://neo-ai-picks.vercel.app/compare/dall-e-3-vs-stable-diffusion</loc><changefreq>weekly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://neo-ai-picks.vercel.app/compare/leonardo-ai-vs-stable-diffusion</loc><changefreq>weekly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://neo-ai-picks.vercel.app/compare/adobe-firefly-vs-midjourney</loc><changefreq>weekly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://neo-ai-picks.vercel.app/compare/adobe-firefly-vs-dall-e-3</loc><changefreq>weekly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://neo-ai-picks.vercel.app/compare/leonardo-ai-vs-midjourney</loc><changefreq>weekly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://neo-ai-picks.vercel.app/compare/leonardo-ai-vs-dall-e-3</loc><changefreq>weekly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://neo-ai-picks.vercel.app/compare/adobe-firefly-vs-stable-diffusion</loc><changefreq>weekly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://neo-ai-picks.vercel.app/compare/canva-ai-vs-adobe-firefly</loc><changefreq>weekly</changefreq><priority>0.7</priority></url>
   <url><loc>https://neo-ai-picks.vercel.app/compare/runway-vs-sora</loc><changefreq>weekly</changefreq><priority>0.7</priority></url>
-  <url><loc>https://neo-ai-picks.vercel.app/compare/runway-vs-synthesia</loc><changefreq>weekly</changefreq><priority>0.7</priority></url>
-  <url><loc>https://neo-ai-picks.vercel.app/compare/sora-vs-heygen</loc><changefreq>weekly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://neo-ai-picks.vercel.app/compare/runway-vs-pika</loc><changefreq>weekly</changefreq><priority>0.7</priority></url>
   <url><loc>https://neo-ai-picks.vercel.app/compare/sora-vs-pika</loc><changefreq>weekly</changefreq><priority>0.7</priority></url>
   <url><loc>https://neo-ai-picks.vercel.app/compare/synthesia-vs-heygen</loc><changefreq>weekly</changefreq><priority>0.7</priority></url>
   <url><loc>https://neo-ai-picks.vercel.app/compare/synthesia-vs-sora</loc><changefreq>weekly</changefreq><priority>0.7</priority></url>
-  <url><loc>https://neo-ai-picks.vercel.app/compare/tabnine-vs-cursor</loc><changefreq>weekly</changefreq><priority>0.7</priority></url>
-  <url><loc>https://neo-ai-picks.vercel.app/compare/tabnine-vs-github-copilot</loc><changefreq>weekly</changefreq><priority>0.7</priority></url>
-  <url><loc>https://neo-ai-picks.vercel.app/compare/tabnine-vs-windsurf</loc><changefreq>weekly</changefreq><priority>0.7</priority></url>
-  <url><loc>https://neo-ai-picks.vercel.app/compare/v0-vs-cursor</loc><changefreq>weekly</changefreq><priority>0.7</priority></url>
-  <url><loc>https://neo-ai-picks.vercel.app/compare/v0-vs-windsurf</loc><changefreq>weekly</changefreq><priority>0.7</priority></url>
-  <url><loc>https://neo-ai-picks.vercel.app/compare/windsurf-vs-github-copilot</loc><changefreq>weekly</changefreq><priority>0.7</priority></url>
-  <url><loc>https://neo-ai-picks.vercel.app/compare/writesonic-vs-copy-ai</loc><changefreq>weekly</changefreq><priority>0.7</priority></url>
-  <url><loc>https://neo-ai-picks.vercel.app/compare/writesonic-vs-jasper</loc><changefreq>weekly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://neo-ai-picks.vercel.app/compare/heygen-vs-pika</loc><changefreq>weekly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://neo-ai-picks.vercel.app/compare/runway-vs-synthesia</loc><changefreq>weekly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://neo-ai-picks.vercel.app/compare/heygen-vs-runway</loc><changefreq>weekly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://neo-ai-picks.vercel.app/compare/pika-vs-synthesia</loc><changefreq>weekly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://neo-ai-picks.vercel.app/compare/sora-vs-heygen</loc><changefreq>weekly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://neo-ai-picks.vercel.app/compare/perplexity-vs-gemini</loc><changefreq>weekly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://neo-ai-picks.vercel.app/compare/perplexity-vs-chatgpt</loc><changefreq>weekly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://neo-ai-picks.vercel.app/compare/notion-ai-vs-chatgpt</loc><changefreq>weekly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://neo-ai-picks.vercel.app/compare/otter-ai-vs-fireflies-ai</loc><changefreq>weekly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://neo-ai-picks.vercel.app/compare/gamma-app-vs-canva-ai</loc><changefreq>weekly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://neo-ai-picks.vercel.app/compare/notion-ai-vs-perplexity</loc><changefreq>weekly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://neo-ai-picks.vercel.app/compare/otter-ai-vs-notion-ai</loc><changefreq>weekly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://neo-ai-picks.vercel.app/compare/fireflies-ai-vs-otter-ai</loc><changefreq>weekly</changefreq><priority>0.7</priority></url>
   <url><loc>https://neo-ai-picks.vercel.app/compare/zapier-ai-vs-hubspot-ai</loc><changefreq>weekly</changefreq><priority>0.7</priority></url>
-
-  <!-- Phase 1 Comparison Expansion -->
+  <url><loc>https://neo-ai-picks.vercel.app/compare/elevenlabs-vs-heygen</loc><changefreq>weekly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://neo-ai-picks.vercel.app/compare/midjourney-vs-flux</loc><changefreq>weekly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://neo-ai-picks.vercel.app/compare/elevenlabs-vs-murf</loc><changefreq>weekly</changefreq><priority>0.7</priority></url>
   <url><loc>https://neo-ai-picks.vercel.app/compare/notebooklm-vs-chatgpt</loc><changefreq>weekly</changefreq><priority>0.7</priority></url>
   <url><loc>https://neo-ai-picks.vercel.app/compare/cursor-vs-supermaven</loc><changefreq>weekly</changefreq><priority>0.7</priority></url>
   <url><loc>https://neo-ai-picks.vercel.app/compare/bolt-new-vs-lovable</loc><changefreq>weekly</changefreq><priority>0.7</priority></url>
@@ -140,106 +136,29 @@
   <url><loc>https://neo-ai-picks.vercel.app/compare/photoroom-vs-canva</loc><changefreq>weekly</changefreq><priority>0.7</priority></url>
 
   <!-- Blog Articles -->
-  <url><loc>https://neo-ai-picks.vercel.app/blog/best-ai-tools-for-students</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://neo-ai-picks.vercel.app/blog/best-ai-coding-tools</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://neo-ai-picks.vercel.app/blog/best-free-ai-tools-2026</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://neo-ai-picks.vercel.app/blog/chatgpt-alternatives</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://neo-ai-picks.vercel.app/blog/best-ai-video-generators</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://neo-ai-picks.vercel.app/blog/academic-research-citations-perplexity-guide</loc><changefreq>weekly</changefreq><priority>0.6</priority></url>
-  <url><loc>https://neo-ai-picks.vercel.app/blog/ai-blogging-optimization-google-rank</loc><changefreq>weekly</changefreq><priority>0.6</priority></url>
-  <url><loc>https://neo-ai-picks.vercel.app/blog/ai-plagiarism-checkers-bypass-myths</loc><changefreq>weekly</changefreq><priority>0.6</priority></url>
-  <url><loc>https://neo-ai-picks.vercel.app/blog/best-writing-assistant-free-options</loc><changefreq>weekly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://neo-ai-picks.vercel.app/blog/best-ai-tools-for-students</loc><changefreq>weekly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://neo-ai-picks.vercel.app/blog/best-ai-coding-tools</loc><changefreq>weekly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://neo-ai-picks.vercel.app/blog/best-free-ai-tools-2026</loc><changefreq>weekly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://neo-ai-picks.vercel.app/blog/chatgpt-alternatives</loc><changefreq>weekly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://neo-ai-picks.vercel.app/blog/best-ai-video-generators</loc><changefreq>weekly</changefreq><priority>0.6</priority></url>
   <url><loc>https://neo-ai-picks.vercel.app/blog/chatgpt-prompt-tips-2026</loc><changefreq>weekly</changefreq><priority>0.6</priority></url>
   <url><loc>https://neo-ai-picks.vercel.app/blog/claude-artifacts-web-prototyping</loc><changefreq>weekly</changefreq><priority>0.6</priority></url>
-  <url><loc>https://neo-ai-picks.vercel.app/blog/copywriting-funnels-conversion-automation</loc><changefreq>weekly</changefreq><priority>0.6</priority></url>
-  <url><loc>https://neo-ai-picks.vercel.app/blog/cursor-vs-vscode-extensions</loc><changefreq>weekly</changefreq><priority>0.6</priority></url>
-  <url><loc>https://neo-ai-picks.vercel.app/blog/custom-gpt-agent-store-success</loc><changefreq>weekly</changefreq><priority>0.6</priority></url>
   <url><loc>https://neo-ai-picks.vercel.app/blog/enterprise-ai-copywriting-brand-voice</loc><changefreq>weekly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://neo-ai-picks.vercel.app/blog/best-writing-assistant-free-options</loc><changefreq>weekly</changefreq><priority>0.6</priority></url>
   <url><loc>https://neo-ai-picks.vercel.app/blog/gemini-1-5-context-window-tips</loc><changefreq>weekly</changefreq><priority>0.6</priority></url>
-  <url><loc>https://neo-ai-picks.vercel.app/blog/github-copilot-enterprise-repository-indexing</loc><changefreq>weekly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://neo-ai-picks.vercel.app/blog/ai-plagiarism-checkers-bypass-myths</loc><changefreq>weekly</changefreq><priority>0.6</priority></url>
   <url><loc>https://neo-ai-picks.vercel.app/blog/gpt-4o-mini-vs-sonnet-creative-writing</loc><changefreq>weekly</changefreq><priority>0.6</priority></url>
-  <url><loc>https://neo-ai-picks.vercel.app/blog/grammar-correctors-vs-writing-bots</loc><changefreq>weekly</changefreq><priority>0.6</priority></url>
-  <url><loc>https://neo-ai-picks.vercel.app/blog/local-first-ai-coding-tabnine-gpu</loc><changefreq>weekly</changefreq><priority>0.6</priority></url>
-  <url><loc>https://neo-ai-picks.vercel.app/blog/outbound-sales-email-templates-ai</loc><changefreq>weekly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://neo-ai-picks.vercel.app/blog/copywriting-funnels-conversion-automation</loc><changefreq>weekly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://neo-ai-picks.vercel.app/blog/academic-research-citations-perplexity-guide</loc><changefreq>weekly</changefreq><priority>0.6</priority></url>
   <url><loc>https://neo-ai-picks.vercel.app/blog/seo-content-outline-generators-compared</loc><changefreq>weekly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://neo-ai-picks.vercel.app/blog/ai-blogging-optimization-google-rank</loc><changefreq>weekly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://neo-ai-picks.vercel.app/blog/grammar-correctors-vs-writing-bots</loc><changefreq>weekly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://neo-ai-picks.vercel.app/blog/outbound-sales-email-templates-ai</loc><changefreq>weekly</changefreq><priority>0.6</priority></url>
   <url><loc>https://neo-ai-picks.vercel.app/blog/storyboarding-prompts-creative-directors</loc><changefreq>weekly</changefreq><priority>0.6</priority></url>
-  <url><loc>https://neo-ai-picks.vercel.app/blog/vercel-v0-shadcn-ui-setup</loc><changefreq>weekly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://neo-ai-picks.vercel.app/blog/custom-gpt-agent-store-success</loc><changefreq>weekly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://neo-ai-picks.vercel.app/blog/cursor-vs-vscode-extensions</loc><changefreq>weekly</changefreq><priority>0.6</priority></url>
   <url><loc>https://neo-ai-picks.vercel.app/blog/windsurf-agentic-ide-debugging-loops</loc><changefreq>weekly</changefreq><priority>0.6</priority></url>
-
-  <!-- Dynamic Blog Topics -->
-  <url><loc>https://neo-ai-picks.vercel.app/blog/dynamic-seo-topic-26</loc><changefreq>weekly</changefreq><priority>0.5</priority></url>
-  <url><loc>https://neo-ai-picks.vercel.app/blog/dynamic-seo-topic-27</loc><changefreq>weekly</changefreq><priority>0.5</priority></url>
-  <url><loc>https://neo-ai-picks.vercel.app/blog/dynamic-seo-topic-28</loc><changefreq>weekly</changefreq><priority>0.5</priority></url>
-  <url><loc>https://neo-ai-picks.vercel.app/blog/dynamic-seo-topic-29</loc><changefreq>weekly</changefreq><priority>0.5</priority></url>
-  <url><loc>https://neo-ai-picks.vercel.app/blog/dynamic-seo-topic-30</loc><changefreq>weekly</changefreq><priority>0.5</priority></url>
-  <url><loc>https://neo-ai-picks.vercel.app/blog/dynamic-seo-topic-31</loc><changefreq>weekly</changefreq><priority>0.5</priority></url>
-  <url><loc>https://neo-ai-picks.vercel.app/blog/dynamic-seo-topic-32</loc><changefreq>weekly</changefreq><priority>0.5</priority></url>
-  <url><loc>https://neo-ai-picks.vercel.app/blog/dynamic-seo-topic-33</loc><changefreq>weekly</changefreq><priority>0.5</priority></url>
-  <url><loc>https://neo-ai-picks.vercel.app/blog/dynamic-seo-topic-34</loc><changefreq>weekly</changefreq><priority>0.5</priority></url>
-  <url><loc>https://neo-ai-picks.vercel.app/blog/dynamic-seo-topic-35</loc><changefreq>weekly</changefreq><priority>0.5</priority></url>
-  <url><loc>https://neo-ai-picks.vercel.app/blog/dynamic-seo-topic-36</loc><changefreq>weekly</changefreq><priority>0.5</priority></url>
-  <url><loc>https://neo-ai-picks.vercel.app/blog/dynamic-seo-topic-37</loc><changefreq>weekly</changefreq><priority>0.5</priority></url>
-  <url><loc>https://neo-ai-picks.vercel.app/blog/dynamic-seo-topic-38</loc><changefreq>weekly</changefreq><priority>0.5</priority></url>
-  <url><loc>https://neo-ai-picks.vercel.app/blog/dynamic-seo-topic-39</loc><changefreq>weekly</changefreq><priority>0.5</priority></url>
-  <url><loc>https://neo-ai-picks.vercel.app/blog/dynamic-seo-topic-40</loc><changefreq>weekly</changefreq><priority>0.5</priority></url>
-  <url><loc>https://neo-ai-picks.vercel.app/blog/dynamic-seo-topic-41</loc><changefreq>weekly</changefreq><priority>0.5</priority></url>
-  <url><loc>https://neo-ai-picks.vercel.app/blog/dynamic-seo-topic-42</loc><changefreq>weekly</changefreq><priority>0.5</priority></url>
-  <url><loc>https://neo-ai-picks.vercel.app/blog/dynamic-seo-topic-43</loc><changefreq>weekly</changefreq><priority>0.5</priority></url>
-  <url><loc>https://neo-ai-picks.vercel.app/blog/dynamic-seo-topic-44</loc><changefreq>weekly</changefreq><priority>0.5</priority></url>
-  <url><loc>https://neo-ai-picks.vercel.app/blog/dynamic-seo-topic-45</loc><changefreq>weekly</changefreq><priority>0.5</priority></url>
-  <url><loc>https://neo-ai-picks.vercel.app/blog/dynamic-seo-topic-46</loc><changefreq>weekly</changefreq><priority>0.5</priority></url>
-  <url><loc>https://neo-ai-picks.vercel.app/blog/dynamic-seo-topic-47</loc><changefreq>weekly</changefreq><priority>0.5</priority></url>
-  <url><loc>https://neo-ai-picks.vercel.app/blog/dynamic-seo-topic-48</loc><changefreq>weekly</changefreq><priority>0.5</priority></url>
-  <url><loc>https://neo-ai-picks.vercel.app/blog/dynamic-seo-topic-49</loc><changefreq>weekly</changefreq><priority>0.5</priority></url>
-  <url><loc>https://neo-ai-picks.vercel.app/blog/dynamic-seo-topic-50</loc><changefreq>weekly</changefreq><priority>0.5</priority></url>
-  <url><loc>https://neo-ai-picks.vercel.app/blog/dynamic-seo-topic-51</loc><changefreq>weekly</changefreq><priority>0.5</priority></url>
-  <url><loc>https://neo-ai-picks.vercel.app/blog/dynamic-seo-topic-52</loc><changefreq>weekly</changefreq><priority>0.5</priority></url>
-  <url><loc>https://neo-ai-picks.vercel.app/blog/dynamic-seo-topic-53</loc><changefreq>weekly</changefreq><priority>0.5</priority></url>
-  <url><loc>https://neo-ai-picks.vercel.app/blog/dynamic-seo-topic-54</loc><changefreq>weekly</changefreq><priority>0.5</priority></url>
-  <url><loc>https://neo-ai-picks.vercel.app/blog/dynamic-seo-topic-55</loc><changefreq>weekly</changefreq><priority>0.5</priority></url>
-  <url><loc>https://neo-ai-picks.vercel.app/blog/dynamic-seo-topic-56</loc><changefreq>weekly</changefreq><priority>0.5</priority></url>
-  <url><loc>https://neo-ai-picks.vercel.app/blog/dynamic-seo-topic-57</loc><changefreq>weekly</changefreq><priority>0.5</priority></url>
-  <url><loc>https://neo-ai-picks.vercel.app/blog/dynamic-seo-topic-58</loc><changefreq>weekly</changefreq><priority>0.5</priority></url>
-  <url><loc>https://neo-ai-picks.vercel.app/blog/dynamic-seo-topic-59</loc><changefreq>weekly</changefreq><priority>0.5</priority></url>
-  <url><loc>https://neo-ai-picks.vercel.app/blog/dynamic-seo-topic-60</loc><changefreq>weekly</changefreq><priority>0.5</priority></url>
-  <url><loc>https://neo-ai-picks.vercel.app/blog/dynamic-seo-topic-61</loc><changefreq>weekly</changefreq><priority>0.5</priority></url>
-  <url><loc>https://neo-ai-picks.vercel.app/blog/dynamic-seo-topic-62</loc><changefreq>weekly</changefreq><priority>0.5</priority></url>
-  <url><loc>https://neo-ai-picks.vercel.app/blog/dynamic-seo-topic-63</loc><changefreq>weekly</changefreq><priority>0.5</priority></url>
-  <url><loc>https://neo-ai-picks.vercel.app/blog/dynamic-seo-topic-64</loc><changefreq>weekly</changefreq><priority>0.5</priority></url>
-  <url><loc>https://neo-ai-picks.vercel.app/blog/dynamic-seo-topic-65</loc><changefreq>weekly</changefreq><priority>0.5</priority></url>
-  <url><loc>https://neo-ai-picks.vercel.app/blog/dynamic-seo-topic-66</loc><changefreq>weekly</changefreq><priority>0.5</priority></url>
-  <url><loc>https://neo-ai-picks.vercel.app/blog/dynamic-seo-topic-67</loc><changefreq>weekly</changefreq><priority>0.5</priority></url>
-  <url><loc>https://neo-ai-picks.vercel.app/blog/dynamic-seo-topic-68</loc><changefreq>weekly</changefreq><priority>0.5</priority></url>
-  <url><loc>https://neo-ai-picks.vercel.app/blog/dynamic-seo-topic-69</loc><changefreq>weekly</changefreq><priority>0.5</priority></url>
-  <url><loc>https://neo-ai-picks.vercel.app/blog/dynamic-seo-topic-70</loc><changefreq>weekly</changefreq><priority>0.5</priority></url>
-  <url><loc>https://neo-ai-picks.vercel.app/blog/dynamic-seo-topic-71</loc><changefreq>weekly</changefreq><priority>0.5</priority></url>
-  <url><loc>https://neo-ai-picks.vercel.app/blog/dynamic-seo-topic-72</loc><changefreq>weekly</changefreq><priority>0.5</priority></url>
-  <url><loc>https://neo-ai-picks.vercel.app/blog/dynamic-seo-topic-73</loc><changefreq>weekly</changefreq><priority>0.5</priority></url>
-  <url><loc>https://neo-ai-picks.vercel.app/blog/dynamic-seo-topic-74</loc><changefreq>weekly</changefreq><priority>0.5</priority></url>
-  <url><loc>https://neo-ai-picks.vercel.app/blog/dynamic-seo-topic-75</loc><changefreq>weekly</changefreq><priority>0.5</priority></url>
-  <url><loc>https://neo-ai-picks.vercel.app/blog/dynamic-seo-topic-76</loc><changefreq>weekly</changefreq><priority>0.5</priority></url>
-  <url><loc>https://neo-ai-picks.vercel.app/blog/dynamic-seo-topic-77</loc><changefreq>weekly</changefreq><priority>0.5</priority></url>
-  <url><loc>https://neo-ai-picks.vercel.app/blog/dynamic-seo-topic-78</loc><changefreq>weekly</changefreq><priority>0.5</priority></url>
-  <url><loc>https://neo-ai-picks.vercel.app/blog/dynamic-seo-topic-79</loc><changefreq>weekly</changefreq><priority>0.5</priority></url>
-  <url><loc>https://neo-ai-picks.vercel.app/blog/dynamic-seo-topic-80</loc><changefreq>weekly</changefreq><priority>0.5</priority></url>
-  <url><loc>https://neo-ai-picks.vercel.app/blog/dynamic-seo-topic-81</loc><changefreq>weekly</changefreq><priority>0.5</priority></url>
-  <url><loc>https://neo-ai-picks.vercel.app/blog/dynamic-seo-topic-82</loc><changefreq>weekly</changefreq><priority>0.5</priority></url>
-  <url><loc>https://neo-ai-picks.vercel.app/blog/dynamic-seo-topic-83</loc><changefreq>weekly</changefreq><priority>0.5</priority></url>
-  <url><loc>https://neo-ai-picks.vercel.app/blog/dynamic-seo-topic-84</loc><changefreq>weekly</changefreq><priority>0.5</priority></url>
-  <url><loc>https://neo-ai-picks.vercel.app/blog/dynamic-seo-topic-85</loc><changefreq>weekly</changefreq><priority>0.5</priority></url>
-  <url><loc>https://neo-ai-picks.vercel.app/blog/dynamic-seo-topic-86</loc><changefreq>weekly</changefreq><priority>0.5</priority></url>
-  <url><loc>https://neo-ai-picks.vercel.app/blog/dynamic-seo-topic-87</loc><changefreq>weekly</changefreq><priority>0.5</priority></url>
-  <url><loc>https://neo-ai-picks.vercel.app/blog/dynamic-seo-topic-88</loc><changefreq>weekly</changefreq><priority>0.5</priority></url>
-  <url><loc>https://neo-ai-picks.vercel.app/blog/dynamic-seo-topic-89</loc><changefreq>weekly</changefreq><priority>0.5</priority></url>
-  <url><loc>https://neo-ai-picks.vercel.app/blog/dynamic-seo-topic-90</loc><changefreq>weekly</changefreq><priority>0.5</priority></url>
-  <url><loc>https://neo-ai-picks.vercel.app/blog/dynamic-seo-topic-91</loc><changefreq>weekly</changefreq><priority>0.5</priority></url>
-  <url><loc>https://neo-ai-picks.vercel.app/blog/dynamic-seo-topic-92</loc><changefreq>weekly</changefreq><priority>0.5</priority></url>
-  <url><loc>https://neo-ai-picks.vercel.app/blog/dynamic-seo-topic-93</loc><changefreq>weekly</changefreq><priority>0.5</priority></url>
-  <url><loc>https://neo-ai-picks.vercel.app/blog/dynamic-seo-topic-94</loc><changefreq>weekly</changefreq><priority>0.5</priority></url>
-  <url><loc>https://neo-ai-picks.vercel.app/blog/dynamic-seo-topic-95</loc><changefreq>weekly</changefreq><priority>0.5</priority></url>
-  <url><loc>https://neo-ai-picks.vercel.app/blog/dynamic-seo-topic-96</loc><changefreq>weekly</changefreq><priority>0.5</priority></url>
-  <url><loc>https://neo-ai-picks.vercel.app/blog/dynamic-seo-topic-97</loc><changefreq>weekly</changefreq><priority>0.5</priority></url>
-  <url><loc>https://neo-ai-picks.vercel.app/blog/dynamic-seo-topic-98</loc><changefreq>weekly</changefreq><priority>0.5</priority></url>
-  <url><loc>https://neo-ai-picks.vercel.app/blog/dynamic-seo-topic-99</loc><changefreq>weekly</changefreq><priority>0.5</priority></url>
-  <url><loc>https://neo-ai-picks.vercel.app/blog/dynamic-seo-topic-100</loc><changefreq>weekly</changefreq><priority>0.5</priority></url>
+  <url><loc>https://neo-ai-picks.vercel.app/blog/github-copilot-enterprise-repository-indexing</loc><changefreq>weekly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://neo-ai-picks.vercel.app/blog/vercel-v0-shadcn-ui-setup</loc><changefreq>weekly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://neo-ai-picks.vercel.app/blog/local-first-ai-coding-tabnine-gpu</loc><changefreq>weekly</changefreq><priority>0.6</priority></url>
 </urlset>

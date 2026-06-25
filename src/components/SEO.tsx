@@ -2,10 +2,11 @@ import React, { useEffect } from 'react';
 import { trackPageView } from '../utils/analytics';
 
 interface SEOProps {
-  title: string;
-  description: string;
+  title?: string;
+  description?: string;
   path: string;
   ogType?: 'website' | 'article' | 'profile';
+  keywords?: string | string[];
   jsonLd?: Record<string, any>;
 }
 
@@ -14,17 +15,40 @@ export const SEO: React.FC<SEOProps> = ({
   description,
   path,
   ogType = 'website',
+  keywords,
   jsonLd
 }) => {
   const siteUrl = import.meta.env.VITE_SITE_URL || 'https://neo-ai-picks.vercel.app';
+  
+  // 1. Auto-generate Title
+  const displayTitle = title || (path === '/' ? 'Neo AI Picks - Find, Compare & Explore AI Tools' : `${path.substring(1).split('/')[0].replace(/-/g, ' ')} Reviews | Neo AI Picks`);
+  
+  // 2. Auto-generate Description
+  const displayDescription = description || `Explore pricing tiers, features, pros and cons, and detailed product comparisons for ${displayTitle.split(' - ')[0]} on Neo AI Picks.`;
+  
+  // 3. Auto-generate Keywords
+  const generateKeywords = (): string => {
+    if (keywords) {
+      return Array.isArray(keywords) ? keywords.join(', ') : keywords;
+    }
+    const cleanWords = displayTitle
+      .toLowerCase()
+      .split(/[^a-z0-9]+/)
+      .filter(w => w.length > 2 && !['and', 'the', 'for', 'best', 'reviewed', 'picks', 'neo', 'vs', 'with', 'reviews'].includes(w));
+    
+    const baseKeywords = ['ai tools', 'artificial intelligence', 'directory', 'software comparison', 'neo ai picks'];
+    return [...new Set([...cleanWords, ...baseKeywords])].join(', ');
+  };
+  
+  const resolvedKeywords = generateKeywords();
   const canonicalUrl = `${siteUrl}${path}`;
 
   useEffect(() => {
     // 1. Meta Title
-    document.title = title;
+    document.title = displayTitle;
 
     // Track page view in GA4
-    trackPageView(path, title);
+    trackPageView(path, displayTitle);
 
     // 2. Meta Description
     let metaDesc = document.querySelector('meta[name="description"]');
@@ -33,9 +57,18 @@ export const SEO: React.FC<SEOProps> = ({
       metaDesc.setAttribute('name', 'description');
       document.head.appendChild(metaDesc);
     }
-    metaDesc.setAttribute('content', description);
+    metaDesc.setAttribute('content', displayDescription);
 
-    // 3. Canonical URL
+    // 3. Meta Keywords
+    let metaKeywords = document.querySelector('meta[name="keywords"]');
+    if (!metaKeywords) {
+      metaKeywords = document.createElement('meta');
+      metaKeywords.setAttribute('name', 'keywords');
+      document.head.appendChild(metaKeywords);
+    }
+    metaKeywords.setAttribute('content', resolvedKeywords);
+
+    // 4. Canonical URL
     let linkCanonical = document.querySelector('link[rel="canonical"]');
     if (!linkCanonical) {
       linkCanonical = document.createElement('link');
@@ -44,14 +77,14 @@ export const SEO: React.FC<SEOProps> = ({
     }
     linkCanonical.setAttribute('href', canonicalUrl);
 
-    // 4. Open Graph Tags
+    // 5. Open Graph Tags
     const ogTags = [
-      { property: 'og:title', content: title },
-      { property: 'og:description', content: description },
+      { property: 'og:title', content: displayTitle },
+      { property: 'og:description', content: displayDescription },
       { property: 'og:url', content: canonicalUrl },
       { property: 'og:type', content: ogType },
       { property: 'og:site_name', content: 'Neo AI Picks' },
-      { property: 'og:image', content: `${siteUrl}/favicon.svg` } // standard placeholder
+      { property: 'og:image', content: `${siteUrl}/favicon.svg` }
     ];
 
     ogTags.forEach(({ property, content }) => {
@@ -64,11 +97,11 @@ export const SEO: React.FC<SEOProps> = ({
       tag.setAttribute('content', content);
     });
 
-    // 5. Twitter Cards
+    // 6. Twitter Cards
     const twitterTags = [
       { name: 'twitter:card', content: 'summary_large_image' },
-      { name: 'twitter:title', content: title },
-      { name: 'twitter:description', content: description },
+      { name: 'twitter:title', content: displayTitle },
+      { name: 'twitter:description', content: displayDescription },
       { name: 'twitter:image', content: `${siteUrl}/favicon.svg` }
     ];
 
@@ -82,7 +115,7 @@ export const SEO: React.FC<SEOProps> = ({
       tag.setAttribute('content', content);
     });
 
-    // 6. JSON-LD Structured Data
+    // 7. JSON-LD Structured Data
     const scriptId = 'json-ld-structured-data';
     let script = document.getElementById(scriptId) as HTMLScriptElement | null;
     if (script) {
@@ -102,7 +135,7 @@ export const SEO: React.FC<SEOProps> = ({
       const existingScript = document.getElementById(scriptId);
       if (existingScript) existingScript.remove();
     };
-  }, [title, description, canonicalUrl, ogType, jsonLd]);
+  }, [displayTitle, displayDescription, resolvedKeywords, canonicalUrl, ogType, jsonLd]);
 
   return null; // This component operates solely in document head
 };

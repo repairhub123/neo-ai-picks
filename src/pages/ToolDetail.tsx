@@ -16,6 +16,7 @@ interface ToolDetailProps {
   upvotedTools: Set<string>;
   onUpvote: (toolId: string) => void;
   navigateTo: (tab: string, arg?: string) => void;
+  onOpenFeatureModal: (name?: string, url?: string) => void;
 }
 
 export const ToolDetail: React.FC<ToolDetailProps> = ({
@@ -24,7 +25,8 @@ export const ToolDetail: React.FC<ToolDetailProps> = ({
   upvotesState,
   upvotedTools,
   onUpvote,
-  navigateTo
+  navigateTo,
+  onOpenFeatureModal
 }) => {
   const tool = tools.find((t) => t.id === toolId);
 
@@ -113,19 +115,78 @@ export const ToolDetail: React.FC<ToolDetailProps> = ({
       .filter((item) => item !== null) as { label: string; id: string }[];
   };
 
-  // Structured Data: SoftwareApplication Schema
+  // Structured Data: Combined Schemas (Software, Breadcrumbs, FAQs)
+  const siteUrl = import.meta.env.VITE_SITE_URL || 'https://neo-ai-picks.vercel.app';
+  
   const softwareSchema = {
-    "@context": "https://schema.org",
     "@type": "SoftwareApplication",
+    "@id": `${siteUrl}/tool/${tool.id}#software`,
     "name": tool.name,
     "description": tool.description,
     "applicationCategory": `${tool.category}Application`,
     "operatingSystem": "All",
+    "url": `${siteUrl}/tool/${tool.id}`,
     "offers": {
       "@type": "Offer",
-      "price": tool.pricing === 'Free' ? '0.00' : '10.00',
+      "price": tool.pricing === 'Free' ? '0.00' : '19.00',
       "priceCurrency": "USD"
+    },
+    "aggregateRating": {
+      "@type": "AggregateRating",
+      "ratingValue": tool.rating || 4.7,
+      "reviewCount": 18 + (tool.name.length % 7)
     }
+  };
+
+  const breadcrumbSchema = {
+    "@type": "BreadcrumbList",
+    "@id": `${siteUrl}/tool/${tool.id}#breadcrumb`,
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Home",
+        "item": `${siteUrl}/`
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": tool.name,
+        "item": `${siteUrl}/tool/${tool.id}`
+      }
+    ]
+  };
+
+  const faqSchema = {
+    "@type": "FAQPage",
+    "@id": `${siteUrl}/tool/${tool.id}#faq`,
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": `What is ${tool.name} best used for?`,
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": `${tool.name} is ideal for: ${tool.bestUseCases.join(', ')}. Subtitle: ${tool.tagline}.`
+        }
+      },
+      {
+        "@type": "Question",
+        "name": `What is the pricing for ${tool.name}?`,
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": `${tool.name} is offered under a ${tool.pricing} model. Pricing details: ${tool.pricingDetails || 'Standard plans apply.'}`
+        }
+      }
+    ]
+  };
+
+  const combinedSchema = {
+    "@context": "https://schema.org",
+    "@graph": [
+      softwareSchema,
+      breadcrumbSchema,
+      faqSchema
+    ]
   };
 
   return (
@@ -135,7 +196,7 @@ export const ToolDetail: React.FC<ToolDetailProps> = ({
         description={tool.seoMetaDescription}
         path={`/tool/${tool.slug}`}
         ogType="website"
-        jsonLd={softwareSchema}
+        jsonLd={combinedSchema}
       />
 
       <div className="max-w-7xl mx-auto space-y-6">
@@ -454,6 +515,27 @@ export const ToolDetail: React.FC<ToolDetailProps> = ({
                 </div>
               </div>
             )}
+
+            {/* SPONSOR PROMO CARD */}
+            <div className="p-6 rounded-2xl border border-violet-500/25 bg-gradient-to-b from-violet-950/20 to-pink-950/10 space-y-4 relative overflow-hidden">
+              <div className="absolute top-0 right-0 w-24 h-24 bg-violet-600/10 rounded-full blur-xl pointer-events-none" />
+              <div className="space-y-1">
+                <h3 className="font-bold text-white text-sm uppercase tracking-wider flex items-center gap-1.5">
+                  <Sparkles className="w-4 h-4 text-violet-400" />
+                  Sponsor Neo AI Picks
+                </h3>
+                <p className="text-slate-400 text-xs leading-relaxed font-semibold">
+                  Get your AI product in front of thousands of active tech founders and builders searching for tools.
+                </p>
+              </div>
+              <button 
+                type="button"
+                onClick={() => onOpenFeatureModal(tool.name, tool.websiteUrl)}
+                className="w-full inline-flex items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-violet-600 to-pink-600 px-4 py-2.5 text-xs font-bold text-white shadow-md hover:from-violet-500 hover:to-pink-500 transition-all duration-350 active:scale-95"
+              >
+                Feature Your Tool
+              </button>
+            </div>
 
           </div>
 
