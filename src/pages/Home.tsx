@@ -391,7 +391,7 @@ export const Home: React.FC<HomeProps> = ({
           ].map((card, i) => {
             const Icon = card.icon;
             return (
-              <div key={i} className="p-6 rounded-2xl saas-glass border border-white/5 space-y-3 saas-card-hover">
+              <div key={i} className="h-full p-6 rounded-2xl saas-glass border border-white/5 space-y-3 saas-card-hover flex flex-col">
                 <div className="w-10 h-10 rounded-xl bg-violet-600/10 border border-violet-500/20 flex items-center justify-center text-violet-400">
                   <Icon className="w-5 h-5" />
                 </div>

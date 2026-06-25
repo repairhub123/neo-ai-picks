@@ -35,7 +35,8 @@ interface AdminDashboardProps {
 
 export const AdminDashboard: React.FC<AdminDashboardProps> = ({ 
   tools, 
-  onRefreshTools
+  onRefreshTools,
+  navigateTo
 }) => {
   // Pure current timestamp for rendering
   const [now] = useState(() => Date.now());
@@ -291,6 +292,12 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
             >
               <RefreshCw className={`h-3.5 w-3.5 ${isLoading ? 'animate-spin' : ''}`} />
               Refresh Data
+            </button>
+            <button 
+              onClick={() => navigateTo('home')}
+              className="px-3 py-1.5 rounded-lg bg-violet-600/10 border border-violet-500/20 text-xs font-semibold text-violet-300 hover:bg-violet-600/20 transition-colors"
+            >
+              View Directory
             </button>
             <button 
               onClick={handleLogout}

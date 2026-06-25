@@ -104,7 +104,7 @@ const inputClass = (hasError: boolean) =>
 
 // ─── Main Component ───────────────────────────────────────────
 
-export const Contact: React.FC<ContactProps> = () => {
+export const Contact: React.FC<ContactProps> = ({ navigateTo }) => {
   const [formData, setFormData] = useState<FormData>({
     name: '',
     email: '',
@@ -339,7 +339,7 @@ export const Contact: React.FC<ContactProps> = () => {
 
             <p className="text-center text-slate-600 text-xs font-semibold">
               By submitting, you agree to our{' '}
-              <button type="button" onClick={() => {}} className="text-slate-500 hover:text-violet-400 underline underline-offset-2 transition-colors cursor-pointer">
+              <button type="button" onClick={() => navigateTo('privacy')} className="text-slate-500 hover:text-violet-400 underline underline-offset-2 transition-colors cursor-pointer">
                 Privacy Policy
               </button>
               .
