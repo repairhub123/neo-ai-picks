@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Sparkles, Mail, Heart, X } from 'lucide-react';
+import { Sparkles, Mail, Heart } from 'lucide-react';
 
 interface FooterProps {
   navigateTo: (tab: string, arg?: string) => void;
@@ -8,7 +8,6 @@ interface FooterProps {
 export const Footer: React.FC<FooterProps> = ({ navigateTo }) => {
   const [email, setEmail] = useState('');
   const [subscribed, setSubscribed] = useState(false);
-  const [activeModal, setActiveModal] = useState<'about' | 'contact' | null>(null);
 
   const handleSubscribe = (e: React.FormEvent) => {
     e.preventDefault();
@@ -64,7 +63,7 @@ export const Footer: React.FC<FooterProps> = ({ navigateTo }) => {
           <h3 className="font-semibold text-white mb-4 text-sm uppercase tracking-wider">Company</h3>
           <ul className="space-y-2.5 text-sm font-semibold">
             <li>
-              <button onClick={() => setActiveModal('about')} className="hover:text-white transition-colors cursor-pointer text-left">
+              <button onClick={() => navigateTo('about')} className="hover:text-white transition-colors cursor-pointer text-left">
                 About
               </button>
             </li>
@@ -118,68 +117,6 @@ export const Footer: React.FC<FooterProps> = ({ navigateTo }) => {
           Made with <Heart className="w-3.5 h-3.5 text-rose-500 fill-rose-500" /> for AI builders.
         </p>
       </div>
-
-      {/* ABOUT MODAL */}
-      {activeModal === 'about' && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/80 backdrop-blur-md">
-          <div className="max-w-md w-full saas-glass border border-white/5 rounded-3xl p-6 md:p-8 space-y-6 shadow-2xl relative text-left">
-            <button 
-              onClick={() => setActiveModal(null)}
-              className="absolute top-4 right-4 p-1 rounded-full text-slate-400 hover:text-white hover:bg-white/10 transition-all cursor-pointer"
-            >
-              <X className="w-5 h-5" />
-            </button>
-            <div className="space-y-3">
-              <div className="w-12 h-12 bg-violet-500/10 border border-violet-500/20 text-violet-400 rounded-xl flex items-center justify-center">
-                <Sparkles className="w-6 h-6" />
-              </div>
-              <h3 className="text-xl font-black text-white">About Neo AI Picks</h3>
-              <p className="text-slate-300 text-sm leading-relaxed font-medium">
-                Neo AI Picks is a professional, developer-vetted directory profiling the best generative artificial intelligence tools. We outline honest benchmarks, side-by-side comparison matrices, and practical tutorials to help you select the best tools for your workflows in 2026.
-              </p>
-            </div>
-            <button
-              onClick={() => setActiveModal(null)}
-              className="w-full bg-white hover:bg-slate-100 text-slate-950 font-bold text-sm py-3 rounded-xl transition-all cursor-pointer shadow-lg"
-            >
-              Close
-            </button>
-          </div>
-        </div>
-      )}
-
-      {/* CONTACT MODAL */}
-      {activeModal === 'contact' && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/80 backdrop-blur-md">
-          <div className="max-w-md w-full saas-glass border border-white/5 rounded-3xl p-6 md:p-8 space-y-6 shadow-2xl relative text-left">
-            <button 
-              onClick={() => setActiveModal(null)}
-              className="absolute top-4 right-4 p-1 rounded-full text-slate-400 hover:text-white hover:bg-white/10 transition-all cursor-pointer"
-            >
-              <X className="w-5 h-5" />
-            </button>
-            <div className="space-y-3">
-              <div className="w-12 h-12 bg-violet-500/10 border border-violet-500/20 text-violet-400 rounded-xl flex items-center justify-center">
-                <Mail className="w-6 h-6" />
-              </div>
-              <h3 className="text-xl font-black text-white">Contact Us</h3>
-              <p className="text-slate-300 text-sm leading-relaxed font-medium">
-                Have suggestions, corrections, or want to list your AI tool on our vetted directory? Get in touch with our support and editorial team:
-              </p>
-              <div className="bg-slate-900 border border-white/5 p-4 rounded-xl space-y-1 text-sm font-semibold">
-                <div className="text-slate-400">Editorial & Submissions:</div>
-                <div className="text-white font-bold select-all">contact@neoaipicks.com</div>
-              </div>
-            </div>
-            <button
-              onClick={() => setActiveModal(null)}
-              className="w-full bg-white hover:bg-slate-100 text-slate-950 font-bold text-sm py-3 rounded-xl transition-all cursor-pointer shadow-lg"
-            >
-              Close
-            </button>
-          </div>
-        </div>
-      )}
     </footer>
   );
 };

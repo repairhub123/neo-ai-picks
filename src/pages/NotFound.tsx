@@ -1,5 +1,5 @@
 import React from 'react';
-import { AlertCircle, ArrowLeft, Sparkles } from 'lucide-react';
+import { AlertCircle, ArrowLeft, Sparkles, Activity, BookOpen } from 'lucide-react';
 import SEO from '../components/SEO';
 
 interface NotFoundProps {
@@ -14,8 +14,8 @@ export const NotFound: React.FC<NotFoundProps> = ({ navigateTo }) => {
       <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-blue-650/10 rounded-full blur-3xl pointer-events-none" />
 
       <SEO
-        title="450 - Page Not Found | Neo AI Picks"
-        description="The requested page could not be found on Neo AI Picks. Explore our directory of 50+ vetted AI tools."
+        title="404 - Page Not Found | Neo AI Picks"
+        description="The requested page could not be found on Neo AI Picks. Explore our directory of 50+ vetted AI tools, comparisons and guides."
         path="/404"
       />
 
@@ -25,8 +25,8 @@ export const NotFound: React.FC<NotFoundProps> = ({ navigateTo }) => {
         </div>
 
         <div className="space-y-2">
-          <h1 className="text-4xl font-black text-white tracking-tight">404</h1>
-          <h2 className="text-xl font-bold text-white">Page Not Found</h2>
+          <div className="text-5xl font-black text-white tracking-tight">404</div>
+          <h1 className="text-xl font-bold text-white">Page Not Found</h1>
           <p className="text-slate-400 text-sm font-semibold leading-relaxed">
             The page you are looking for might have been removed, had its name changed, or is temporarily unavailable.
           </p>
@@ -40,9 +40,25 @@ export const NotFound: React.FC<NotFoundProps> = ({ navigateTo }) => {
             <Sparkles className="w-4 h-4" />
             Explore Vetted Tools
           </button>
+          <div className="grid grid-cols-2 gap-3">
+            <button
+              onClick={() => navigateTo('compare')}
+              className="bg-slate-900 hover:bg-slate-800 border border-white/5 hover:border-violet-500/20 text-slate-350 font-bold text-sm py-2.5 rounded-xl transition-all cursor-pointer flex items-center justify-center gap-1.5 active:scale-95"
+            >
+              <Activity className="w-3.5 h-3.5 text-violet-400" />
+              Compare Tools
+            </button>
+            <button
+              onClick={() => navigateTo('blog')}
+              className="bg-slate-900 hover:bg-slate-800 border border-white/5 hover:border-violet-500/20 text-slate-350 font-bold text-sm py-2.5 rounded-xl transition-all cursor-pointer flex items-center justify-center gap-1.5 active:scale-95"
+            >
+              <BookOpen className="w-3.5 h-3.5 text-violet-400" />
+              AI Blog
+            </button>
+          </div>
           <button
             onClick={() => window.history.back()}
-            className="w-full bg-slate-900 hover:bg-slate-800 border border-white/5 hover:border-violet-500/25 text-slate-350 font-bold text-sm py-3 rounded-xl transition-all cursor-pointer flex items-center justify-center gap-2 active:scale-95"
+            className="w-full bg-slate-900/50 hover:bg-slate-800 border border-white/5 hover:border-violet-500/25 text-slate-400 font-bold text-sm py-2.5 rounded-xl transition-all cursor-pointer flex items-center justify-center gap-2 active:scale-95"
           >
             <ArrowLeft className="w-4 h-4" />
             Go Back

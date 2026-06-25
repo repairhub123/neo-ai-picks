@@ -11,6 +11,7 @@ import BlogDetail from './pages/BlogDetail';
 import Contact from './pages/Contact';
 import Privacy from './pages/Privacy';
 import Terms from './pages/Terms';
+import About from './pages/About';
 import NotFound from './pages/NotFound';
 import toolsData from './data/tools.json';
 import type { AITool } from './components/ToolCard';
@@ -185,6 +186,8 @@ function App() {
         setCurrentRoute({ path: 'privacy' });
       } else if (pathname === '/terms') {
         setCurrentRoute({ path: 'terms' });
+      } else if (pathname === '/about') {
+        setCurrentRoute({ path: 'about' });
       } else if (pathname === '/admin') {
         setCurrentRoute({ path: 'admin' });
       } else if (pathname.startsWith('/tool/')) {
@@ -239,6 +242,9 @@ function App() {
     } else if (path === 'terms') {
       url = '/terms';
       routePath = 'terms';
+    } else if (path === 'about') {
+      url = '/about';
+      routePath = 'about';
     } else if (path === 'admin') {
       url = '/admin';
       routePath = 'admin';
@@ -392,6 +398,8 @@ function App() {
         return <Privacy navigateTo={navigateTo} />;
       case 'terms':
         return <Terms navigateTo={navigateTo} />;
+      case 'about':
+        return <About navigateTo={navigateTo} />;
       case '404':
       default:
         return <NotFound navigateTo={navigateTo} />;

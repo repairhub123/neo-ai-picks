@@ -101,6 +101,7 @@ export const CompareDetail: React.FC<CompareDetailProps> = ({
   const winner = ratingA > ratingB ? toolA : ratingB > ratingA ? toolB : null;
 
   // JSON-LD Product Schema for Comparison
+  const siteUrl = import.meta.env.VITE_SITE_URL || 'https://neo-ai-picks.vercel.app';
   const comparisonSchema = {
     "@type": "Product",
     "name": `${toolA.name} vs ${toolB.name} Comparison`,
@@ -121,19 +122,19 @@ export const CompareDetail: React.FC<CompareDetailProps> = ({
         "@type": "ListItem",
         "position": 1,
         "name": "Home",
-        "item": `${window.location.origin}/`
+        "item": `${siteUrl}/`
       },
       {
         "@type": "ListItem",
         "position": 2,
         "name": "Comparisons",
-        "item": `${window.location.origin}/compare`
+        "item": `${siteUrl}/compare`
       },
       {
         "@type": "ListItem",
         "position": 3,
         "name": `${toolA.name} vs ${toolB.name}`,
-        "item": `${window.location.origin}/compare/${pair.id}`
+        "item": `${siteUrl}/compare/${pair.id}`
       }
     ]
   };

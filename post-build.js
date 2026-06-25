@@ -41,6 +41,7 @@ let xml = `<?xml version="1.0" encoding="UTF-8"?>
   <url><loc>${siteUrl}/blog</loc><changefreq>daily</changefreq><priority>0.9</priority></url>
   <url><loc>${siteUrl}/submit</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>${siteUrl}/contact</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>${siteUrl}/about</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
   <url><loc>${siteUrl}/privacy</loc><changefreq>monthly</changefreq><priority>0.5</priority></url>
   <url><loc>${siteUrl}/terms</loc><changefreq>monthly</changefreq><priority>0.5</priority></url>
 
@@ -78,6 +79,7 @@ if (fs.existsSync(distDir)) {
 // 5. Generate robots.txt content
 const robotsTxt = `User-agent: *
 Allow: /
+Disallow: /admin
 
 Sitemap: ${siteUrl}/sitemap_index.xml
 `;

@@ -1,4 +1,5 @@
 User-agent: *
 Allow: /
+Disallow: /admin
 
 Sitemap: https://neo-ai-picks.vercel.app/sitemap_index.xml
